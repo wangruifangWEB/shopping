@@ -1,0 +1,41 @@
+/**app.wxss**/
+
+.container {
+  width: 100%;
+}
+
+page {
+  background: #f3f3f3;
+}
+
+.h1 {
+  font-size: 36rpx;
+}
+
+.h2 {
+  font-size: 32rpx;
+}
+
+.h3 {
+  font-size: 30rpx;
+}
+
+.h4 {
+  font-size: 28rpx;
+}
+
+.h5 {
+  font-size: 24rpx;
+}
+
+.relative {
+  position: relative;
+}
+
+.order-fixed view:first-of-type {
+  display: none;
+}
+
+view {
+  box-sizing: border-box;
+}

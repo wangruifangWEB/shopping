@@ -1,0 +1,74 @@
+.coupon-title{
+  background: #ffffff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+.coupon-title view{
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  line-height: 82rpx;
+  border-bottom: 8rpx transparent solid;
+}
+.coupon-title view.active{
+  border-color: #ff5b62;
+  color: #ff5b62;
+  font-size: 36rpx;
+}
+
+.coupon-box{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 120rpx
+}
+
+.coupon{
+  font-size: 32rpx;
+  border-radius: 8rpx;
+  padding: 30rpx;
+  padding-top: 70rpx;
+  background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAA2CAYAAACvHjsIAAABiUlEQVRYhe3ZO4+MYRTA8d9sXoJs4hKiUJJIXCq+gZZaofNh+ABa0alUK6jQoCChIUQQZF0SK+MaTNhdxXkksjHO7Mwmu8X5N5NMMu/85rzneZvpLZ442beG6rB1tRF/N7XagKUVKKtAWQXKKlBWgbIKlFWgrAJlFSirQFkFyipQVoGyCpRVoKwCZRUoq0BZBcoqUNaaA3VjfGYRX/AefXzAN/SwCVvE3xU7MG2ZP3q5oD4e4m57fd3e+9FAGxpmF/bhMPY35IqDnmMGl3Afc2Ja/2oK23EAx3AUuxt6YtC8mMR5nGuwrAW8w3U8wVMcxyFxW4c2yv2dwxVcGBGztFmcxSncadixQQt4hpt4MQbmTwPcxlWxc2OBBmJ5Z9rFvk4AIk7mZTHpWUP2rxNT6IldGbQvfot7uIZb7QL/HfUI/RKH4YzYqyPYi23YiPWY6nBRTOq7GOcrPBbH+qV4xqxU83iEN7iBg9iDnQ3WdTgtJjTAZ3wUU/pp+LGetE9iHR5gs3h2TWPdb8IOVlV5gzgWAAAAAElFTkSuQmCC) no-repeat;
+  background-repeat: repeat-x;
+  background-size: 40rpx;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+.coupon image{
+  width: 150rpx;
+  right: 10rpx;
+  position: absolute;
+  bottom: -20rpx;
+}
+
+.title text{
+  color: #ff5b62;
+}
+.title text:nth-last-of-type(2){
+  font-size: 60rpx;
+  padding: 0 20rpx;
+}
+.text{
+  padding-top: 10rpx;
+}
+.text text{
+  display: block;
+  color: #999999;
+  line-height: 1.5;
+}
+.coupon>text{
+  position: absolute;
+  color: #fff;
+  display: block;
+  text-align: right;
+  top: 5rpx;
+  right: 0;
+  width: 100%;
+  padding: 0 30rpx;
+}
+
+.history .coupon text{
+  color:#999;
+}

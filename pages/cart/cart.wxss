@@ -1,0 +1,176 @@
+page {
+  background: #f3f3f3;
+  margin-bottom: 80rpx;
+}
+
+.cart-top {
+  font-size: 36rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 2.8;
+  padding: 0 36rpx;
+  background: #fff;
+}
+
+.cart-top view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+
+.selected {
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 20rpx;
+}
+
+.cart-list {
+  width: 90%;
+  padding: 30rpx 0 0;
+  margin: 0 auto;
+}
+
+.cart-list>view {
+  padding: 30rpx 0;
+}
+
+.cart-top>text {
+  color: #ff5b62;
+}
+
+.cart-image-box {
+  display: flex;
+  align-items: center;
+}
+
+.cart-image-box .selected {
+  margin-left: 20rpx;
+}
+
+.cart-image {
+  width: 115rpx;
+  height:115rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+
+.cart-list>view {
+  box-sizing: border-box;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-text {
+  width: 42%;
+  text-align: justify;
+}
+
+.cart-text>text {
+  display: block;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.rule {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 2;
+}
+
+.cart-num {
+  width: 190rpx;
+  border: 1rpx #d5d3d4 solid;
+}
+
+.cart-num text {
+  display: inline-block;
+  text-align: center;
+  line-height: 50rpx;
+  color: #333;
+}
+
+.down {
+  width: 54rpx;
+}
+
+.cart-num .num {
+  width: 80rpx;
+  border-left: 1rpx #d5d3d4 solid;
+  border-right: 1rpx #d5d3d4 solid;
+}
+
+.delete {
+  width: 50rpx;
+}
+
+.price {
+  color: #ff5b62;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.price text {
+  margin-bottom: 90rpx;
+}
+
+.cart-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  background: #fff;
+  line-height: 2.8;
+  font-size: 36rpx;
+  align-items: center;
+}
+
+.cart-bottom>view {
+  width: 40%;
+  text-align: center;
+}
+
+.cart-bottom>view:first-of-type {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 20%;
+}
+
+.cart-bottom>view:first-of-type image {
+  width: 34rpx;
+  height: 34rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.cart-bottom>view:first-of-type text {
+  display: block;
+  line-height: 1;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.cart-bottom>view:nth-of-type(2) .red {
+  color: #ff5b62;
+}
+
+.cart-bottom>view:last-of-type {
+  color: #fff;
+  background: #ff5b62;
+}
+
+.add{
+  text-align: center;
+  margin-left:5%;
+}

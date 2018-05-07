@@ -1,0 +1,34 @@
+<view class="container">
+  <form bindsubmit='formSubmit'>
+    <view>
+      <text>单位名称：</text>
+      <input name="companyName" placeholder='必填' required></input>
+    </view>
+    <view>
+      <text>纳税人识别码：</text>
+      <input name="identCode" placeholder='必填' required></input>
+    </view>
+    <view>
+      <text>注册地址：</text>
+      <input name="address" placeholder='必填' required></input>
+    </view>
+    <view>
+      <text>注册电话：</text>
+      <input name="tel" placeholder='必填' required></input>
+    </view>
+    <view>
+      <text>开户银行：</text>
+      <input name="bank" placeholder='必填' required></input>
+    </view>
+    <view>
+      <text>银行账户：</text>
+      <input name="account" placeholder='必填' required></input>
+    </view>
+    <view>
+      <image wx:if="{{notice}}" src="../../../images/cart/circle@selected.png" bindtap="notice"></image>
+      <image wx:else src="../../../images/cart/circle@noselected.png" bindtap="notice"></image>
+      <text>我已阅读并同意 <text class="red">《增票资质确认书》</text></text>
+    </view>
+     <button class="nextStep" formType="submit">下一步</button>
+  </form>
+</view>

@@ -1,0 +1,204 @@
+page {
+  background: #f3f3f3;
+}
+
+.pay-backgrund {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  padding: 25rpx 0 25rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 10rpx 20rpx #f3f3f3;
+}
+
+.pay-top {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pay-line {
+  width: 100%;
+  height: 6rpx;
+  display: block;
+}
+
+.pay-top-text text {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.pay-top-text text:first-of-type {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #ff5b62;
+}
+
+.pay-btn button:first-of-type {
+  margin-right: 25rpx;
+  margin-top: 3rpx;
+}
+
+.pay-btn button:last-of-type {
+  padding: 2rpx 1.9em;
+}
+
+.pay-number {
+  background: #fff;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.5;
+  padding: 30rpx;
+  margin-top: 170rpx;
+}
+
+.pay-number view text {
+  width: 73%;
+  display: inline-block;
+}
+
+.pay-number view text:first-of-type {
+  width: 160rpx;
+  display: inline-block;
+}
+
+.pay-box {
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.pay-list {
+  width: 90%;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.pay-list image {
+  width: 150rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+}
+
+.pay-list>view>text {
+  display: block;
+}
+
+.title {
+  font-size: 36rpx;
+  color: #666;
+}
+
+.format {
+  font-size: 30rpx;
+  color: #999;
+  line-height: 2;
+}
+
+.price text:first-of-type {
+  color: #ff5b62;
+  font-size: 40rpx;
+}
+
+.price text:nth-of-type(2) {
+  color: #b0afaf;
+  font-size: 24rpx;
+  text-decoration: line-through;
+  padding: 0 20rpx;
+}
+
+.price text:last-of-type {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.my-address {
+  font-size: 36rpx;
+  line-height: 2.5;
+  color: #6b6b6b;
+  font-weight: 400;
+  background: #fff;
+  margin: 30rpx auto;
+  padding: 0 50rpx;
+}
+
+.my-address text {
+  display: inline-block;
+}
+
+.my-address text:first-of-type {
+  width: 150rpx;
+  display: inline-block;
+}
+
+.pay-address {
+  background: #fff;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.5;
+  padding: 30rpx;
+  margin: 20rpx 0;
+  align-items: top;
+  display: flex;
+}
+
+.pay-address text {
+  display: inline-block;
+  width: 160rpx;
+}
+
+.pay-address text:last-of-type {
+  width: 73%;
+}
+
+.order {
+  background: #fff;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.5;
+  padding: 30rpx;
+}
+
+.order view::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.order view text {
+  display: block;
+  float: left;
+}
+
+.order view text:last-of-type {
+  color: #ff5b62;
+  float: right;
+}
+
+.moreChoice {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+}
+
+.pay-address text.ticket:last-of-type {
+  width: 50%;
+}
+
+.pay-address text.choiced:last-of-type {
+  width: 50%;
+}
+
+.pay-rt {
+  width: 50%;
+  float: right;
+  text-align: right;
+}

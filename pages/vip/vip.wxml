@@ -1,0 +1,73 @@
+<import src="../tpls/search/search.wxml" />
+<import src="../tpls/swiper/swiper.wxml" />
+<view class="container">
+  <template data="{{searchShow,historyArray,searchValue}}" is="search" />
+  <!-- vip -->
+  <view class="vip-card">
+    <view class="vip-top">
+      <view class="user-box">
+        <image class="vip-img" mode="widthFix" src="/images/vip/vip.png"></image>
+        <view class="user" wx:if="{{uid}}">
+          <view class="name">
+            <text class="nickName">{{userInfo.nickName}}</text>
+            <text>{{userMsg.vip?'正式会员':'临时会员'}}</text>
+          </view>
+          <text class="id">
+           <text>积分：</text>
+          <text>{{userMsg.inte ? userMsg.inte:'0'}} 分</text>
+          </text>
+        </view>
+        <view class="user" wx:else bindtap="userLogin">
+          <view>
+            <text class="fontColor">会员尊享福利\n</text>
+            <text class="noLogin">已是会员？立即登录 》</text>
+          </view>
+        </view>
+
+      </view>
+      <image mode="widthFix" class="vip-smile" src="/images/vip/vip-smile.png" catchtap='signin'></image>
+    </view>
+
+    <view class="vip-bottom">
+      <view class="vip-bottom-text">
+        <text>每年最低省180元</text>
+        <text>购物累计积分，直接兑换礼品</text>
+        <text>每月享受不同的专属优惠活动</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="vip-card-bottom">
+    <view class="coupon">
+      <view>
+        <image mode="widthFix" src="/images/vip/coupon1.png" bindtap=""></image>
+        <text>会员特价</text>
+      </view>
+      <view class="coupon-line">|</view>
+      <view>
+        <image mode="widthFix" src="/images/vip/coupon2.png" catchtap='coupon'></image>
+        <text>优惠券</text>
+      </view>
+      <view class="coupon-line">|</view>
+      <view>
+        <image mode="widthFix" src="/images/vip/coupon3.png" catchtap='shop'></image>
+        <text>积分购物</text>
+      </view>
+    </view>
+  </view>
+  <view class="vip-box">
+    <text class="h1">会员专区</text>
+    <view class="vip-swiper">
+      <template is="swiper" data="{{imgSrc}}" />
+    </view>
+    <view class="goods-box">
+      <block wx:for="{{listGoods}}" wx:key="">
+        <view class="goods-list" data-idx="{{item.id}}" bindtap='onOneShop'>
+          <image src="{{item.picy}}"></image>
+          <text>{{item.gname}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+</view>

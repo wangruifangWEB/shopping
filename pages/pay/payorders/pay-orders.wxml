@@ -1,0 +1,65 @@
+<view class="container">
+  <image class="pay-line" src="/images/pay/pay-line.png"></image>
+  <view class="pay-number" bindtap="choiceAddress" data-idx="{{goodsDetails.id}}">
+    <image mode='widthFix' class="address" src="/images/icon/address.png"></image>
+    <view>
+      <text>{{goodsDetails.name}} {{goodsDetails.tel}}</text>
+      <text>{{goodsDetails.sheng}}{{goodsDetails.shi}}{{goodsDetails.xian}}{{goodsDetails.dizhi}}</text>
+    </view>
+  </view>
+  <image class="pay-line" src="/images/pay/pay-line.png"></image>
+  <view class="pay-box">
+    <view class="pay-list">
+      <image mode="widthFix" src='{{goodsDetails.shop[0].picy}}'></image>
+      <view>
+        <text class="title">{{goodsDetails.shop[0].gname}}</text>
+        <view class="price">
+          <text>￥{{goodsDetails.shop[0].zhejia}}</text>
+          <text>￥{{goodsDetails.shop[0].yuanjia}}</text>
+          <text>x{{goodsDetails.num}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class="pay-address">
+    <text class="maginRt">配送方式</text>
+    <text>普通快递￥{{goodsDetails.yunfei}}，新疆、西藏地区暂不支持</text>
+  </view>
+
+  <view class="pay-address" bindtap='invoiceSelection' data-oid="{{goodsDetails.id}}">
+    <text>发票</text>
+    <view>
+      <text class="choiced">{{choicedType}}</text>
+      <image src='/images/icon/more.png' class="moreChoice"></image>
+    </view>
+  </view>
+
+  <view class="pay-address">
+    <text class="leaveMsg">买家留言</text>
+    <input name="leavingMsg" focus='{{leavingFocus}}' value="{{goodsDetails.liuyan}}" bindtap='leavingMsg' bindblur="leavingChange"></input>
+  </view>
+
+  <view class="order">
+    <view>
+      <text>商品金额</text>
+      <text>￥{{goodsDetails.shop[0].yuanjia}}</text>
+    </view>
+    <view>
+      <text>运费</text>
+      <text>￥{{goodsDetails.shop[0].yunfei}}</text>
+    </view>
+    <view>
+      <text>优惠</text>
+      <text>￥{{couponPrice}}</text>
+    </view>
+    <view>
+      <text>应付金额</text>
+      <text>￥{{totalPrice}}</text>
+    </view>
+
+  </view>
+
+  <view class="order-btn" bindtap='onPay'>提交订单</view>
+
+</view>

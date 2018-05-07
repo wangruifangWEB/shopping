@@ -1,0 +1,12 @@
+<import src="../../tpls/search/search.wxml" />
+<template is="search"/>
+<!-- 新闻 -->
+<view class="new-container">
+  <view class="new-box" wx:for="{{detailsList}}" wx:key="" data-id='{{item.id}}' bindtap='onOneNewsList'>
+    <image src="{{item.picy}}"></image>
+    <view class="new-text">
+      <text class="title">{{item.title}}</text>
+      <text class="text">{{item.desc}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,20 @@
+@import "../../../../wxParse/wxParse.wxss";
+
+page{
+  background: #fff;
+}
+image{
+  display: block;
+  width: 100%;
+}
+.rich-text{
+  padding: 20rpx 30rpx;
+  padding-top: 10rpx;
+  
+}
+.rich-text>text{
+  line-height: 2;
+}
+.wxParse-p{
+  text-align: justify;
+}

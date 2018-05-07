@@ -1,0 +1,74 @@
+<view class="container">
+  <view class="order-fixed">
+    <view>全部</view>
+    <view class='active' bindtap='onPay'>待付款</view>
+    <view bindtap='onSend' >待发货</view>
+    <view bindtap='onReceive'>待收货</view>
+    <view bindtap='onComplete'>已完成</view>
+  </view>
+
+  <view class='order-box'>
+    <view class='order-list-big'>
+      <view class='order-list'>
+        <view class='image-box'>
+          <image mode='widthFix' src="/images/pay-list.png"></image>
+          <view class='title'>
+            <text class='text'>文艺复古系列豹纹眼框</text>
+            <text class='rule'>琥珀色   56cm</text>
+          </view>
+        </view>
+        <view class='price-box'>
+          <view class='price'>￥99.00</view>
+          <view class='oldprice'>￥99.00</view>
+          <view class='num'>x1</view>
+        </view>
+      </view>
+      <view class='total'>
+        <view>
+          <text class='totalprice'> ¥99.00 </text>
+          <text class='totalnum'>共 1 件商品 合计</text>
+        </view>
+
+      </view>
+      <view class='pay' bindtap='onPayGo'>
+        <view>
+          <text>去付款</text>
+        </view>
+
+      </view>
+    </view>
+    <view class='order-list-big'>
+      <view class='order-list'>
+        <view class='image-box'>
+          <image mode='widthFix' src="/images/pay-list.png"></image>
+          <view class='title'>
+            <text class='text'>文艺复古系列豹纹眼框</text>
+            <text class='rule'>琥珀色   56cm</text>
+          </view>
+        </view>
+        <view class='price-box'>
+          <view class='price'>￥99.00</view>
+          <view class='oldprice'>￥99.00</view>
+          <view class='num'>x1</view>
+        </view>
+      </view>
+      
+      <view class='total'>
+        <view>
+          <text class='totalprice'> ¥99.00 </text>
+          <text class='totalnum'>共 1 件商品 合计</text>
+        </view>
+
+      </view>
+      <view class='pay' bindtap='onPayGo'>
+        <view>
+          <text>去付款</text>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+
+
+</view>

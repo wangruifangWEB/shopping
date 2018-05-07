@@ -1,0 +1,18 @@
+<import src="../../tpls/search/search.wxml" />
+<import src="../../tpls/swiper/swiper.wxml" />
+<view class="container">
+  <template is="search"/>
+
+  <view class="vip-box">
+    <view class="vip-swiper">
+      <template is="swiper" data="{{imgSrc}}"/>
+    </view>
+    <view class="goods-box">
+      <view class="goods-list"  wx:for="{{listGoods}}" wx:key="" data-id='{{item.id}}' bindtap='onOneShop'>
+        <image src="{{item.picy}}"></image>
+        <text>{{item.gname}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>

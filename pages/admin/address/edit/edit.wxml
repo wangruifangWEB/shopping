@@ -1,0 +1,27 @@
+<view class="register">
+  <form bindsubmit="formSubmit">
+    <view>
+      <input type='text' name="userName" placeholder="姓名" value="{{addr.name}}"></input>
+    </view>
+    <view class="yzm">
+      <input type='number' name="userTel" placeholder="手机号" value="{{addr.tel}}"></input>
+    </view>
+    <view>
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+       {{region[0]}}/{{region[1]}}/{{region[2]}}
+      </view>
+    </picker>
+    </view>
+    <view class="mm">
+      <input type="text" name="userDetailsAddress" placeholder="详细地址" value="{{addr.dizhi}}"></input>
+    </view>
+    <view>
+      
+      <image bindtap="onagree" mode='widthFix' src="{{agree?'/images/cart/circle@selected.png':'/images/cart/circle@noselected.png'}}"></image>
+      <text bindtap="onagree" class="agree">设为默认地址</text>
+    </view>
+    <button class="btn" formType="submit">保存</button>
+    
+  </form>
+</view>

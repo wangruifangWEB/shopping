@@ -1,0 +1,28 @@
+<template name='receivingState'>
+  <view class='order-box'>
+    <block wx:for="{{dfk}}" wx:key="*this">
+      <view class='order-list-big'>
+        <view class='order-list'>
+          <view class='image-box'>
+            <image mode='widthFix' src="{{item.pics}}"></image>
+            <view class='title'>
+              <text class='text'>{{item.gname}}</text>
+            </view>
+          </view>
+          <view class='price-box'>
+            <view class='price'>{{item.zhejia}}</view>
+            <view class='oldprice'>{{item.yuanjia}}</view>
+            <view class='num'>x{{item.num}}</view>
+          </view>
+        </view>
+
+        <view class='total'>
+          <view>
+            <text class='totalprice'> {{item.num*item.zhejia}} </text>
+            <text class='totalnum'>共 {{item.num}} 件商品 合计</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

@@ -1,0 +1,80 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/vip/vip",
+    "pages/find/find",
+    "pages/admin/my/my",
+    "pages/admin/address/edit/edit",
+    "pages/admin/address/add/add",
+    "pages/admin/address/choose/choose",
+    "pages/admin/signin/signin",
+    "pages/cart/cart",
+    "pages/goods/goods",
+    "pages/pay/payorder/payorder",
+    "pages/login/register/register",
+    "pages/login/log/log",
+    "pages/coupon/coupon",
+    "pages/login/psd/psd",
+    "pages/login/msgVail/msgVail",
+    "pages/pay/payorders/pay-orders",
+    "pages/find/shop/shop",
+    "pages/find/news/news",
+    "pages/find/news/newslist/newslist",
+    "pages/find/active/active",
+    "pages/find/findlist/findlist",
+    "pages/index/indexlist/indexlist",
+    "pages/find/active/activelist/activelist",
+    "pages/pay/payno/paygo/paygo",
+    "pages/pay/pays/pays",
+    "pages/invoice/invoiceMsg/invoiceMsg",
+    "pages/invoice/addingTicket/addingTicket",
+    "pages/invoice/modifyTicket/modifyTicket",
+    "pages/invoice/showTicket/showTicket",
+    "pages/integration/integration"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#333",
+    "navigationBarTitleText": "购物商城",
+    "navigationBarTextStyle": "#fff",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "images/toolbar/index.png",
+        "selectedIconPath": "images/toolbar/index@selected.png"
+      },
+      {
+        "pagePath": "pages/vip/vip",
+        "iconPath": "images/toolbar/vip.png",
+        "selectedIconPath": "images/toolbar/vip@selected.png",
+        "text": "会员专区"
+      },
+      {
+        "pagePath": "pages/find/find",
+        "iconPath": "images/toolbar/find.png",
+        "selectedIconPath": "images/toolbar/find@selected.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/admin/my/my",
+        "iconPath": "images/toolbar/my.png",
+        "selectedIconPath": "images/toolbar/my@selected.png",
+        "text": "我的"
+      }
+    ],
+    "selectedColor": "#ff5b62",
+    "color": "#858585",
+    "backgroundColor": "#FFFFFF"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

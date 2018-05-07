@@ -1,0 +1,51 @@
+Page {
+  background-color: #fff;
+}
+
+.container view {
+  margin: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.container form view {
+  color: #333;
+  display: flex;
+  height: 100rpx;
+  line-height: 130rpx;
+  font-size: 28rpx;
+  font-family: '微软雅黑';
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.container view:last-child {
+  border-bottom: none;
+}
+
+.container view input {
+  width: calc(100% - 28%);
+  height: 100%;
+  margin-top: 15rpx;
+  overflow: hidden;
+}
+.container view input.companyName{
+    width:530rpx;
+}
+.container view .red {
+  color: #fe6c71;
+}
+
+.container view image {
+  width: 33rpx;
+  height: 33rpx;
+  margin-top: 50rpx;
+  margin-right: 10rpx;
+}
+
+.container button {
+  color: #fff;
+  width: 70%;
+  line-height: 68rpx;
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  background-color: #ff5b62;
+}

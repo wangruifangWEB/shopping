@@ -1,0 +1,41 @@
+@import "../../tpls/search/search.wxss";
+@import "../../tpls/swiper/swiper.wxss";
+
+.new-box {
+  padding-bottom: 10rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+image {
+  display: block;
+  width: 100%;
+}
+
+.new-text {
+  padding: 5rpx;
+}
+
+.new-text text {
+  width: 100%;
+  margin: 5rpx auto;
+  display: block;
+}
+
+.title {
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 32rpx;
+  padding: 0 20rpx;
+  line-height: 60rpx;
+}
+
+.text {
+  box-sizing: border-box;
+  color: #666;
+  font-size: 28rpx;
+  padding: 0 20rpx;
+  letter-spacing: 2rpx;
+  line-height: 40rpx;
+  text-align: justify;
+}

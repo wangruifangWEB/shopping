@@ -1,0 +1,10 @@
+<import src="../../tpls/search/search.wxml" />
+<import src="../../tpls/swiper/swiper.wxml" />
+<view class="container">
+  <template is="search"/>
+  <template is="swiper" data="{{imgSrc}}"/>
+  
+  <view class="news-image" wx:for="{{activeList}}" data-id='{{item.id}}' bindtap="onOneActive">
+    <image src="{{item.picy}}"></image>
+  </view> 
+</view>

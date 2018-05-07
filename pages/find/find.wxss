@@ -1,0 +1,109 @@
+@import "../tpls/search/search.wxss";
+@import "../tpls/swiper/swiper.wxss";
+
+page {
+  background: #f3f3f3;
+}
+
+.search-box {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.search {
+  margin: 0 auto;
+}
+
+.swiper {
+  height: 130px;
+}
+
+.store {
+  margin: 28rpx auto;
+  width: 90%;
+  padding: 25rpx 20rpx;
+  border-radius: 20rpx;
+  background: #fff;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+.jf {
+  width: 40%;
+  text-align: center;
+  border-right: 1px #e8e8e8 solid;
+}
+
+.jf view {
+  padding: 10rpx;
+}
+
+.jf image {
+  width: 100rpx;
+  display: inline-block;
+}
+
+.jf text {
+  display: block;
+}
+
+view text:first-of-type {
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.5;
+}
+
+view text:nth-of-type(2) {
+  font-size: 24rpx;
+  color: #c2c2c2;
+}
+
+.store::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.store>view {
+  float: left;
+}
+
+.right {
+  width: 59%;
+  float: right;
+}
+
+.news {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news image {
+  width: 80rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+
+.news text {
+  display: block;
+}
+
+.news:first-of-type {
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.news-image {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 28rpx;
+  box-sizing: border-box;
+}
+
+.news-image image {
+  display: block;
+  width: 100%;
+  height: 178rpx;
+}

@@ -1,0 +1,253 @@
+Page {
+  background-color: #f3f3f3;
+}
+
+.container {
+  box-shadow: border-box;
+}
+
+.prompt {
+  height: 90rpx;
+  line-height: 35rpx;
+  padding: 0 40rpx;
+  background-color: #ff6b71;
+  position: relative;
+  z-index: 10;
+  box-shadow: 2rpx 2rpx 2rpx -1rpx rgba(0, 0, 0, 0.4);
+}
+
+.prompt text {
+  color: #fff;
+  font-size: 24rpx;
+}
+
+.contentContainer {
+  color: #666;
+  font-size: 30rpx;
+}
+
+.contentContainer .invoiceType, .invoicesMsg {
+  padding: 20rpx 40rpx 20rpx 40rpx;
+  background-color: #fff;
+}
+
+.contentContainer .invoiceList {
+  display: flex;
+  margin: 25rpx 0;
+}
+
+.invoiceList view, .contentHeader view {
+  color: #666;
+  border: 1px solid #b2b2b2;
+  padding: 10rpx 20rpx;
+  margin-right: 30rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.invoiceList view.active, .contentHeader view.active {
+  color: #ff6f75;
+  border: 1px solid #ffadb1;
+}
+
+.invoiceList view:last-child {
+  margin-right: 0;
+}
+
+.invoiceType .unavailable {
+  color: #eee;
+}
+
+.notice {
+  color: #666;
+  font-size: 26rpx;
+}
+
+.invoicesRaised {
+  color: #666;
+  padding: 25rpx 40rpx;
+  font-size: 30rpx;
+  margin-top: 28rpx;
+  background-color: #fff;
+}
+
+.invoicesRaised .raisedChoice {
+  display: flex;
+  margin: 30rpx 0 10rpx 0;
+}
+
+.invoicesRaised .raisedChoice image {
+  width: 33rpx;
+  height: 33rpx;
+  margin-right: 25rpx;
+}
+
+.invoicesRaised .raisedChoice view {
+  margin-right: 48rpx;
+}
+
+/* 发票内容 */
+
+.invoicesContent {
+  padding: 20rpx 40rpx 20rpx 40rpx;
+  background-color: #fff;
+  margin-top: 30rpx;
+}
+
+.contentHeader {
+  display: flex;
+  padding: 20rpx 0;
+}
+
+.contentColor {
+  color: #666;
+  font-size: 22rpx;
+  margin-left: 8rpx;
+}
+
+.contentTitle {
+  font-size: 30rpx;
+  padding: 30rpx 0 10rpx 0;
+}
+
+.contentList {
+  padding-bottom: 10rpx;
+}
+
+.contentList text {
+  display: none;
+  color: #666;
+  font-size: 24rpx;
+}
+
+.contentList text.active {
+  display: block;
+}
+
+/*单位相关  */
+
+.company input {
+  color: #666;
+  width: 100%;
+  height: 80rpx;
+  background-color: #efefef;
+  margin: 20rpx 0;
+  padding-left: 20rpx;
+  border-radius: 10rpx;
+}
+
+.company .phcolor {
+  color: #fe6168;
+}
+
+/*收票人信息  */
+
+.invoicesMsg {
+  margin-top: 30rpx;
+}
+
+.msg {
+  color: #333;
+  font-size: 32rpx;
+  padding-bottom: 30rpx;
+}
+
+.invoicesMsg view {
+  color: #666;
+  font-size: 28rpx;
+  display: flex;
+  line-height: 50rpx;
+  margin: 25rpx 0 20rpx 0;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.invoicesMsg view input {
+  width: 500rpx;
+  color: #333;
+  margin-left: 16rpx;
+}
+
+/*增值发票专用  */
+
+.invoiceSpecial {
+  height: 100%;
+  margin-top: 30rpx;
+  background-color: #fff;
+  overflow: hidden;
+  padding: 25rpx 40rpx 30rpx 40rpx;
+}
+
+.specialQual {
+  margin: 30rpx 0;
+}
+
+.specialQual view {
+  color: #3d3d3d;
+  height: 75rpx;
+  font-size: 26rpx;
+  line-height: 75rpx;
+}
+
+.specialQual view .specialColor {
+  color: #666;
+  float: left;
+}
+
+.specialQual view text:nth-child(2) {
+  width: 70%;
+  overflow-x: hidden;
+  float: left;
+}
+
+.specialContent {
+  margin-top: 30rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+  padding: 0 40rpx;
+}
+
+.specialContent view {
+  padding: 30rpx 0;
+}
+
+.specialContent view:first-child {
+  border-bottom: 1px solid #eee;
+}
+
+.specialMsg {
+  padding: 0 40rpx;
+  margin-top: 30rpx;
+  background-color: #fff;
+  padding-top: 20rpx;
+}
+
+.msgContent {
+  padding: 30rpx 0 10rpx 0;
+}
+
+.msgContent view {
+  display: flex;
+  font-size: 26rpx;
+  padding: 20rpx 0;
+  border-top: 1px solid #eee;
+}
+
+.msgContent view text {
+  margin-top: 10rpx;
+}
+
+/*确定按钮  */
+
+.sureFixed button {
+  color: #fff;
+  width: 60%;
+  height:65rpx;
+  line-height: 65rpx;
+  margin-top: 115rpx;
+  margin-bottom: 65rpx;
+  background-color: #ff6b71;
+}
+.hide{
+  display: none;
+}

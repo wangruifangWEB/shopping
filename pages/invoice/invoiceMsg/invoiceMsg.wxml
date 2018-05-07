@@ -1,0 +1,121 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="prompt">
+      <text>部分地区仅提供电子普通发票，用户可自行打印，效力等同纸质普通发票，发票内容选项已根据税法调整，具体请以展示...</text>
+    </view>
+    <view class="contentContainer">
+      <!--发票类型  -->
+      <view class="invoiceType">
+        <text class="msg">发票类型</text>
+        <view class="invoiceList">
+          <view wx:for="{{invoiceType}}" data-idx="{{index}}" class="item {{currentIndex==index ? 'active' :  ''}}" wx:key="unique" bindtap="invoiceType">
+            <text>{{item}}</text>
+          </view>
+        </view>
+        <text class="notice">部分地区仅提供电子普通发票，具体以实际出单为准.</text>
+      </view>
+    </view>
+    <!--发票抬头  -->
+    <view class="invoicesRaised" wx:if="{{contentIndex==1 && currentIndex!==1}}">
+      <text class="msg">发票抬头</text>
+      <view class="raisedChoice">
+        <view wx:for="{{invoiceObj}}" data-idx="{{index}}" class="item {{objIndex==index ? 'active' : ''}}" wx:key="unique" bindtap="invoiceObj">
+          <image src="{{objIndex==index ? '../../../../images/cart/circle@selected.png' : '../../../../images/cart/circle@noselected.png'}}"></image>
+          <text>{{item}}</text>
+        </view>
+      </view>
+
+      <!--普通发票单位  -->
+      <view class="company" wx:if="{{objIndex==1}}">
+        <input name="companyName" placeholder='请输入单位名称' required="required"></input>
+        <input placeholder-class="phcolor" name="companyNum" required="required" placeholder='请在此填写纳税人识别号'></input>
+      </view>
+    </view>
+
+    <!--发票内容  -->
+    <view class="invoicesContent" wx:if="{{currentIndex!==1}}">
+      <view class="contentTitle">
+        <text class="msg">发票内容</text>
+        <text class="contentColor">发票内容选项已根据税法调整，具体请以展示为准</text>
+      </view>
+
+      <view class="contentHeader">
+        <view wx:for="{{invoiceContent}}" data-idx="{{index}}" class="item {{contentIndex==index ? 'active' : ''}}" wx:key="unique" bindtap="invoiceContent">
+          <text>{{item}}</text>
+        </view>
+      </view>
+
+      <view class="contentList">
+        <text wx:for="{{contentList}}" data-idx="{{index}}" class="item {{contentIndex==index ? 'active' : ''}}" wx:key="">{{item}}
+    </text>
+      </view>
+    </view>
+    <!--增值税专用发票  -->
+    <view class="invoiceSpecialContainer" wx:if="{{currentIndex==1}}">
+      <!--增票资质  -->
+      <view class="invoiceSpecial">
+        <text class="msg">增票资质</text>
+        <view class="specialQual">
+          <view>
+            <text class="specialColor">单位名称：</text>
+            <text>{{userMessage.cname}}</text>
+          </view>
+          <view>
+            <text class="specialColor">纳税人识别码：</text>
+            <text>{{userMessage.taxpayer}}</text>
+          </view>
+          <view>
+            <text class="specialColor">注册地址：</text>
+            <text>{{userMessage.regaddress}}</text>
+          </view>
+          <view>
+            <text class="specialColor">注册电话：</text>
+            <text>{{userMessage.regtel}}</text>
+          </view>
+          <view>
+            <text class="specialColor">开户银行：</text>
+            <text>{{userMessage.bankname}}</text>
+          </view>
+          <view>
+            <text class="specialColor">银行账户：</text>
+            <text>{{userMessage.bankaccount}}</text>
+          </view>
+        </view>
+      </view>
+      <!--增税发票内容  -->
+      <view class="specialContent">
+        <view>
+          <text class="msg">发票内容</text>
+          <text decode="{{true}}" space="{{true}}" class="notice">&nbsp;&nbsp;&nbsp;(增值税发票内容中支持明细)</text>
+        </view>
+        <view>
+          <text class="msg">明细</text>
+        </view>
+      </view>
+
+      <!--收票人信息  -->
+      <view class="specialMsg">
+        <text class="msg">收票人信息 <text class="notice">（该信息可与收货人信息不同）</text></text>
+        <view class="msgContent">
+          <view>
+            <text>收票人姓名：</text>
+            <input name="userName" placeholder='必填' required="required"></input>
+          </view>
+          <view>
+            <text>收票人手机：</text>
+            <input name="userTel" placeholder='必填' required="required"></input>
+          </view>
+          <view>
+            <text>所在地址：</text>
+            <input name="userAddr" placeholder='必填' required="required"></input>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--确定按钮  -->
+    <view class="sureFixed">
+      <button class="sure" form-type='submit'>确定</button>
+    </view>
+  </form>
+</view>

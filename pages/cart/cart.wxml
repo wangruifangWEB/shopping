@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="cart-box">
+    <!-- wx:for 渲染购物车列表 -->
+    <view class="cart-list" wx:for="{{carts}}" wx:key="">
+      <view>
+        <view class="cart-image-box">
+          <!-- wx:if 是否选择显示不同图标 -->
+          <image wx:if="{{item.status==1}}" bindtap='selectList' class="selected" data-index="{{index}}" src='/images/cart/circle@selected.png' data-ccid="{{item.ccid}}" data-status="{{item.status}}"></image>
+          <image wx:else bindtap='selectList' class="selected" data-index="{{index}}" src='/images/cart/circle@noselected.png' data-ccid="{{item.ccid}}" data-status="{{item.status}}"></image>
+          <image class="cart-image" src="{{item.pics}}"></image>
+        </view>
+        <!-- 增加减少数量按钮 -->
+        <view class="cart-text">
+          <text class="title">{{item.game}}</text>
+          <text class="rule">规格：{{item.rule}}</text>
+          <view class="cart-num">
+            <text bindtap='minusCount' data-id="{{item.gid}}" data-index='{{index}}' class="down">-</text>
+            <text class="num">{{item.gnum}}</text>
+            <text bindtap='addCount'data-id="{{item.gid}}" data-index="{{index}}" class="add">+</text>
+          </view>
+        </view>
+        <view class="price">
+          <text>¥{{item.zhejia}}</text>
+          <image mode="widthFix" class="delete" data-id="{{item.gid}}" bindtap='deleteList' data-index='{{index}}' data-num="{{item.gnum}}" src="/images/cart/delete.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cart-bottom">
+    <view bindtap='onAllSelected'>
+      <!-- wx:if 是否全选显示不同图标 -->
+      <image wx:if="{{selectAllStatus}}" src='/images/cart/circle@selected.png' bindtap="selectAll"></image>
+      <image wx:else src='/images/cart/circle@noselected.png' bindtap="selectAll"></image>
+      <text>全选</text>
+    </view>
+    <view>
+      <text>合计：</text>
+      <text class="red">¥{{totalPrice}}</text>
+    </view>
+    <view bindtap='onAccount'>
+      去结算（{{totalNumber}}）
+    </view>
+  </view>
+</view>

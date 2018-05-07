@@ -1,0 +1,149 @@
+.pay-tab {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  line-height: 96rpx;
+  font-size: 32rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  box-shadow: 0 10rpx 20rpx #f3f3f3;
+}
+
+.pay-tab text {
+  padding: 0 20rpx;
+  border-bottom: 5rpx transparent solid;
+}
+
+.pay-tab text.active {
+  color: #ff5b62;
+  border-color: #ff5b62;
+}
+
+.order-box {
+  width: 100%;
+  margin-top: 120rpx;
+}
+
+.order-list {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 40rpx 0rpx;
+  box-sizing: border-box;
+}
+
+.order-list-big {
+  background: #fafafa;
+  margin-bottom: 20rpx;
+}
+
+.image-box {
+  display: flex;
+  justify-content: flex-start;
+}
+
+image {
+  width: 130rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+
+.title text {
+  display: block;
+}
+
+.text {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.rule {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 2;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.price {
+  color: #ff5b62;
+  font-size: 32rpx;
+}
+
+.oldprice {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.num {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.total {
+  background: #fff;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.total view {
+  width: 90%;
+  margin: 0 auto;
+  line-height: 90rpx;
+}
+
+.total text {
+  float: right;
+}
+
+.total::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.totalprice {
+  font-size: 36rpx;
+  color: #ff5b62;
+  margin-left: 20rpx;
+}
+
+.totalnum {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.pay {
+  background: #fff;
+  position: relative;
+  top: -19rpx;
+}
+
+.pay view {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.pay text {
+  display: block;
+  float: right;
+  padding: 15rpx 40rpx;
+  font-size: 36rpx;
+  color: #ff5b62;
+  border: 1rpx solid #ff5b62;
+  border-radius: 10rpx;
+  margin: 25rpx 0;
+}
+
+.pay::after {
+  content: '';
+  display: block;
+  clear: both;
+}

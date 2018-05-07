@@ -1,0 +1,14 @@
+/* 轮播图 */
+.banner-item image{
+  width: 100%
+}
+.swiper{
+  height: 180px; 
+  margin-bottom: 28rpx;
+}
+
+.swiper .wx-swiper-dot-active{
+  width:30rpx;
+  border-radius:10rpx;
+    
+}

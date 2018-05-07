@@ -1,0 +1,176 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.91",
+	"appid": "wx032a4e456c744881",
+	"projectname": "shopping",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": 0,
+					"name": "修改地址",
+					"pathName": "pages/admin/address/edit/edit",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "优惠券",
+					"pathName": "pages/coupon/coupon",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "注册",
+					"pathName": "pages/login/register/register",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "个人主页",
+					"pathName": "pages/admin/my/my",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "登录",
+					"pathName": "pages/login/log/log",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "商品详情",
+					"pathName": "pages/goods/goods",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "未支付",
+					"pathName": "pages/pay/payno/pay-no",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "修改密码",
+					"pathName": "pages/login/psd/psd",
+					"query": ""
+				},
+				{
+					"id": 9,
+					"name": "签到",
+					"pathName": "pages/admin/signin/signin",
+					"query": ""
+				},
+				{
+					"id": 10,
+					"name": "添加地址",
+					"pathName": "pages/admin/address/add/add",
+					"query": ""
+				},
+				{
+					"id": 11,
+					"name": "选择地址",
+					"pathName": "pages/admin/address/choose/choose",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "案例",
+					"pathName": "pages/demo/demo",
+					"query": ""
+				},
+				{
+					"id": 13,
+					"name": "购物车",
+					"pathName": "pages/cart/cart",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "提交订单(多)",
+					"pathName": "pages/pay/payorders/pay-orders",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发现",
+					"pathName": "pages/find/find",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "活动详情",
+					"pathName": "pages/find/news/news",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "待收货",
+					"pathName": "pages/pay/receiveno/receiveno",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "付款状态",
+					"pathName": "pages/pay/pays/pays",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发票信息",
+					"pathName": "pages/invoice/invoiceMsg/invoiceMsg",
+					"query": ""
+				},
+				{
+					"id": 22,
+					"name": "添加增票资质",
+					"pathName": "pages/invoice/addingTicket/addingTicket",
+					"query": ""
+				},
+				{
+					"id": 23,
+					"name": "修改或删除增税信息",
+					"pathName": "pages/invoice/modifyTicket/modifyTicket",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "会员专区",
+					"pathName": "pages/vip/vip",
+					"query": ""
+				}
+			]
+		}
+	}
+}

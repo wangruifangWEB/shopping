@@ -1,0 +1,149 @@
+<import src="../../wxParse/wxParse.wxml" />
+<view class="container">
+  <view class="swiper-box">
+    <swiper class="swiper" autoplay="true" circular="true" bindchange="changeAutoplay">
+      <swiper-item class="banner-item">
+        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      </swiper-item>
+      <swiper-item class="banner-item">
+        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      </swiper-item>
+      <swiper-item class="banner-item">
+        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      </swiper-item>
+    </swiper>
+    <view class="swiper-text">
+      <text>{{current+1}}</text>
+      <text>/</text>
+      <text>3</text>
+    </view>
+  </view>
+  <view class="goods-title">
+    <view class="goods-box">
+      <view class="title">
+        <text>会员专享</text>
+        <text class="h1">{{goodsArray.gname}}</text>
+      </view>
+      <view class="h2">{{goodsArray.desc}}</view>
+      <view class="price">
+        <text class="red">￥{{goodsArray.zhejia}}</text>
+        <text class="underline">￥{{goodsArray.yuanjia}}</text>
+      </view>
+      <view class="goods-yes">
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>正品保证</text>
+        </view>
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>满¥68包邮</text>
+        </view>
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>7天退货</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 优惠 -->
+  <view class="favourable">
+    <view>
+      <text>会员特权</text>
+      <text>每月一享满150立减20元</text>
+    </view>
+  </view>
+  <view class="favourable">
+    <view>
+      <text>全场包邮</text>
+      <text>实付满199包邮，偏远地区除外</text>
+    </view>
+  </view>
+  <view class="favourable">
+    <view>
+      <text>会员卡激活后</text>
+      <text>次单每150减20起，最高减少60元</text>
+    </view>
+  </view>
+  <view class="goods-details">
+    <view class="details-title">
+      <text></text>
+      <text>商品详情</text>
+    </view>
+    <view class="text">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+
+  </view>
+
+  <view class="goods-details goods-details2">
+    <view class="details-title">
+      <text></text>
+      <text>猜你喜欢</text>
+    </view>
+    <view class="img">
+      <view wx:for="{{likeArray}}" wx:key="">
+        <view data-idx="{{item.id}}" bindtap='onOneShop'>
+          <image mode='widthFix' src="{{item.picy}}"></image>
+          <text>{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-bottom">
+    <view class="cart-bus" bindtap='onCart'>
+      <view class="cart-bus-box">
+        <text class="{{isShake?'animate':''}}">{{TotalNumberGoods ? TotalNumberGoods:'0'}}</text>
+        <image mode="widthFix" src="/images/icon/cart@top.png"></image>
+      </view>
+    </view>
+    <view class="kf">
+      <image mode='widthFix' src="/images/icon/kf.png"></image>
+      <text>客服</text>
+      <button class="kf_button" open-type="contact" session-from="weapp">联系</button>
+    </view>
+    <view class="shop" bindtap="onAddGoods" data-id='{{goodsArray.id}}'>
+      <image mode='widthFix' src="/images/icon/shop.png"></image>
+      <text>加入购物车</text>
+    </view>
+    <view class="buy" data-id='{{item.goodsArray}}' bindtap='onBuyNow'>
+
+      <text>立即购买</text>
+    </view>
+  </view>
+
+  <view hidden='{{fixbg}}' class="buy-now">
+    <view class="absolute {{isTop?'animate-top':''}}">
+      <view class="relative">
+        <image mode='widthFix' class="x-image" src="/images/icon/xx.png" bindtap='onX'></image>
+
+        <view class="buy-image">
+          <view class="image-small">
+            <image src="{{goodsArray.picy}}"></image>
+          </view>
+          <view class="buy-text">
+            <view class="price-input">
+              <view>￥</view>
+              <view>
+                <input type='text' disabled name="price" value='{{goodsArray.zhejia}}'></input>
+              </view>
+            </view>
+
+            <text>已选择{{rule}}</text>
+          </view>
+        </view>
+        <view class="number">
+          <text>购买数量</text>
+          <view class="cart-num">
+            <text class="down {{classNum?'classnum':''}}" bindtap='onDown'>-</text>
+            <view class="num">
+              <input type='text' disabled name="buyNum" value='{{buyNum}}'></input>
+            </view>
+            <text class="add" bindtap='onUp'>+</text>
+          </view>
+        </view>
+      </view>
+      <button data-aid="{{goodsArray.id}}" bindtap="submission">确定</button>
+    </view>
+  </view>
+</view>

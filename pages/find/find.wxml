@@ -1,0 +1,41 @@
+<import src="../tpls/swiper/swiper.wxml" />
+<view class="container">
+  <template is="swiper" data="{{imgSrc}}" />
+  <view class="store-box">
+    <view class="store">
+      <view class="jf" bindtap="onShop">
+        <view>
+          <image mode="widthFix" src="/images/5.png"></image>
+          <text>积分商城</text>
+          <text>更多积分礼品</text>
+        </view>
+
+      </view>
+      <view class="right">
+        <view class="news" bindtap="onNews">
+          <image mode="widthFix" src="/images/6.png"></image>
+          <view class="news-text">
+            <text>新闻资讯</text>
+            <text>了解更多资讯详情</text>
+          </view>
+
+        </view>
+        <view class="news" bindtap="onActive">
+          <image mode="widthFix" src="/images/7.png"></image>
+          <view class="news-text">
+            <text>热门活动</text>
+            <text>了解更多资讯详情</text>
+          </view>
+
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+  <block wx:for="{{list}}" wx:key="*this">
+    <view class="news-image" data-id='{{item.id}}' bindtap='onOneActive'>
+      <image src="{{item.picy}}"></image>
+    </view>
+  </block>
+</view>

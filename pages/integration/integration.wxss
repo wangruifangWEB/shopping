@@ -1,0 +1,13 @@
+@import "../goods/goods.wxss";
+
+.buy {
+  width: 100%;
+}
+
+.goods-details2 .img {
+  justify-content: flex-start;
+}
+
+.goods-details2 .img view {
+  margin-right: 15rpx;
+}

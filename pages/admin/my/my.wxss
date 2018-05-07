@@ -1,0 +1,123 @@
+@import "/pages/tpls/search/search.wxss";
+@import "/pages/tpls/swiper/swiper.wxss";
+page{
+  background: #f3f3f3;
+}
+.search-box{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.search{
+
+  margin: 0 auto;
+
+}
+.my{
+  background: #ff5b62;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 30rpx;
+  color:#fff;
+  text-align: center;
+  padding: 30rpx 0; 
+  position: relative;
+  padding-bottom: 180rpx;
+}
+.my text{
+  width: 100%;
+  display: block;
+  line-height: 1.6;
+}
+.my-photo{
+  width: 140rpx;
+  height:140rpx;
+  border-radius: 50%;
+  border: 7rpx solid #fff;
+  margin: 0 auto;
+  margin-bottom: 15rpx;
+  margin-top: 30rpx;
+
+}
+.smile{
+  width: 60rpx;
+  position: absolute;
+  top:40rpx;
+  right: 40rpx;
+}
+.my-bottom{
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx;
+  line-height: 2;
+
+}
+.my-bottom text{
+  line-height: 1.8;
+}
+.my-bottom image{
+  width: 100rpx;
+}
+.a{
+  width: 100%;
+  position: absolute;
+  bottom:0 ;
+  background: rgba(0, 0,0,0.2)
+}
+
+.money{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-bottom:  1rpx solid #e0e0e0;
+  background: #ffffff;
+ 
+}
+.money>view{
+  padding: 30rpx 0;
+  border-left: 1rpx solid #f3f3f3;
+  width: 25%;
+
+}
+.money>view:first-of-type{
+  border-left: none;
+}
+.money image{
+  width: 70rpx;
+  margin-bottom: 5rpx;
+}
+.money text{
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-size: 30rpx;
+}
+
+.my-address{
+  font-size: 36rpx;
+  line-height: 2.5;
+  display: flex;
+  align-items: center;
+  color: #6b6b6b;
+  font-weight: 400;
+  background: #fff;
+  margin: 30rpx auto;
+  border-top: 1rpx solid #e0e0e0;
+  border-bottom:  1rpx solid #e0e0e0;
+}
+.my-address image{
+  width: 40rpx;
+  margin: 0 30rpx;
+}
+.coupon{
+   border-bottom:  1rpx solid #e0e0e0;
+}
+.coupon .my-address{
+  margin: 0;
+  border-bottom:none;
+}

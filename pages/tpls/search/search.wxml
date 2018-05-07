@@ -1,0 +1,15 @@
+<template name="search">
+  <view class='search-box'>
+    <view class='search'>
+      <icon type='search' class='search-img' size='15' color='#405f80'></icon>
+      <input type='text' placeholder='输入你要搜索的内容' class='placeholder' bindblur='onBlur' bindfocus='onBindFocus' value="{{searchValue}}" />
+      <image wx:if="{{searchShow}}" mode='widthFix' class='xx-img' src='/images/icon/xx.png' catchtap='onCancelImgTap'></image>      
+    </view>
+    <view class='history' wx:if="{{searchShow}}">
+      <text>历史搜索</text>
+      <view>
+        <text wx:for="{{historyArray}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+  </view>
+</template>

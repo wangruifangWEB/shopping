@@ -1,0 +1,17 @@
+<template name="coupon">
+  <block wx:for="{{cou}}" wx:key="*this">
+    <view class="coupon">
+      <text>{{item.Jurisdiction}}</text>
+      <view class="title">
+        <text>¥</text>
+        <text>{{item.money}}</text>
+        <text>满{{item.man}}元减{{item.jian}}优惠券</text>
+      </view>
+      <view class="text">
+        <text>卷号：{{item.juanhao}}</text>
+        <text>有效期：{{item.shikai}} - {{item.shijie}}</text>
+      </view>
+      <image class="absolute" mode='widthFix' src="/images/icon/quan.png"></image>
+    </view>
+  </block>
+  </template>

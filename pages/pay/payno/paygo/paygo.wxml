@@ -1,0 +1,92 @@
+<view class="container">
+  <view class="pay-backgrund">
+    <view class="pay-top">
+      <view class="pay-top-text">
+        <text>待付款</text>
+        <text>等待买家付款</text>
+      </view>
+
+      <view class="pay-btn">
+        <!-- <button type="warn" size="mini" plain="true">取消订单</button> -->
+        <button type="warn" size="mini" bindtap='onPay'>去付款</button>
+      </view>
+    </view>
+    
+  </view>
+
+  <image class="pay-line" src="/images/pay/pay-line.png"></image>
+  <view class="pay-number">
+    
+    <view>
+      <text>订单号：</text>
+      <text>{{orderMsg.orderh}}</text>
+    </view>
+    <view>
+      <text>下单时间：</text>
+      <text>{{orderMsg.addtime}}</text>
+    </view>
+    <view>
+      <text>收货信息：</text>
+      <text>{{orderMsg.name}} {{orderMsg.tel}}</text>
+    </view>
+    <view>
+      <text></text>
+      <text>{{orderMsg.shi}}{{orderMsg.sheng}}{{orderMsg.xian}}{{orderMsg.dizhi}}</text>
+    </view>
+
+  </view>
+  <image class="pay-line" src="/images/pay/pay-line.png"></image>
+  <view class="pay-box">
+    <view class="pay-list" wx:for='{{goodsList}}' wx:key="*this">
+      <image mode="widthFix" src="{{item.img}}"></image>
+      <view>
+        <text class="title">{{item.title}}</text>
+        <text class="format">{{item.rule}}</text>
+        <view class="price">
+          <text>￥{{item.price}}</text>
+          <text>{{item.oldPrice}}</text>
+          <text>x{{item.number}}</text>
+        </view>
+      </view>
+    </view>
+    
+    
+
+  </view>
+  <view class="pay-address">
+    <text>配送方式</text>
+    <text>普通快递￥{{orderMsg.yunfei}}，新疆、西藏地区暂不支持</text>
+  </view>
+
+  <view class="pay-address">
+    <text>买家留言</text>
+    <text>{{orderMsg.liuyan}}</text>
+  </view>
+
+  <view class="pay-address" bindtap='invoiceSelection'>
+    <text class="ticket">发票</text>
+    <view class="pay-rt">
+      <text class="choiced">{{choicedType}}</text>
+      <image src='/images/icon/more.png' class="moreChoice"></image>
+    </view>
+  </view>
+
+    <view class="order">
+    <view>
+      <text>商品金额</text>
+      <text>￥{{orderMsg.yuanjia}}</text>
+    </view>
+    <view>
+      <text>运费</text>
+      <text>￥{{orderMsg.yunfei}}</text>
+    </view>
+    <view>
+      <text>优惠</text>
+      <text>￥{{orderMsg.cid}}</text>
+    </view>
+    <view>
+      <text>应付金额</text>
+      <text>￥{{orderMsg.zhejia}}</text>
+    </view>
+  </view>
+</view>

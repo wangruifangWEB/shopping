@@ -1,0 +1,40 @@
+<import src="../../tpls/calendarTemplate/index" />
+<view class="container">
+  <view class="sign-box">
+    <view class="qiandao-box">
+      <image class="qiandao" mode='widthFix' src="/images/icon/qiandao.png"></image>
+      <text bindtap="onSignIn">{{signText}}</text>
+      <view class="qiandao-text">
+        <view class='integral'>
+          <text>{{integration}}</text>
+          <text>  积分</text>
+        </view>
+        <view class='scope' catchtap='shop'>积分商城</view>
+      </view>
+    </view>
+
+  </view>
+  <view class="scope-list">
+    <view class="scope-title">
+      <view>
+        <image mode="widthFix" src="/images/icon/gift.png"></image>
+        <text>积分兑换</text>
+      </view>
+      <view class="more" bindtap="viewMore">查看更多 ></view>
+    </view>
+    <view class="scope-box">
+      <block wx:for="{{pointsList}}" wx:key="">
+        <view id="{{item.id}}" bindtap='inteDetails'>
+          <image mode="widthFix" src="{{item.picy}}"></image>
+          <text>{{item.gname}}</text>
+        </view>
+      </block>
+    </view>
+
+  </view>
+  <!-- 签到日历 -->
+  <view class="calendar">
+    <template is="calendar" data="{{...calendar}}" />
+  </view>
+
+</view>

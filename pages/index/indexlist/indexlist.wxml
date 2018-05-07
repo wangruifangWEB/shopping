@@ -1,0 +1,10 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class="container">
+  <image mode='widthFix' src='{{imgUrl}}'></image>
+  <view class='rich-text'>        
+    <text>{{activeList.title}}</text>
+    <view>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+    </view>
+  </view>
+</view>

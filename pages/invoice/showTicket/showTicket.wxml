@@ -1,0 +1,34 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view>
+      <text>单位名称：</text>
+      <input name="companyName" class='companyName' value="{{invoiceMsg.cname}}" disabled='{{disabled}}'></input>
+    </view>
+    <view>
+      <text>纳税人识别码：</text>
+      <input name="identCode" value="{{invoiceMsg.taxpayer}}"  disabled='{{disabled}}'></input>
+    </view>
+    <view>
+      <text>注册地址：</text>
+      <input name="address" value="{{invoiceMsg.regaddress}}" disabled='{{disabled}}'></input>
+    </view>
+    <view>
+      <text>注册电话：</text>
+      <input name="tel" value="{{invoiceMsg.regtel}}" disabled='{{disabled}}'></input>
+    </view>
+    <view>
+      <text>开户银行：</text>
+      <input name="bank" value="{{invoiceMsg.bankname}}"  disabled='{{disabled}}'></input>
+    </view>
+    <view>
+      <text>银行账户：</text>
+      <input name="account" value="{{invoiceMsg.bankaccount}}" disabled='{{disabled}}'></input>
+    </view>
+  </form>
+  <view class="noticeText">
+    <image src="../../../images/icon/notice.png"></image>
+    <text class="remind">本页面仅供增值税专用发票-资质审核使用，切勿进行支付相关行业，谨防上当受骗</text>
+  </view>
+  <button class="modify" bindtap='modify'>修 改</button>
+  <button class="remove" bindtap='removeMsg'>删 除</button>
+</view>

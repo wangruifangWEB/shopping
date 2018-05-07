@@ -1,0 +1,45 @@
+<import src="../tpls/search/search.wxml" />
+<import src="../tpls/swiper/swiper.wxml" />
+<view class="container">
+  <template data="{{searchShow,historyArray,searchValue}}" is="search" />
+
+  <view class="indexTop">
+    <image mode='widthFix' src="{{newsOneUrl.picy}}" class="banner" id="{{newsOneUrl.id}}"></image>
+    <view class="coupons">
+      <block wx:for="{{coupon}}" wx:key="key">
+        <view class="couponItem" id="{{item.id}}" bindtap='coupon'>
+          <text class="couponNum">{{item.money}}</text>
+          <view class="itemMargin">
+            <text class="couponTicket">优惠券\n</text>
+            <text class="couponBg">满{{item.man}}使用</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="nine">
+    <image  src='{{newsTwoUrl.picy}}' class="imgBg" id="{{newsTwoUrl.id}}"></image>
+    <view class="nine-box">
+      <block wx:for="{{imgDetails}}" wx:key="">
+        <view bindtap='jump' data-idx="{{item.id}}" data-src="{{item.lianjie}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 轮播图 -->
+  <template is="swiper" data="{{imgSrc}}" />
+
+  <!-- 新闻 -->
+  <view class="new-container">
+    <block wx:for="{{detailsList}}" wx:key="key">
+      <view class="new-box">
+        <image src="{{item.picy}}" bindtap="detailsPage" data-idx="{{item.id}}"></image>
+        <view class="new-text">
+          <text class="title">{{item.title}}</text>
+          <text class="text">{{item.desc}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

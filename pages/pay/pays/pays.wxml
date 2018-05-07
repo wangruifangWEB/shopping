@@ -1,0 +1,29 @@
+<import src='../../tpls/payTemplate/receivingState.wxml' />
+<import src='../../tpls/payTemplate/nopay.wxml' />
+<import src='../../tpls/payTemplate/waitReceiving.wxml' />
+<view class="payContainer">
+  <view class="pay-tab">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+  <view class="mineContent">
+    <!--待付款-->
+    <view wx:if="{{currentTab == 0}}">
+      <template is='nopay' data="{{...stayPayment}}"></template>
+    </view>
+
+    <!--待发货-->
+    <view wx:if="{{currentTab == 1}}">
+      <template is='receivingState' data="{{...stayPayment}}"></template>
+    </view>
+
+    <!--待收货-->
+    <view wx:if="{{currentTab == 2}}">
+      <template is='waitReceiving' data="{{...stayPayment}}"></template>
+    </view>
+
+    <!--已完成-->
+    <view wx:if="{{currentTab == 3}}">
+      <template is='receivingState' data="{{...stayPayment}}"></template>
+    </view>
+  </view>
+</view>

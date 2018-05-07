@@ -1,0 +1,97 @@
+<import src="../../wxParse/wxParse.wxml" />
+<view class="container">
+  <view class="swiper-box">
+    <swiper class="swiper" autoplay="true" circular="true" bindchange="changeAutoplay">
+      <swiper-item class="banner-item">
+        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      </swiper-item>
+      <swiper-item class="banner-item">
+        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      </swiper-item>
+      <swiper-item class="banner-item">
+        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      </swiper-item>
+    </swiper>
+    <view class="swiper-text">
+      <text>{{current+1}}</text>
+      <text>/</text>
+      <text>3</text>
+    </view>
+  </view>
+  <view class="goods-title">
+    <view class="goods-box">
+      <view class="title">
+        <text>会员专享</text>
+        <text class="h1">{{goodsArray.gname}}</text>
+      </view>
+      <view class="h2">{{goodsArray.desc}}</view>
+      <view class="price">
+        <text class="red">￥{{goodsArray.zhejia}}</text>
+        <text class="underline">￥{{goodsArray.yuanjia}}</text>
+      </view>
+      <view class="goods-yes">
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>正品保证</text>
+        </view>
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>满¥68包邮</text>
+        </view>
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>7天退货</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 优惠 -->
+  <view class="favourable">
+    <view>
+      <text>会员特权</text>
+      <text>每月一享满150立减20元</text>
+    </view>
+  </view>
+  <view class="favourable">
+    <view>
+      <text>全场包邮</text>
+      <text>实付满199包邮，偏远地区除外</text>
+    </view>
+  </view>
+  <view class="favourable">
+    <view>
+      <text>会员卡激活后</text>
+      <text>次单每150减20起，最高减少60元</text>
+    </view>
+  </view>
+  <view class="goods-details">
+    <view class="details-title">
+      <text></text>
+      <text>商品详情</text>
+    </view>
+    <view class="text">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </view>
+
+  <view class="goods-details goods-details2">
+    <view class="details-title">
+      <text></text>
+      <text>猜你喜欢</text>
+    </view>
+    <view class="img">
+      <view wx:for="{{likeArray}}" wx:key="">
+        <view>
+          <image mode='widthFix' src="{{item.picy}}"></image>
+          <text>{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-bottom">
+    <view class="buy" data-id='{{item.goodsArray}}' bindtap='onBuyNow'>
+      <text>积分兑换</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+@import "../addingTicket/addingTicket.wxss";
+
+.container view:last-child {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.container button {
+  height: 70rpx;
+}
+
+.container .remove {
+  color: #ff5f65;
+  background-color: #fff;
+  border: 1px solid #ff5f65;
+}
+
+.noticeText image {
+  width: 28rpx;
+  height: 25rpx;
+  position: relative;
+  top: 8rpx;
+}
+
+.noticeText text {
+  color: #ff5f65;
+  font-size: 24rpx;
+}

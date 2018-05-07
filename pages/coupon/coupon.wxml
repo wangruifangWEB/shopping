@@ -1,0 +1,17 @@
+<import src="../tpls/coupon/coupon.wxml" />
+<view class="container">
+  <view class="coupon-title fixed">
+    <block wx:for="{{tabbar}}" wx:key="*this">
+      <view id="{{index}}" class="{{currentIdx == index ? 'active' :''}}" catchtap='barClick'>{{item}} </view>
+    </block>
+  </view>
+  <view class="coupon-box">
+    <view wx:if='{{currentIdx == 0}}'>
+      <template is="coupon" data="{{...couponList}}" />
+    </view>
+
+    <view wx:if='{{currentIdx == 1}}' class="history">
+      <template is="coupon" data="{{...historyCouponList}}" /> 
+    </view>
+  </view>
+</view>
