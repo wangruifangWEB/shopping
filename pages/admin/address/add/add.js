@@ -59,7 +59,7 @@ Page({
   callback(res) {
     var requestStatus = res.data;
     if (requestStatus) {
-      util.showToast('地址修改成功!', '');
+      util.showToast('地址填写成功!', 'none');
       wx.navigateBack({})
     } else {
       util.showToast('网络错误,请重试!', 'none');

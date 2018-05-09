@@ -101,7 +101,6 @@ Page({
   },
   callback(res) {
     var requestStatus = res.data.data.uid;
-    console.log(requestStatus);
     if (requestStatus) {
       utils.showToast('登录成功!', 'success');
       //设置缓存记录登录状态

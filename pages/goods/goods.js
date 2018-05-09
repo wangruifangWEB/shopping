@@ -61,7 +61,6 @@ Page({
     } else {
       utils.showToast('没有登录，请先登录!', 'none');
     }
-
   },
   // 立即购买
   onBuyNow() {

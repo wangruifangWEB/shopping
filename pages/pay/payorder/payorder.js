@@ -2,26 +2,35 @@ var app = getApp();
 var utils = require('../../../utils/util.js');
 Page({
   data: {
-    addressPrice: 10,
-    couponPrice: 2,
+    couponPrice: 0,
     totalPrice: 0,
-    leavingFocus: false
+    leavingFocus: false,
+    payPrice: 0,
+    choicedType: '不开发票',
+    noAddress: false,  //地址不显示
+    hiddenAddress:true
   },
   onLoad: function (options) {
+    //获取缓存值
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
+    //获取账单信息
+    var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + uid;
+    utils.http(orderUrl, this.initOrdercallback);
   },
   onShow() {
-    //获取缓存值
+    //获取发票状态值
+    var choicedType = wx.getStorageSync('choicedType');
+    this.setData({ choicedType });
+    //获取账单信息
     var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + this.data.uid;
     utils.http(orderUrl, this.ordercallback);
   },
   // 支付
   onPay() {
     console.log('支付');
-    var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
-    utils.http(payUrl, this.paycallback);
-
+    // var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
+    // utils.http(payUrl, this.paycallback);
     wx.requestPayment({
       'timeStamp': '',
       'nonceStr': '',
@@ -81,16 +90,16 @@ Page({
     this.setData({ goodsDetails: modifyAddress });
   },
   ordercallback(res) {
-    let payGoods = res.data.data.ord;
-    let choicedType = payGoods.fapiao;
-    if (choicedType == 1) {
-      choicedType = '普通发票'
-    } else if (choicedType == 2) {
-      choicedType = '增值发票'
+    let did = res.data.data.ord.did;
+    if (did == 0) {
+      this.data.noAddress = true;
+      this.data.hiddenAddress = false;
     } else {
-      choicedType = '不开发票'
+      this.data.noAddress = false;
+      this.data.hiddenAddress = true;
     }
-    this.setData({ payGoods, choicedType });
+    let payGoods = res.data.data.ord;
+    this.setData({ payGoods });
   },
   //发票选择
   invoiceSelection(e) {
@@ -98,4 +107,32 @@ Page({
       url: '../../invoice/invoiceMsg/invoiceMsg?oid=' + e.currentTarget.dataset.oid,
     })
   },
+  //价格
+  initOrdercallback(res) {
+    let did = res.data.data.ord.did;
+    if (did == 0) {
+      this.data.noAddress = true;
+      this.data.hiddenAddress=false;
+    } else {
+      this.data.noAddress = false;
+      this.data.hiddenAddress=true;
+    }
+    let payGoods = res.data.data.ord;
+    let totalPrice = this.data.totalPrice;
+    let payPrice = this.data.payPrice;
+    let couponPrice = this.data.couponPrice;
+    for (var i in payGoods.shop) {
+      totalPrice += Number(payGoods.shop[i].yuanjia);
+      payPrice += Number(payGoods.shop[i].zhejia);
+      couponPrice = totalPrice - payPrice;
+    }
+    payPrice = payPrice + Number(payGoods.yunfei);
+    this.setData({ payGoods, totalPrice, payPrice, couponPrice });
+  },
+  //添加地址
+  addAddress(){
+    wx.navigateTo({
+      url: '../../admin/address/add/add',
+    })
+  }
 })

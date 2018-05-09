@@ -33,7 +33,6 @@ Page({
       var defaultAddrChange = app.globalData.shopUrl + '/home/address/index/ty/u/uid/' + this.data.uid + '/aid/' + did + '/n/' + n + '/s/' + s + '/ss/' + ss + '/x/' + x + '/d/' + d + '/t/' + t + '/m/1';
       utils.http(defaultAddrChange, this.defaultAddrChangecallback);
     }
-
     this.setData({
       currentTab: e.currentTarget.dataset.id
     })

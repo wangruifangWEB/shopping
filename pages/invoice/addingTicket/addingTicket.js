@@ -28,10 +28,7 @@ Page({
       return;
     } else {
       var url = app.globalData.shopUrl + '/home/zpzz/index/ty/zpa/uid/' + this.data.uid + '/cn/' + companyName + '/nsr/' + identCode + '/ra/' + address + '/rt/' + tel + '/bk/' + bank + '/bkh/' + account;
-      console.log(url);
       utils.formHttp(url, 'POST', 'application/x-www-form-urlencoded', this.callback);
-      // //返回上一个页面
-      // wx.navigateBack({})
     }
   },
   notice() {
@@ -42,12 +39,13 @@ Page({
     }
   },
   callback(res) {
-    console.log(res);
     if (!res.data) {
       //用户提示
       app.showModal('添加失败，请稍后重试！', '');
     } else {
       app.showModal('增票信息添加成功！', '');
+      //返回上一页
+      wx.navigateBack({})
     }
   }
 })

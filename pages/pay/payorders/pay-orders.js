@@ -2,29 +2,35 @@ var app = getApp();
 var utils = require('../../../utils/util.js');
 Page({
   data: {
-    addressPrice: 10,
-    couponPrice: 2,
+    couponPrice: 0,
     totalPrice: 0,
-    choicedType: '不开发票',
-    leavingFocus: false
+    leavingFocus: false,
+    payPrice: 0,
+    choicedType: '不开发票'
   },
   onLoad: function (options) {
+    //获取缓存值
+    var uid = wx.getStorageSync('uid');
     //获取上个页面传值
-    this.setData({ uid: options.uid, num: options.goodsCount, aid: options.aid });
-    //根据是否有更换地址做页面更新
-    var url = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num;
+    this.setData({ uid: uid, num: options.goodsCount, aid: options.aid });
+    //获取账单信息
+    var url = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + uid + '/gid/' + this.data.aid + '/num/' + this.data.num;
     utils.http(url, this.callback);
   },
   onShow() {
+    //获取发票状态值
+    var choicedType = wx.getStorageSync('choicedType');
+    console.log(choicedType);
+    this.setData({ choicedType });
+    //获取账单信息
     var addressModifyUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.aid;
     utils.http(addressModifyUrl, this.addressModifycallback);
   },
   // 支付
   onPay() {
     console.log('支付');
-    var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
-    utils.http(payUrl, this.paycallback);
-
+    // var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
+    // utils.http(payUrl, this.paycallback);
     wx.requestPayment({
       'timeStamp': '',
       'nonceStr': '',
@@ -41,26 +47,35 @@ Page({
   //发票选择
   invoiceSelection(e) {
     wx.navigateTo({
-      url: '../../invoice/invoiceMsg/invoiceMsg?oid='+e.currentTarget.dataset.oid,
+      url: '../../invoice/invoiceMsg/invoiceMsg?oid=' + e.currentTarget.dataset.oid,
     })
-  },
-  callback(res) {
-    if (res.data) {
-      var goodsDetailsUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.aid;
-      utils.http(goodsDetailsUrl, this.goodsDetailscallback);
-    }
-  },
-  goodsDetailscallback(res) {
-    //获取用户商品信息
-    var goodsDetails = res.data.data.ord;
-    let totalPrice = this.data.num * goodsDetails.shop[0].zhejia;
-    this.setData({ goodsDetails, totalPrice });
   },
   //选择地址
   choiceAddress(e) {
     wx.navigateTo({
       url: '../../admin/address/choose/choose?oid=' + e.currentTarget.dataset.idx,
     })
+  },
+  callback(res) {
+    if (res.data) {
+      var payGoodsUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.aid;
+      utils.http(payGoodsUrl, this.payGoodscallback);
+    }
+  },
+  payGoodscallback(res) {
+    //获取用户商品信息
+    var payGoods = res.data.data.ord;
+    let totalPrice = this.data.totalPrice;
+    let payPrice = this.data.payPrice;
+    let couponPrice = this.data.couponPrice;
+    for (var i in payGoods.shop) {
+      totalPrice += Number(payGoods.shop[i].yuanjia);
+      payPrice += Number(payGoods.shop[i].zhejia);
+      couponPrice = totalPrice - payPrice;
+    }
+    payPrice = payPrice + Number(payGoods.yunfei);
+    this.setData({ payGoods, totalPrice, payPrice, couponPrice });
+    console.log(payGoods)
   },
   addresscallback(res) {
     if (res.data) {
@@ -93,6 +108,12 @@ Page({
   },
   addressModifycallback(res) {
     var modifyAddress = res.data.data.ord;
-    this.setData({ goodsDetails: modifyAddress});
+    this.setData({ payGoods: modifyAddress });
+  },
+  //发票选择
+  invoiceSelection(e) {
+    wx.navigateTo({
+      url: '../../invoice/invoiceMsg/invoiceMsg?oid=' + e.currentTarget.dataset.oid,
+    })
   }
 })

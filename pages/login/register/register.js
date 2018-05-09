@@ -78,7 +78,7 @@ Page({
   callback(res, method, contentType) {
     var status = res.data;
     if (status == 1) {
-      utils.showToast('注册成功!', 'success');
+      utils.showToast('注册成功，去登录!', 'none');
       wx.navigateBack({})
     } else if (status == 222) {
       utils.showToast('该用户已注册', 'error');

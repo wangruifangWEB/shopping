@@ -1,5 +1,7 @@
 var app = getApp();
 var utils = require('../../../utils/util.js');
+import { Register } from 'invoiceMsg-model.js'
+let register = new Register();
 Page({
   data: {
     invoiceType: ['普通发票', '增值税专用发票'],
@@ -10,6 +12,7 @@ Page({
     objIndex: 0,
     contentIndex: 0,
     isStatus: 0, //是否符合增税人身份
+    choicedType: ''
   },
   onLoad: function (options) {
     //获取后台缓存数据
@@ -21,9 +24,13 @@ Page({
     utils.http(url, this.valueAddcallback);
   },
   invoiceType(e) {
-    this.setData({
-      currentIndex: e.currentTarget.dataset.idx
-    });
+    let index = e.currentTarget.dataset.idx;
+    this.setData({ index });
+    if (!this.data.userMessage){
+      this.setData({ currentIndex:0 });
+    }else{
+      this.setData({ currentIndex: index });
+    }
   },
   invoiceObj(e) {
     this.setData({
@@ -40,28 +47,32 @@ Page({
   },
   formSubmit(e) {
     let userInput = e.detail.value;
-    console.log(userInput);
-    let choicedType = '';
-    if (this.data.currentIndex == 0 && this.data.objIndex == 0 && this.data.contentIndex == 0) {
-      console.log('不开发票');
-      this.setData({ choicedType: '不开发票' });
-      this.prevPage();
+    if (this.data.currentIndex == 0 && this.data.contentIndex == 0 && this.data.objIndex == 0) {
+      wx.setStorageSync('choicedType', '不开发票')
+      wx.navigateBack({})
     } else if (this.data.currentIndex == 0 && this.data.contentIndex == 1 && this.data.objIndex == 0) {
-      console.log('普通发票');
-      this.setData({ fid: 2, choicedType: '普通发票' });
+      this.setData({ fid: 2 });
       this.ordinaryTicketPersonal();
     } else if (this.data.contentIndex == 1 && this.data.currentIndex == 0 && this.data.objIndex == 1) {
-      console.log('普通发票-公司');
       let companyName = userInput.companyName;
       let companyNum = userInput.companyNum;
-      this.setData({ companyName, companyNum });
+      this.setData({ fid: 2, companyName, companyNum });
       this.ordinaryCompanyTicket();
     } else {
       var sn = userInput.userName;
       var st = userInput.userTel;
       var sd = userInput.userAddr;
-      console.log('增值发票');
-      this.setData({ fid: 2, choicedType: '增值发票', sn, st, sd });
+      //提示用户内容不能为空
+      if (sn == '' || st == '' || sd == '') {
+        app.showModal('', '内容不能为空！');
+        return false;
+        //验证手机格式
+      } else if ("" == register.trim(st) || !(/^1[0-9]{10}$/.test(st))) {
+        register.showToast('手机号为空或格式不正确', 'none', 1000)
+        return false;
+      }
+      //设置
+      this.setData({ fid: 2, sn, st, sd });
       //调用增值发票
       this.valueAddTicket();
     }
@@ -69,25 +80,35 @@ Page({
   //普通发票-个人
   ordinaryTicketPersonal() {
     var url = app.globalData.shopUrl + '/home/order/index/ty/oou_f/uid/' + this.data.uid + '/oid/' + this.data.oid + '/fapiao/' + this.data.fid;
-    console.log(url);
+    console.log('普通发票个人：' + url);
     utils.http(url, this.ticketcallback);
   },
   ticketcallback(res) {
-    console.log(res);
     if (res.data) {
-      this.prevPage();
+      this.data.choicedType = '开发票';
+      wx.setStorageSync('choicedType', '开发票')
+      //返回上一页
+      wx.navigateBack({})
     } else {
       utils.showToast('网络错误,请重试!', 'none');
     }
   },
   //普通发票-公司
   ordinaryCompanyTicket() {
-    var url = app.globalData.shopUrl + '/home/fapiao/index/ty/pt/uid/' + this.data.uid + '/gid/' + this.data.goodsId + '/cn/' + this.data.companyName + '/nsr/' + this.data.companyNum;
-    utils.http(url, this.companycallback);
+    if (this.data.companyName == '' || this.data.companyNum == '') {
+      app.showModal('', '内容不能为空！');
+    } else {
+      var url = app.globalData.shopUrl + '/home/fapiao/index/ty/pt/uid/' + this.data.uid + '/gid/' + this.data.goodsId + '/cn/' + this.data.companyName + '/nsr/' + this.data.companyNum;
+      console.log('普通发票公司：' + url);
+      utils.http(url, this.companycallback);
+    }
   },
   companycallback(res) {
     if (res.data !== 0) {
-      this.prevPage();
+      this.data.choicedType = '开发票';
+      wx.setStorageSync('choicedType', '开发票')
+      //返回上一页
+      wx.navigateBack({})
     } else {
       utils.showToast('网络错误,请重试!', 'none');
     }
@@ -95,28 +116,27 @@ Page({
   //增值发票
   valueAddTicket() {
     var url = app.globalData.shopUrl + '/home/fapiao/index/ty/zzz/uid/' + this.data.uid + '/gid/' + this.data.goodsId + '/oid/' + this.data.oid + '/st/' + this.data.st + '/sn/' + this.data.sn + '/sd/' + this.data.sd;
-    console.log(url)
+    console.log('增值发票：' + url)
     utils.http(url, this.valueAddTicketcallback);
   },
   valueAddTicketcallback(res) {
+    console.log(res);
     if (res.data !== 0) {
-      this.prevPage();
+      this.data.choicedType = '开发票';
+      wx.setStorageSync('choicedType', '开发票')
+      //返回上一页
+      // wx.navigateBack({})
     } else {
       utils.showToast('网络错误,请重试!', 'none');
     }
   },
-  prevPage() {
-    var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1];  //当前页面
-    var prevPage = pages[pages.length - 2]; //上一个页面
-    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    prevPage.setData({
-      choicedType: this.data.choicedType
-    })
-    wx.navigateBack();
-  },
   valueAddcallback(res) {
     var userMessage = res.data.data.or;
-    this.setData({ userMessage });
-  },
+    let currentIndex = this.data.currentIndex;
+    if (!userMessage) {
+      utils.showToast('请到个人中心添加增票资质信息!', 'none');
+    } else {
+      this.setData({ userMessage });
+    }
+  }
 })

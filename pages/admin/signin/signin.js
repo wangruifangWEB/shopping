@@ -4,7 +4,6 @@ var app = getApp();
 Page({
   data: {
     signDay: '',
-    signText:'签到',
     arr: []
   },
   onLoad: function () {
@@ -13,7 +12,7 @@ Page({
     //获取用户id
     var uid = wx.getStorageSync('uid');
     console.log(uid);
-    this.setData({ uid, signText });
+    this.setData({ uid,signText });
     //积分兑换列表
     var pointsListUrl = app.globalData.shopUrl + '/home/jifen/index/ty/jis';
     util.http(pointsListUrl, this.pointsListcallback);
@@ -72,7 +71,6 @@ Page({
   },
   //签到列表
   signListcallback(res) {
-    console.log(res);
     var signList = res.data.data.qd;
     console.log(signList);
     let arr = [];

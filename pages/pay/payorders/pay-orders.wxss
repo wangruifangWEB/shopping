@@ -160,10 +160,15 @@ page {
 .moreChoice {
   width: 40rpx;
   height: 40rpx;
-  /* float: right;  */
+  float: right;  
   vertical-align: middle;
+  margin-top:8rpx;
 }
 
 .maginRt{
   margin-right: 38rpx;
+}
+
+.choiced{
+  margin-right:10rpx;
 }

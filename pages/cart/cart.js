@@ -105,15 +105,16 @@ Page({
     for (let i = 0; i < carts.length; i++) {  // 循环列表得到每个数据
       if (carts[i].status == 1) {                   // 判断选中才会计算价格
         var orderListUrl = app.globalData.shopUrl + '/home/caror/index/ty/xzo/uid/' + this.data.uid + '/ss/1';
+        console.log(orderListUrl);
         utils.http(orderListUrl, this.orderListcallback);
       } else {
         utils.showToast('您还没有选中商品!', 'none');
       }
     }
-
   },
   callback(res) {
     var carts = res.data.data.car;
+    console.log(carts);
     let TotalNumberGoods = 0;
     for (var i in carts) {
       TotalNumberGoods += parseInt(carts[i].gnum);

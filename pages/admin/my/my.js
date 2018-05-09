@@ -17,7 +17,7 @@ Page({
     var that = this;
     //判断用户是否登录
     var uid = wx.getStorageSync('uid');
-    that.setData({ uid });
+    that.setData({ uid }); 
     if (uid) {
       //获取用户头像
       that.getUserInfo();
@@ -126,7 +126,6 @@ Page({
     }
   },
   callback(res) {
-    console.log(res);
     if (!this.data.uid) {
       util.showToast('请登录后查看！', 'none');
     } else {

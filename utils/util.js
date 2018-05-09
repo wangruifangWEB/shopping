@@ -43,11 +43,11 @@ function showToast(titles, icon) {
   wx.showToast({
     title: titles,
     icon: icon,
-    duration: 1500
+    duration: 2000
   })
   setTimeout(function () {
     wx.hideLoading()
-  }, 2000)
+  }, 3000)
 }
 module.exports = {
   http: http,
