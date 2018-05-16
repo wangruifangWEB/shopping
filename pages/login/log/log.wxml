@@ -14,11 +14,11 @@
     <button class="btn" bindtap='onRegister'>注册</button>
   </form>
 
-  <view class="form-fixed" bindtap='onlogin'>
+  <view class="form-fixed">
     <view class="relative">
       <text class='or'>or</text>
       <view>
-        <image mode='widthFix' src="/images/icon/wx.png" bindtap='onlogin'></image>
+        <button plain="true" style="background-image: url('/images/icon/wx.png')" open-type="getUserInfo" bindgetuserinfo="getUserInfo" bindtap='onlogin' class="loginBg"></button> 
         <text>微信登录</text>
       </view>
     </view>

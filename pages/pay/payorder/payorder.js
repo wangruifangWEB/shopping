@@ -6,31 +6,35 @@ Page({
     totalPrice: 0,
     leavingFocus: false,
     payPrice: 0,
-    choicedType: '不开发票',
-    noAddress: false,  //地址不显示
-    hiddenAddress:true
+    choicedType: '不开发票'
   },
   onLoad: function (options) {
     //获取缓存值
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
     //获取账单信息
-    var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + uid;
+    var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + this.data.uid;
     utils.http(orderUrl, this.initOrdercallback);
   },
   onShow() {
     //获取发票状态值
     var choicedType = wx.getStorageSync('choicedType');
-    this.setData({ choicedType });
-    //获取账单信息
-    var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + this.data.uid;
-    utils.http(orderUrl, this.ordercallback);
+    if (choicedType) {
+      this.setData({ choicedType });
+    }
+    var addressId = wx.getStorageSync('addressId')
+    if (addressId) {
+      //获取账单信息
+      this.modifyAddress();
+    } else {
+      this.setData({ noAddress: true, hiddenAddress:false});
+    }
   },
   // 支付
   onPay() {
     console.log('支付');
-    // var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
-    // utils.http(payUrl, this.paycallback);
+    var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
+    utils.http(payUrl, this.paycallback);
     wx.requestPayment({
       'timeStamp': '',
       'nonceStr': '',
@@ -85,22 +89,6 @@ Page({
       console.log('用户信息提交成功');
     }
   },
-  addressModifycallback(res) {
-    var modifyAddress = res.data.data.ord;
-    this.setData({ goodsDetails: modifyAddress });
-  },
-  ordercallback(res) {
-    let did = res.data.data.ord.did;
-    if (did == 0) {
-      this.data.noAddress = true;
-      this.data.hiddenAddress = false;
-    } else {
-      this.data.noAddress = false;
-      this.data.hiddenAddress = true;
-    }
-    let payGoods = res.data.data.ord;
-    this.setData({ payGoods });
-  },
   //发票选择
   invoiceSelection(e) {
     wx.navigateTo({
@@ -109,14 +97,6 @@ Page({
   },
   //价格
   initOrdercallback(res) {
-    let did = res.data.data.ord.did;
-    if (did == 0) {
-      this.data.noAddress = true;
-      this.data.hiddenAddress=false;
-    } else {
-      this.data.noAddress = false;
-      this.data.hiddenAddress=true;
-    }
     let payGoods = res.data.data.ord;
     let totalPrice = this.data.totalPrice;
     let payPrice = this.data.payPrice;
@@ -129,8 +109,33 @@ Page({
     payPrice = payPrice + Number(payGoods.yunfei);
     this.setData({ payGoods, totalPrice, payPrice, couponPrice });
   },
+  modifyAddress() {
+    var address = wx.getStorageSync('address')
+    let userName, userTel, userSheng, 
+    userShi, userXian, userDizhi,
+     hiddenAddress, noAddress;
+    userName = address.name;
+    userTel = address.tel;
+    userSheng = address.sheng;
+    userShi = address.shi;
+    userXian = address.xian;
+    userDizhi = address.dizhi;
+    //判定是否有收货地址
+    noAddress = false;
+    hiddenAddress = true;
+    this.setData({
+      noAddress,
+      hiddenAddress,
+      userName,
+      userTel,
+      userSheng,
+      userShi,
+      userXian,
+      userDizhi
+    });
+  },
   //添加地址
-  addAddress(){
+  addAddress() {
     wx.navigateTo({
       url: '../../admin/address/add/add',
     })

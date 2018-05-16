@@ -40,10 +40,12 @@ const conf = {
     });
   },
   handleCalendar(e) {
+    var that=this;
+    //获取用户id
+    var uid = wx.getStorageSync('uid');
     const handle = e.currentTarget.dataset.handle;
-    const curYear = this.data.calendar.curYear;
-    const curMonth = this.data.calendar.curMonth;
-    
+    const curYear = that.data.calendar.curYear;
+    const curMonth = that.data.calendar.curMonth;
     if (handle === 'prev') {
       let newMonth = curMonth - 1;
       let newYear = curYear;
@@ -51,7 +53,6 @@ const conf = {
         newYear = curYear - 1;
         newMonth = 12;
       }
-
       conf.calculateDays.call(this, newYear, newMonth);
       conf.calculateEmptyGrids.call(this, newYear, newMonth);
 
@@ -59,37 +60,90 @@ const conf = {
         'calendar.curYear': newYear,
         'calendar.curMonth': newMonth,
       });
+     
+      if (newMonth < 10) {
+        newMonth = '0' + newMonth;
+      }
+      let date = newYear + '-' + newMonth;
+      //签到列表
+      wx.request({
+        url: 'https://mypro.51cmo.net/home/qiandao/index/ty/qd/uid/' + uid + '/lsqd/' + date,
+        success: function (res) {
+          var signList = res.data.data.qd;
+          let arr = [];
+          let dayArr = that.data.calendar.days;
+          for (var i in signList) {
+            let addtime = signList[i].addtime;
+            var days = addtime.slice(8, );
+            if (days.charAt(0) == '0') {
+              var days = addtime.slice(9, );
+            }
+            arr.push(Number(days));
+          }
+          for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dayArr.length; j++) {
+              if (arr[i] == dayArr[j].day) {
+                dayArr[j].choosed = true;
+              }
+            }
+          }
+          that.setData({
+            "calendar.days": dayArr
+          })
+        }
+      })
+
     } else {
-      let newMonth = curMonth + 1;
+      let newMonth = Number(curMonth) + 1;
       let newYear = curYear;
-      
+
       if (newMonth > 12) {
-        newYear = curYear + 1;
+        newYear = Number(curYear) + 1;
         newMonth = 1;
       }
 
       conf.calculateDays.call(this, newYear, newMonth);
       conf.calculateEmptyGrids.call(this, newYear, newMonth);
 
+      if (newMonth < 10) {
+        newMonth = '0' + newMonth;
+      }
+      let date = newYear + '-' + newMonth;
+      //签到列表
+      wx.request({
+        url: 'https://mypro.51cmo.net/home/qiandao/index/ty/qd/uid/' + uid + '/lsqd/' + date,
+        success: function (res) {
+          var signList = res.data.data.qd;
+          let arr = [];
+          let dayArr = that.data.calendar.days;
+          for (var i in signList) {
+            let addtime = signList[i].addtime;
+            var days = addtime.slice(8, );
+            if (days.charAt(0) == '0') {
+              var days = addtime.slice(9, );
+            }
+            arr.push(Number(days));
+          }
+          for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < dayArr.length; j++) {
+              if (arr[i] == dayArr[j].day) {
+                dayArr[j].choosed = true;
+              }
+            }
+          }
+          that.setData({
+            "calendar.days": dayArr
+          })
+  
+        }
+      })
+
       this.setData({
         'calendar.curYear': newYear,
         'calendar.curMonth': newMonth,
-        
+
       });
     }
-    let arr = wx.getStorageSync('signDays');
-    let dayArr = this.data.calendar.days;
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 0; j < dayArr.length; j++) {
-        if (arr[i] == dayArr[j].day) {
-          dayArr[j].choosed = true; 
-        }
-      }
-    } 
-    this.setData({
-      "calendar.days": dayArr
-    })
-    
   },
   tapDayItem(e) {
     const idx = e.currentTarget.dataset.idx;
@@ -140,3 +194,4 @@ export default () => {
   self.handleCalendar = conf.handleCalendar.bind(self);
   self.chooseYearAndMonth = conf.chooseYearAndMonth.bind(self);
 };
+

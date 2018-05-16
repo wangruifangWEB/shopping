@@ -81,7 +81,7 @@
     </view>
     <view class="img">
       <view wx:for="{{likeArray}}" wx:key="">
-        <view>
+        <view data-idx="{{item.id}}" bindtap='onOneShop'>
           <image mode='widthFix' src="{{item.picy}}"></image>
           <text>{{item.desc}}</text>
         </view>

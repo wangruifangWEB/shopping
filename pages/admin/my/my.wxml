@@ -3,7 +3,7 @@
   <view class="my">
     <image class="smile" mode="widthFix" bindtap="onSignIn" src="/images/vip/vip-smile.png"></image>
     <image mode="widthFix" src="{{userInfo.avatarUrl}}" class="my-photo"></image>
-    <text>{{vip}}</text>
+    <text>{{userMsg.vip ?'正式会员':'临时会员'}}</text>
     <view class='a'>
       <view class="my-bottom">
         <view>

@@ -12,7 +12,7 @@ page {
   font-size: 36rpx;
 }
 
-.h2 {
+.h2 { 
   font-size: 32rpx;
 }
 
@@ -38,4 +38,5 @@ page {
 
 view {
   box-sizing: border-box;
+  -webkit-overflow-scrolling : touch;
 }

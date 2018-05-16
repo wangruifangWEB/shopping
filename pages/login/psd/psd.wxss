@@ -23,15 +23,12 @@ form view{
   display: block;
   background: #ff5b62;
   color: #ffffff;
-  
   font-size: 28rpx;
   padding: 6rpx 10rpx;
   border-radius: 6rpx;
   box-sizing: inherit;
   line-height: 40rpx;
   margin-right: 0;
-  width: 140rpx;
-  
 }
 
 form view image{

@@ -17,11 +17,9 @@
       <input type="text" name="userDetailsAddress" placeholder="详细地址" value="{{addr.dizhi}}"></input>
     </view>
     <view>
-      
       <image bindtap="onagree" mode='widthFix' src="{{agree?'/images/cart/circle@selected.png':'/images/cart/circle@noselected.png'}}"></image>
       <text bindtap="onagree" class="agree">设为默认地址</text>
     </view>
     <button class="btn" formType="submit">保存</button>
-    
   </form>
 </view>

@@ -16,23 +16,30 @@ Page({
     utils.http(addrUrl, this.addrManage);
   },
   onagree(e) {
+    //获取当前地址id
     let did = e.currentTarget.dataset.idx;
-    this.setData({ did });
-    if (this.data.oid) {
-      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + did + '/oid/' + this.data.oid;
-      utils.http(addressUrl, this.addresscallback);
-    } else {
-      const index = e.currentTarget.dataset.id; // 获取data- 传进来的index
-      let address = this.data.address;                 // 地址列表
-      const n = address[index].name;
-      const t = address[index].tel;
-      const s = address[index].sheng;
-      const ss = address[index].shi;
-      const x = address[index].xian;
-      const d = address[index].dizhi;
-      var defaultAddrChange = app.globalData.shopUrl + '/home/address/index/ty/u/uid/' + this.data.uid + '/aid/' + did + '/n/' + n + '/s/' + s + '/ss/' + ss + '/x/' + x + '/d/' + d + '/t/' + t + '/m/1';
-      utils.http(defaultAddrChange, this.defaultAddrChangecallback);
-    }
+    const index = e.currentTarget.dataset.id; // 获取data- 传进来的index
+    let address = this.data.address;                 // 地址列表
+    const n = address[index].name;
+    const t = address[index].tel;
+    const s = address[index].sheng;
+    const ss = address[index].shi;
+    const x = address[index].xian;
+    const d = address[index].dizhi;
+    //修改默认地址
+    var defaultAddrChange = app.globalData.shopUrl + '/home/address/index/ty/u/uid/' + this.data.uid + '/aid/' + did + '/n/' + n + '/s/' + s + '/ss/' + ss + '/x/' + x + '/d/' + d + '/t/' + t + '/m/1';
+    utils.http(defaultAddrChange, this.defaultAddrChangecallback);
+    let addressMsg = {
+      name: n,
+      tel: t,
+      dizhi: d,
+      sheng: s,
+      shi: ss,
+      xian: x
+    };
+    //更新缓存地址
+    wx.setStorageSync('address', addressMsg)
+    //更新页面状态
     this.setData({
       currentTab: e.currentTarget.dataset.id
     })
@@ -40,8 +47,12 @@ Page({
   //收货地址 
   addrManage(res) {
     var address = res.data.data.addr;
-    wx.setStorageSync('addressId', address[0].id)
-    this.setData({ address });
+    if (address.length !== 0) {
+      wx.setStorageSync('addressId', address[0].id)
+      //缓存默认地址
+      wx.setStorageSync('address', address[0])
+      this.setData({ address });
+    }
   },
   //修改地址
   modifyAddress(e) {
@@ -70,27 +81,18 @@ Page({
         address: this.data.address
       });
       utils.showToast('删除成功!', '');
+      //检查是否删完所有地址
+      if (this.data.address.length == 0) {
+        wx.setStorageSync('address', 0)
+        wx.setStorageSync('addressId', 0)
+      }
     } else {
-      utils.showToast('网络错误,请重试!', 'none');
-    }
-  },
-  addresscallback(res) {
-    if (!res.data) {
-      utils.showToast('网络错误,请重试!', 'none');
-    } else {
-      var gid = wx.getStorageSync('goodsId');
-      var addressModifyUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + gid;
-      utils.http(addressModifyUrl, this.addressModifycallback);
-    }
-  },
-  addressModifycallback(res) {
-    if (!res.data) {
       utils.showToast('网络错误,请重试!', 'none');
     }
   },
   //修改默认地址
   defaultAddrChangecallback(res) {
-    if(!res.data){
+    if (!res.data) {
       utils.showToast('网络错误,请重试!', 'none');
     }
   }

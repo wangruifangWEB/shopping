@@ -3,9 +3,9 @@ var app = getApp();
 Page({
   data: {
     yzm: false,
-    agree: true,
+    agree: false,
     region: [],
-    m: 1
+    m: 0
   },
   onLoad: function (options) {
     //获取该地址id
@@ -17,17 +17,15 @@ Page({
     util.formHttp(initUrl, 'POST', 'application/x-www-form-urlencoded', this.initcallback);
   },
   onagree(e) {
-    if (this.data.agree) {
+    if (!this.data.agree) {
       this.setData({
-        agree: false,
-        registerBtn: true,
-        m: 0
+        agree: true,
+        m: 1
       })
     } else {
       this.setData({
-        agree: true,
-        registerBtn: false,
-        m: 1
+        agree: false,
+        m: 0
       })
     }
   },

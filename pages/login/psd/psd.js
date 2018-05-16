@@ -44,9 +44,6 @@ Page({
         clearInterval(interval);
       }
     }, 1000)
-
-
-
   },
   onagree() {
     if (this.data.agree) {

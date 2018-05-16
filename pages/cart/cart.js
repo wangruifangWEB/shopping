@@ -6,35 +6,30 @@ Page({
     carts: [],               // 购物车列表
     hasList: false,          // 列表是否有数据
     totalPrice: 0,           // 总价，初始为0
-    selectAllStatus: true,   // 全选状态，默认全选
+    selectAllStatus: false,   // 全选状态，默认全选
     select: true,            //默认选中,
     totalNumber: 0,          //初始化结算总数
     displayDistage: false,
   },
   onLoad: function (options) {
-
-  },
-  onShow() {
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
-    var url = app.globalData.shopUrl + '/home/car/index/ty/car/uid/' + uid;
+  },
+  onShow() {
+    var url = app.globalData.shopUrl + '/home/car/index/ty/car/uid/' + this.data.uid;
     utils.http(url, this.callback);
   },
   // 单个选中
   selectList(e) {
     const index = e.currentTarget.dataset.index; // 获取data- 传进来的index
     const ccid = e.currentTarget.dataset.ccid;
-
     let carts = this.data.carts;                 // 获取购物车列表
     const status = carts[index].status;      // 获取当前商品的选中状态
     carts[index].status = 1 - status;           // 改变状态
     let s = 1 - status;
     var selectedUrl = app.globalData.shopUrl + '/home/caror/index/ty/xz/uid/' + this.data.uid + '/ss/' + s + '/ccid/' + ccid;
     utils.http(selectedUrl, this.selectedcallback);
-    this.setData({
-      carts: carts
-    });
-    this.getTotalPrice();                         // 重新获取总价
+    this.setData({ carts,status });
   },
   // 全选
   selectAll(e) {
@@ -102,29 +97,29 @@ Page({
   // 结账
   onAccount() {
     let carts = this.data.carts; // 获取购物车列表
-    for (let i = 0; i < carts.length; i++) {  // 循环列表得到每个数据
-      if (carts[i].status == 1) {                   // 判断选中才会计算价格
-        var orderListUrl = app.globalData.shopUrl + '/home/caror/index/ty/xzo/uid/' + this.data.uid + '/ss/1';
-        console.log(orderListUrl);
-        utils.http(orderListUrl, this.orderListcallback);
-      } else {
-        utils.showToast('您还没有选中商品!', 'none');
-      }
+    let shopStatus = 0;
+    for (var i in carts) {  // 循环列表得到每个数据 
+      shopStatus += Number(carts[i].status);
+    }
+    if (shopStatus >= 1) {                // 判断选中才会计算价格
+      var orderListUrl = app.globalData.shopUrl + '/home/caror/index/ty/xzo/uid/' + this.data.uid + '/ss/1';
+      utils.http(orderListUrl, this.orderListcallback);
+    } else {
+      utils.showToast('您还没有选中商品!', 'none');
     }
   },
   callback(res) {
     var carts = res.data.data.car;
-    console.log(carts);
     let TotalNumberGoods = 0;
+    let shopArray=[];
     for (var i in carts) {
       TotalNumberGoods += parseInt(carts[i].gnum);
-      if (carts[i].status == 0) {
-        this.setData({ selectAllStatus: false });
-      } else {
-        this.setData({ selectAllStatus: true });
-      }
+      shopArray.push(carts[i].status);
     }
-    this.setData({ carts });
+    if (this.getSameNum(1, shopArray) == shopArray.length){
+       this.setData({ selectAllStatus: true });
+    }
+    this.setData({ carts});
     //计算价格
     this.getTotalPrice();
     //设置缓存
@@ -203,6 +198,13 @@ Page({
   selectedcallback(res) {
     if (!res.data) {
       utils.showToast('网络错误,请稍后重试!', 'none');
+    } else {
+      if (!this.data.status) {
+        this.setData({ selectAllStatus: true });
+      } else {
+        this.setData({ selectAllStatus: false });
+      }
+      this.getTotalPrice();// 重新获取总价
     }
   },
   orderListcallback(res) {
@@ -211,5 +213,12 @@ Page({
         url: '../pay/payorder/payorder',
       })
     }
+  },
+  //获取数组中相同数个数
+ getSameNum(val, arr){
+    arr = arr.filter(function (value) {
+      return value == val;
+    })
+    return arr.length;
   }
 })

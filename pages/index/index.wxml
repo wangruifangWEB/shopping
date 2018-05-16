@@ -2,7 +2,7 @@
 <import src="../tpls/swiper/swiper.wxml" />
 <view class="container">
   <template data="{{searchShow,historyArray,searchValue}}" is="search" />
-
+  
   <view class="indexTop">
     <image mode='widthFix' src="{{newsOneUrl.picy}}" class="banner" id="{{newsOneUrl.id}}"></image>
     <view class="coupons">

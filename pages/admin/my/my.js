@@ -12,21 +12,24 @@ Page({
     currentIdx: '',
     phoneNumber: '52342947'
   },
-  onLoad: function (options) { },
-  onShow: function () {
-    var that = this;
+  onLoad: function (options) { 
     //判断用户是否登录
     var uid = wx.getStorageSync('uid');
-    that.setData({ uid }); 
-    if (uid) {
-      //获取用户头像
-      that.getUserInfo();
+    //获取用户头像
+    var userInfo = wx.getStorageSync('user');
+    this.setData({ uid, userInfo }); 
+    if (this.data.uid) {
       //获取当前用户的展示信息
-      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + uid;
-      var cnumUrl = app.globalData.shopUrl + '/home/user/index/ty/cnum/uid/' + uid;
-
+      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + this.data.uid;
+      util.http(userUrl, this.userMsg);
+    }
+  },
+  onShow: function () {
+    var that = this;
+    if (that.data.uid) {
+      //获取当前用户的优惠券数量
+      var cnumUrl = app.globalData.shopUrl + '/home/user/index/ty/cnum/uid/' + that.data.uid;
       util.http(cnumUrl, that.cnumCount);
-      util.http(userUrl, that.userMsg);
     }
   },
   // 待付款
@@ -60,13 +63,9 @@ Page({
   },
   // 积分
   onPoint() {
-    if (!this.data.uid) {
-      util.showToast('请登录后查看！', 'none');
-    } else {
-      wx.navigateTo({
-        url: '../../find/shop/shop',
-      })
-    }
+    wx.navigateTo({
+      url: '../../find/shop/shop',
+    })
   },
   // 发票
   onInvoice() {
@@ -103,27 +102,7 @@ Page({
   //钱包余额及会员积分
   userMsg(res) {
     var userMsg = res.data.data.user[0];
-    let vip = '';
-    if (userMsg.vip == 0) {
-      vip = '临时会员'
-    } else {
-      vip = '正式会员'
-    }
-    this.setData({ userMsg, vip });
-  },
-  getUserInfo() {
-    var that = this
-    _getUserInfo();
-    function _getUserInfo() {
-      wx.getUserInfo({
-        success: function (res) {
-          that.setData({
-            userInfo: res.userInfo
-          })
-          that.update()
-        }
-      })
-    }
+    this.setData({ userMsg });
   },
   callback(res) {
     if (!this.data.uid) {

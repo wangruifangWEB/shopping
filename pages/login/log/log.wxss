@@ -106,3 +106,16 @@ form .text {
   left: 50%;
   margin-left: -60rpx;
 }
+
+.loginBg{
+  width:79rpx;
+  height:79rpx;
+  background-size:79rpx 79rpx;
+  background-repeat: no-repeat;
+  margin-bottom:30rpx;
+}
+
+/*去掉按钮边框*/
+button[plain] {
+  border: 0;
+}

@@ -98,7 +98,6 @@ Page({
     util.http(historyUrl, this.historycallback);
     let history;
     history = this.data.historyArray;
-    console.log(history)
     history.push(val);
     wx.setStorageSync('history', history)
     this.setData({

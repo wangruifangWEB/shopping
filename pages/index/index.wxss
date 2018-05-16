@@ -126,9 +126,13 @@ image {
   margin-right: 10rpx;
 }
 
+.couponItem {
+  border-radius: 8rpx;
+}
+
 .couponItem .couponTicket {
   font-size: 28rpx;
-  margin-bottom:5rpx;
+  margin-bottom: 3rpx;
 }
 
 .coupons .couponItem:nth-child(2) {

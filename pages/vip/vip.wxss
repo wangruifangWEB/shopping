@@ -180,10 +180,11 @@
 }
 
 .noLogin {
-  font-size: 30rpx;
+  font-size: 26rpx;
   background-color: #fff;
-  padding: 5rpx 10rpx;
+  padding: 0 10rpx;
   border-radius: 10rpx;
+  margin-top:10rpx;
   opacity: 0.5;
 }
 
@@ -192,9 +193,13 @@
 }
 
 .nickName {
-  width: 50%;
+  width: 40%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display:inline-block;
+}
+
+.btn-hover{
+  background-color: #fff
 }

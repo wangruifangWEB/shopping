@@ -146,8 +146,10 @@ Page({
     }
   },
   cartCountcallback(res) {
-    var TotalNumberGoods = res.data.data.num;
-    this.setData({ TotalNumberGoods });
+    if(res.data){
+      var TotalNumberGoods = res.data.data.num;
+      this.setData({ TotalNumberGoods });
+    }
   },
   //猜你喜欢
   likecallback(res) {

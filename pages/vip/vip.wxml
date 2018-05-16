@@ -17,10 +17,10 @@
           <text>{{userMsg.inte ? userMsg.inte:'0'}} 分</text>
           </text>
         </view>
-        <view class="user" wx:else bindtap="userLogin">
+        <view class="user" wx:else>
           <view>
             <text class="fontColor">会员尊享福利\n</text>
-            <text class="noLogin">已是会员？立即登录 》</text>
+            <button class="noLogin" hover-class="btn-hover" open-type="getUserInfo" bindtap="userLogin" bindgetuserinfo="getUserInfo">已是会员？立即登录/注册 》</button>
           </view>
         </view>
 

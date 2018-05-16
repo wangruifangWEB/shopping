@@ -170,5 +170,9 @@ page {
 }
 
 .choiced{
-  margin-right:10rpx;
+  margin-right:18rpx;
+}
+
+.active{
+  display: none;
 }

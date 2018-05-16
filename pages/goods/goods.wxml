@@ -72,7 +72,6 @@
     <view class="text">
       <template is="wxParse" data="{{wxParseData:article.nodes}}" />
     </view>
-
   </view>
 
   <view class="goods-details goods-details2">
@@ -107,7 +106,6 @@
       <text>加入购物车</text>
     </view>
     <view class="buy" data-id='{{item.goodsArray}}' bindtap='onBuyNow'>
-
       <text>立即购买</text>
     </view>
   </view>

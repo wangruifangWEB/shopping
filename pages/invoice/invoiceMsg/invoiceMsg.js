@@ -134,7 +134,7 @@ Page({
     var userMessage = res.data.data.or;
     let currentIndex = this.data.currentIndex;
     if (!userMessage) {
-      utils.showToast('请到个人中心添加增票资质信息!', 'none');
+      utils.showToast('若需专用发票，请到个人中心添加增票资质信息!', 'none');
     } else {
       this.setData({ userMessage });
     }

@@ -6,30 +6,37 @@ Page({
     totalPrice: 0,
     leavingFocus: false,
     payPrice: 0,
-    choicedType: '不开发票'
+    choicedType: '不开发票',
+    noAddress: false,
+    hiddenAddress: true
   },
   onLoad: function (options) {
     //获取缓存值
     var uid = wx.getStorageSync('uid');
     //获取上个页面传值
-    this.setData({ uid: uid, num: options.goodsCount, aid: options.aid });
+    this.setData({ uid: uid, num: options.goodsCount, gid: options.aid });
     //获取账单信息
-    var url = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + uid + '/gid/' + this.data.aid + '/num/' + this.data.num;
+    var url = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + uid + '/gid/' + this.data.gid + '/num/' + this.data.num;
     utils.http(url, this.callback);
   },
   onShow() {
     //获取发票状态值
     var choicedType = wx.getStorageSync('choicedType');
-    console.log(choicedType);
-    this.setData({ choicedType });
-    //获取账单信息
-    var addressModifyUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.aid;
-    utils.http(addressModifyUrl, this.addressModifycallback);
+    if (choicedType) {
+      this.setData({ choicedType });
+    }
+    var addressId = wx.getStorageSync('addressId')
+    if (addressId) {
+      //获取账单信息
+      this.modifyAddress();
+    } else {
+      this.setData({ noAddress: true, hiddenAddress: false });
+    }
   },
   // 支付
   onPay() {
     console.log('支付');
-    // var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
+    // var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.gid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
     // utils.http(payUrl, this.paycallback);
     wx.requestPayment({
       'timeStamp': '',
@@ -58,7 +65,7 @@ Page({
   },
   callback(res) {
     if (res.data) {
-      var payGoodsUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.aid;
+      var payGoodsUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.gid;
       utils.http(payGoodsUrl, this.payGoodscallback);
     }
   },
@@ -75,12 +82,11 @@ Page({
     }
     payPrice = payPrice + Number(payGoods.yunfei);
     this.setData({ payGoods, totalPrice, payPrice, couponPrice });
-    console.log(payGoods)
   },
   addresscallback(res) {
     if (res.data) {
       var addressId = wx.getStorageSync('addressId');
-      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + addressId + '/oid/' + this.data.aid;
+      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + addressId + '/oid/' + this.data.gid;
       utils.http(addressUrl, this.addresscallback);
     } else {
       utils.showToast('网络错误,请重试!', 'none');
@@ -92,7 +98,7 @@ Page({
   leavingChange(e) {
     var leavingMsg = e.detail.value;
     this.setData({ leavingMsg });
-    var leavingMsgUrl = app.globalData.shopUrl + '/home/order/index/ty/oou_l/uid/' + this.data.uid + '/oid/' + this.data.aid + '/liuyan/' + leavingMsg;
+    var leavingMsgUrl = app.globalData.shopUrl + '/home/order/index/ty/oou_l/uid/' + this.data.uid + '/oid/' + this.data.gid + '/liuyan/' + leavingMsg;
     console.log('提交订单：' + leavingMsgUrl);
     utils.http(leavingMsgUrl, this.leavingMsgcallback);
   },
@@ -106,9 +112,24 @@ Page({
       console.log('用户信息提交成功');
     }
   },
-  addressModifycallback(res) {
-    var modifyAddress = res.data.data.ord;
-    this.setData({ payGoods: modifyAddress });
+  modifyAddress() {
+    var address = wx.getStorageSync('address')
+    let userName, userTel, userSheng,
+      userShi, userXian, userDizhi,
+      hiddenAddress, noAddress;
+    //判定是否有收货地址
+    noAddress = false;
+    hiddenAddress = true;
+    this.setData({
+      noAddress,
+      hiddenAddress,
+      userName: address.name,
+      userTel: address.tel,
+      userSheng: address.sheng,
+      userShi: address.shi,
+      userXian: address.xian,
+      userDizhi: address.dizhi,
+    });
   },
   //发票选择
   invoiceSelection(e) {

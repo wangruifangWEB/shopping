@@ -78,12 +78,11 @@ Page({
   callback(res, method, contentType) {
     var status = res.data;
     if (status == 1) {
-      utils.showToast('注册成功，去登录!', 'none');
-      wx.navigateBack({})
+      utils.showModal('注册成功，去登录!', '');
     } else if (status == 222) {
-      utils.showToast('该用户已注册', 'error');
+      utils.showModal('该用户已注册,去登录!', '');
     } else {
-      utils.showToast('登录失败,请重试!', 'none');
+      utils.showModal('登录失败,请重试!', '');
     }
   },
   timer() {

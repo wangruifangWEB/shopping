@@ -31,8 +31,12 @@ Page({
   },
   // 立即兑换
   onBuyNow() {
-    var buyUrl = app.globalData.shopUrl + '/home/jifen/index/ty/dh/uid/' + this.data.uid + '/gid/' + +this.data.gid;
-    utils.http(buyUrl, this.onbuyNowcallback);
+    if (!this.data.uid) {
+      utils.showToast('请登录，登录后即可领取！', 'none');
+    } else {
+      var buyUrl = app.globalData.shopUrl + '/home/jifen/index/ty/dh/uid/' + this.data.uid + '/gid/' + +this.data.gid;
+      utils.http(buyUrl, this.onbuyNowcallback);
+    }
   },
   //提交
   submission(e) {
@@ -70,5 +74,11 @@ Page({
     }else{
       utils.showToast('网络错误，请重试！', 'none');
     }
+  },
+  onOneShop(e) {
+    let id = e.currentTarget.dataset.idx;
+    wx.navigateTo({
+      url: '../integration/integration?id=' + id,
+    })
   }
 })

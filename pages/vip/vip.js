@@ -16,13 +16,15 @@ Page({
     //轮播图
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
     utils.http(swiperUrl, this.swiperCallback);
-    //获取用户名称
-    this.getUserInfo();
+    if(uid){
+      //获取当前用户的展示信息
+      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + this.data.uid;
+      utils.http(userUrl, this.userMsg);
+    }
   },
-  onShow() {
-    //获取当前用户的展示信息
-    var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + this.data.uid;
-    utils.http(userUrl, this.userMsg);
+  onShow(){
+    var userInfo=wx.getStorageSync('user');
+    this.setData({ userInfo });
   },
   callback(res) {
     var listGoods = res.data.data.goods;
@@ -35,9 +37,13 @@ Page({
     })
   },
   signin() {
-    wx.navigateTo({
-      url: '../admin/signin/signin',
-    })
+    if (!this.data.uid) {
+      utils.showToast('请登录，登录后即可签到！', 'none');
+    } else {
+      wx.navigateTo({
+        url: '../admin/signin/signin',
+      })
+    }
   },
   coupon() {
     wx.navigateTo({
@@ -45,13 +51,9 @@ Page({
     })
   },
   shop() {
-    if(!this.data.uid){
-      utils.showToast('登录后即可查看!', 'none');
-    }else{
-      wx.navigateTo({
-        url: '../find/shop/shop',
-      })
-    } 
+    wx.navigateTo({
+      url: '../find/shop/shop',
+    })
   },
   //轮播图
   swiperCallback(res) {
@@ -59,10 +61,16 @@ Page({
     this.setData({ imgSrc });
   },
   userLogin() {
+    var that=this;
     //设置缓存记录未登录状态
     wx.setStorageSync('uid', '');
-    wx.navigateTo({
-      url: '../login/log/log',
+    wx.getUserInfo({
+      success: function (res) {
+        wx.setStorageSync('user', res.userInfo)
+        wx.navigateTo({
+          url: '../login/log/log',
+        })
+      }
     })
   },
   onBlur(event) {
@@ -112,19 +120,5 @@ Page({
   userMsg(res) {
     var userMsg = res.data.data.user[0];
     this.setData({ userMsg });
-  },
-  getUserInfo() {
-    var that = this
-    _getUserInfo();
-    function _getUserInfo() {
-      wx.getUserInfo({
-        success: function (res) {
-          that.setData({
-            userInfo: res.userInfo
-          })
-          that.update()
-        }
-      })
-    }
-  },
+  }
 })
