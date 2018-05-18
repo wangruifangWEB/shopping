@@ -2,16 +2,23 @@ var app = getApp();
 var util = require('../../../../utils/util.js');
 Page({
   data: {
+    choicedType: '不开发票'
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var uid = wx.getStorageSync('uid');
-    var orderId = options.orderId;
-    this.setData({ uid,orderId });
-    var url = app.globalData.shopUrl + '/home/dfk/index/ty/oo/uid/' + uid + '/oid/' + orderId;
-    util.http(url,this.callback);
+    var oid = options.oid;
+   
+    this.setData({ uid, oid });
+    var url = app.globalData.shopUrl + '/home/dfk/index/ty/oo/uid/' + uid + '/oid/' + oid;
+    console.log(url);
+    util.http(url, this.callback);
+  },
+  onShow(){
+    //获取发票状态值
+    var choicedType = wx.getStorageSync('choicedType');
+    if (choicedType) {
+      this.setData({ choicedType });
+    }
   },
   // 支付
   onPay() {
@@ -26,26 +33,28 @@ Page({
       },
       'fail': function (res) {
         wx.navigateTo({
-          url: '../payorders/pay-orders',
+          url: '../pay/payorders/pay-orders',
         })
       }
     })
   },
-  callback(res){
-    let orderMsg=res.data.data.ord;
-    this.setData({ orderMsg});
-    let ticket = orderMsg.fapiao;
-    let choicedType='';
-    if (!ticket){
-      choicedType='不开发票'
-    }else{
-      choicedType = '开发票'
-    }
-    this.setData({ orderMsg, choicedType});
+  callback(res) {
+    //获取用户商品信息
+    var payGoods = res.data.data.ord;
+    console.log(payGoods);
+    let totalPrice = this.data.totalPrice,
+      payPrice = this.data.payPrice,
+      couponPrice = this.data.couponPrice
+      // orderId = payGoods.id;
+      totalPrice = Number(payGoods.yuanjia) * payGoods.num;
+      payPrice = Number(payGoods.zhejia) * payGoods.num;
+      couponPrice = totalPrice - payPrice;
+    payPrice = payPrice + Number(payGoods.yunfei);
+    this.setData({ payGoods, totalPrice, payPrice, couponPrice });
   },
-  invoiceSelection(e){
+  invoiceSelection(e) {
     wx.navigateTo({
-      url: '../../../invoice/invoiceMsg/invoiceMsg',
+      url: '../../../invoice/invoiceMsg/invoiceMsg?oid=' + this.data.oid,
     })
   }
 })

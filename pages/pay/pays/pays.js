@@ -13,17 +13,15 @@ Page({
     that.setData({ uid, currentTab: currentIdx });
     var typeNum = Number(currentIdx) + 1;
     var noPayUrl = app.globalData.shopUrl + '/home/fklx/index/ty/' + typeNum + '/uid/' + uid;
-    util.http(noPayUrl, that.noPaycallback);
+    util.http(noPayUrl, that.noPaycallbackInit);
   },
   navbarTap: function (e) {
-    this.setData({
-      currentTab: e.currentTarget.dataset.idx
-    })
     //点击切换更新当前显示标题
-    app.setTitle(this.data.navbar, this.data.currentTab);
-    var currentIdx = Number(e.currentTarget.dataset.idx)+1;
+    let idx;
+    var currentIdx = Number(e.currentTarget.dataset.idx) + 1;
     var noPayUrl = app.globalData.shopUrl + '/home/fklx/index/ty/' + currentIdx + '/uid/' + this.data.uid;
     util.http(noPayUrl, this.noPaycallback);
+    this.setData({ idx: e.currentTarget.dataset.idx });
   },
   onShow: function () {
     this.setData({
@@ -34,24 +32,38 @@ Page({
   },
   //去付款
   onPayGo(e) {
-    var orderId = e.currentTarget.dataset.idx;
+    let oid = e.currentTarget.dataset.oid;
+    console.log(oid);
     wx.navigateTo({
-      url: '../payno/paygo/paygo?orderId=' + orderId,
+      url: '../payno/paygo/paygo?oid=' + oid,
     })
   },
   sureGoods(e) {
-    var oid=e.currentTarget.dataset.idx;
-    var url = app.globalData.shopUrl + '/home/dfk/index/ty/ysh/uid/' + this.data.uid + '/oid/' +oid;
+    var oid = e.currentTarget.dataset.idx;
+    var url = app.globalData.shopUrl + '/home/dfk/index/ty/ysh/uid/' + this.data.uid + '/oid/' + oid;
     util.http(url, this.sureGoodscallback);
   },
-  noPaycallback(res) {
+  noPaycallbackInit(res) {
     var stayPayment = res.data.data;
-    this.setData({ stayPayment });
+    this.setData({
+      stayPayment
+    })
   },
-  sureGoodscallback(res){
-    if(res.data){
+  noPaycallback(res) {
+    if (res.data) {
+      var stayPayment = res.data.data;
+      app.setTitle(this.data.navbar, this.data.idx);
+      this.setData({
+        currentTab: this.data.idx, stayPayment
+      })
+    } else {
+      app.showToast('网络错误，请重试！', 'error');
+    }
+  },
+  sureGoodscallback(res) {
+    if (res.data) {
       app.showToast('确认收货完成', 'success');
-    }else{
+    } else {
       app.showToast('网络错误，请重试！', 'error');
     }
   }

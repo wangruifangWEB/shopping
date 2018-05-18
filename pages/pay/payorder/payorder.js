@@ -27,26 +27,31 @@ Page({
       //获取账单信息
       this.modifyAddress();
     } else {
-      this.setData({ noAddress: true, hiddenAddress:false});
+      this.setData({ noAddress: true, hiddenAddress: false });
     }
+    this.setData({ addressId });
   },
   // 支付
   onPay() {
-    console.log('支付');
-    var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
-    utils.http(payUrl, this.paycallback);
-    wx.requestPayment({
-      'timeStamp': '',
-      'nonceStr': '',
-      'package': '',
-      'signType': 'MD5',
-      'paySign': '',
-      'success': function (res) {
-      },
-      'fail': function (res) {
+    if (!this.data.addressId) {
+      utils.showToast('请添加收货地址！', 'none');
+    } else {
+      console.log('支付');
+      var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.aid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
+      utils.http(payUrl, this.paycallback);
+      wx.requestPayment({
+        'timeStamp': '',
+        'nonceStr': '',
+        'package': '',
+        'signType': 'MD5',
+        'paySign': '',
+        'success': function (res) {
+        },
+        'fail': function (res) {
 
-      }
-    })
+        }
+      })
+    }
   },
   //发票选择
   invoiceSelection(e) {
@@ -62,8 +67,7 @@ Page({
   },
   addresscallback(res) {
     if (res.data) {
-      var addressId = wx.getStorageSync('addressId');
-      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + addressId + '/oid/' + this.data.aid;
+      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + this.data.addressId + '/oid/' + this.data.aid;
       utils.http(addressUrl, this.addresscallback);
     } else {
       utils.showToast('网络错误,请重试!', 'none');
@@ -111,9 +115,9 @@ Page({
   },
   modifyAddress() {
     var address = wx.getStorageSync('address')
-    let userName, userTel, userSheng, 
-    userShi, userXian, userDizhi,
-     hiddenAddress, noAddress;
+    let userName, userTel, userSheng,
+      userShi, userXian, userDizhi,
+      hiddenAddress, noAddress;
     userName = address.name;
     userTel = address.tel;
     userSheng = address.sheng;

@@ -5,6 +5,8 @@ Page({
     searchShow: false,
     searchValue: '',
     historyArray: [],
+    noContent:false,
+    hasContent:true,
     imgDetails: [
       {
         id: 0,
@@ -45,9 +47,6 @@ Page({
     ]
   },
   onLoad: function (options) {
-    //获取用户id
-    var uid = wx.getStorageSync('uid');
-    this.setData({ uid });
     //首页图片(一图)
     var newsOneUrl = app.globalData.shopUrl + '/home/index/index/ty/imggg/gg/1';
     //首页图片(二图)
@@ -67,6 +66,11 @@ Page({
     util.http(swiperUrl, this.swiperCallback);
     util.http(couponUrl, this.couponCallback);
     util.http(newUrl, this.newCallback);
+  },
+  onShow(){
+    //获取用户id
+    var uid = wx.getStorageSync('uid');
+    this.setData({ uid });
   },
   callback(res) {
     var datas = res.data.data.imggg[0];
@@ -94,16 +98,18 @@ Page({
   },
   onBlur(event) {
     let val = event.detail.value;
-    var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/xw/de/' + val;
-    util.http(historyUrl, this.historycallback);
-    let history;
-    history = this.data.historyArray;
-    history.push(val);
-    wx.setStorageSync('history', history)
-    this.setData({
-      searchShow: false
-    })
-    this.onHistoryArray();
+    if(val!==''){
+      var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/xw/de/' + val;
+      util.http(historyUrl, this.historycallback);
+      let history;
+      history = this.data.historyArray;
+      history.push(val);
+      wx.setStorageSync('history', history)
+      this.setData({
+        searchShow: false
+      })
+      this.onHistoryArray();
+    }
   },
   onBindFocus() {
     this.setData({
@@ -160,7 +166,13 @@ Page({
   },
   //搜索
   historycallback(res) {
-    var newsArray = res.data.data.new;
-    this.setData({ detailsList: newsArray });
+    if(res.data.data.new.length!==0){
+      var newsArray = res.data.data.new;
+      this.setData({ detailsList: newsArray });
+    }else{
+      let noContent = this.data.noContent,
+        hasContent = this.data.hasContent;
+      this.setData({noContent:true,hasContent:false});
+    }
   }
 })

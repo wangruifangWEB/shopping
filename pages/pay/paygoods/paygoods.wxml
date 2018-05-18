@@ -63,5 +63,5 @@
       <text>￥{{payPrice}}</text>
     </view>
   </view>
-  <view class="order-btn" bindtap='onPay' data-orderh="{{payGoods.orderh}}">提交订单</view>
+  <view class="order-btn" bindtap='onBuyNow' data-orderh="{{payGoods.orderh}}">确认兑换</view>
 </view>

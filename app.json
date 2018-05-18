@@ -11,6 +11,7 @@
     "pages/cart/cart",
     "pages/goods/goods",
     "pages/pay/payorder/payorder",
+    "pages/pay/paygoods/paygoods",
     "pages/login/register/register",
     "pages/login/log/log",
     "pages/coupon/coupon",

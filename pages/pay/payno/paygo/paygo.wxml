@@ -19,51 +19,49 @@
     
     <view>
       <text>订单号：</text>
-      <text>{{orderMsg.orderh}}</text>
+      <text>{{payGoods.orderh}}</text>
     </view>
     <view>
       <text>下单时间：</text>
-      <text>{{orderMsg.addtime}}</text>
+      <text>{{payGoods.addtime}}</text>
     </view>
     <view>
       <text>收货信息：</text>
-      <text>{{orderMsg.name}} {{orderMsg.tel}}</text>
+      <text>{{payGoods.name}} {{payGoods.tel}}</text>
     </view>
     <view>
       <text></text>
-      <text>{{orderMsg.shi}}{{orderMsg.sheng}}{{orderMsg.xian}}{{orderMsg.dizhi}}</text>
+      <text>{{payGoods.shi}}{{payGoods.sheng}}{{payGoods.xian}}{{payGoods.dizhi}}</text>
     </view>
 
   </view>
   <image class="pay-line" src="/images/pay/pay-line.png"></image>
   <view class="pay-box">
-    <view class="pay-list" wx:for='{{goodsList}}' wx:key="*this">
-      <image mode="widthFix" src="{{item.img}}"></image>
+    <view class="pay-list">
+      <image mode="widthFix" src="{{payGoods.pics}}"></image>
       <view>
-        <text class="title">{{item.title}}</text>
-        <text class="format">{{item.rule}}</text>
+        <text class="title">{{payGoods.gname}}</text>
+        <!-- <text class="format">{{item.rule}}</text> -->
         <view class="price">
-          <text>￥{{item.price}}</text>
-          <text>{{item.oldPrice}}</text>
-          <text>x{{item.number}}</text>
+          <text>￥{{payGoods.zhejia}}</text>
+          <text>{{payGoods.yuanjia}}</text>
+          <text>x {{payGoods.num}}</text>
         </view>
       </view>
     </view>
     
-    
-
   </view>
   <view class="pay-address">
     <text>配送方式</text>
-    <text>普通快递￥{{orderMsg.yunfei}}，新疆、西藏地区暂不支持</text>
+    <text>普通快递￥{{payGoods.yunfei}}，新疆、西藏地区暂不支持</text>
   </view>
 
   <view class="pay-address">
     <text>买家留言</text>
-    <text>{{orderMsg.liuyan}}</text>
+    <text>{{payGoods.liuyan}}</text>
   </view>
 
-  <view class="pay-address" bindtap='invoiceSelection'>
+  <view class="pay-address" bindtap='invoiceSelection' wx:key="*this">
     <text class="ticket">发票</text>
     <view class="pay-rt">
       <text class="choiced">{{choicedType}}</text>
@@ -74,19 +72,19 @@
     <view class="order">
     <view>
       <text>商品金额</text>
-      <text>￥{{orderMsg.yuanjia}}</text>
+      <text>￥{{payGoods.yuanjia}}</text>
     </view>
     <view>
       <text>运费</text>
-      <text>￥{{orderMsg.yunfei}}</text>
+      <text>￥{{payGoods.yunfei}}</text>
     </view>
     <view>
       <text>优惠</text>
-      <text>￥{{orderMsg.cid}}</text>
+      <text>￥{{couponPrice}}</text>
     </view>
     <view>
       <text>应付金额</text>
-      <text>￥{{orderMsg.zhejia}}</text>
+      <text>￥{{payPrice}}</text>
     </view>
   </view>
 </view>

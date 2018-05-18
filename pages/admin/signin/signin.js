@@ -4,17 +4,12 @@ var app = getApp();
 Page({
   data: {
     signDay: '',
-    signText:'签到',
+    signText: '',
   },
   onLoad: function () {
     //获取用户id
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
-    //当前签到状态
-    var signText = wx.getStorageSync('signText');
-    if (signText){
-      this.setData({ signText });
-    }
     //积分兑换列表
     var pointsListUrl = app.globalData.shopUrl + '/home/jifen/index/ty/jis';
     util.http(pointsListUrl, this.pointsListcallback);
@@ -26,7 +21,7 @@ Page({
     //当前时间获取                    
     this.signStatus();
   },
-  onShow(){
+  onShow() {
     //签到列表
     var signListUrl = app.globalData.shopUrl + '/home/qiandao/index/ty/qd/uid/' + this.data.uid + '/lsqd/' + this.data.initDate;
     util.http(signListUrl, this.signListcallback);
@@ -70,14 +65,18 @@ Page({
   },
   //签到列表
   signListcallback(res) {
-    let signText = this.data.signText;
-    if (res.data.data.qd.length!==0) {
-      this.setData({ signText:"已签" });
-    }else{
-      this.setData({ signText:'签到' });
+    let signText = this.data.signText,
+        signList = res.data.data.qd,
+        dateList = [];
+    for (let i in signList) {
+      dateList.push(signList[i].addtime);
     }
-    var signList = res.data.data.qd;
-    if(res.data){
+    if (this.getSameNum(this.data.date, dateList)) {
+      this.setData({ signText: "已签" });
+    } else {
+      this.setData({ signText: '签到' });
+    }
+    if (res.data) {
       let arr = [];
       for (var i in signList) {
         let addtime = signList[i].addtime;
@@ -90,7 +89,7 @@ Page({
       this.setData({ arr });
       wx.setStorageSync('signDays', arr);
       this._signDay();
-    }else{
+    } else {
       app.showToast('网络错误，请重试！', 'none');
     }
   },
@@ -116,8 +115,8 @@ Page({
     let initDate, initDay;
     date.year = new Date().getFullYear();
     date.month = new Date().getMonth() + 1;
-    date.day = new Date().getDate(); 
-    this.setData({ initDay: date.day-1});       
+    date.day = new Date().getDate();
+    this.setData({ initDay: date.day - 1 });
     if (date.month < 10) {
       date.month = '0' + date.month;
     }
@@ -125,8 +124,8 @@ Page({
       date.day = '0' + date.day;
     }
     date = date.year + '-' + date.month + '-' + date.day;
-    initDate = date.slice(0,-3);
-    this.setData({ date, initDate});
+    initDate = date.slice(0, -3);
+    this.setData({ date, initDate });
   },
   signcallback(res) {
     let signText = this.data.signText;
@@ -137,16 +136,20 @@ Page({
   },
   signIncallback(res) {
     let signText = this.data.signText;
-    if (res.data=='已签到') {
+    if (res.data == '已签到') {
       app.showToast('今日已签到！', '');
-    }else{
+    } else {
       //更新签到列表
-      util.http(this.data.signListUrl,this.signListcallback);
-     //提示签到结果
+      util.http(this.data.signListUrl, this.signListcallback);
+      //提示签到结果
       app.showToast('签到成功！', '');
-      //缓存已签状态值
-      wx.setStorageSync('signText', '已签');
-      this.setData({ signText: '已签' });
     }
+  },
+  //获取数组中相同数个数
+  getSameNum(val, arr) {
+    arr = arr.filter(function (value) {
+      return value == val;
+    })
+    return arr.length;
   }
 });

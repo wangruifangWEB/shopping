@@ -125,7 +125,7 @@ Page({
       this.data.choicedType = '开发票';
       wx.setStorageSync('choicedType', '开发票')
       //返回上一页
-      // wx.navigateBack({})
+       wx.navigateBack({})
     } else {
       utils.showToast('网络错误,请重试!', 'none');
     }

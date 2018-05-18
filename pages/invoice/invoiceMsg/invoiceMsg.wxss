@@ -178,6 +178,9 @@ Page {
   padding: 25rpx 40rpx 30rpx 40rpx;
 }
 
+.specialMsg input{
+  margin-top: 8rpx;
+}
 .specialQual {
   margin: 30rpx 0;
 }

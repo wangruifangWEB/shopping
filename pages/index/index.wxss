@@ -151,3 +151,8 @@ image {
 .imgBg {
   height: 581rpx;
 }
+
+.fontShow{
+  text-align: center;
+  margin:30rpx 0;
+}

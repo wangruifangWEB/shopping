@@ -13,23 +13,28 @@ Page({
     phoneNumber: '52342947'
   },
   onLoad: function (options) { 
+    var that=this;
+    //调用应用实例的方法获取全局数据  
+    app.getUserInfo(function (userInfo) {
+      //更新数据  
+      that.setData({
+        userInfo: userInfo
+      })
+    })
+  },
+  onShow: function () {
     //判断用户是否登录
     var uid = wx.getStorageSync('uid');
     //获取用户头像
     var userInfo = wx.getStorageSync('user');
     this.setData({ uid, userInfo }); 
-    if (this.data.uid) {
+    if (uid) {
       //获取当前用户的展示信息
-      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + this.data.uid;
+      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + uid;
       util.http(userUrl, this.userMsg);
-    }
-  },
-  onShow: function () {
-    var that = this;
-    if (that.data.uid) {
       //获取当前用户的优惠券数量
-      var cnumUrl = app.globalData.shopUrl + '/home/user/index/ty/cnum/uid/' + that.data.uid;
-      util.http(cnumUrl, that.cnumCount);
+      var cnumUrl = app.globalData.shopUrl + '/home/user/index/ty/cnum/uid/' + uid;
+      util.http(cnumUrl, this.cnumCount);
     }
   },
   // 待付款

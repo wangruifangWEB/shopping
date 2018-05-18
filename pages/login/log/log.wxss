@@ -72,8 +72,10 @@ form .text {
 
 .form-fixed image {
   width: 80rpx;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
+  height:80rpx;
+  position:relative;
+  right:26rpx;
+  top:6rpx;
 }
 
 .relative {
@@ -108,11 +110,9 @@ form .text {
 }
 
 .loginBg{
-  width:79rpx;
-  height:79rpx;
-  background-size:79rpx 79rpx;
-  background-repeat: no-repeat;
-  margin-bottom:30rpx;
+  width:85rpx;
+  height:90rpx;
+  border:#fff;
 }
 
 /*去掉按钮边框*/

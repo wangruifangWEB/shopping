@@ -61,7 +61,8 @@
       <template is="swiper" data="{{imgSrc}}" />
     </view>
     <view class="goods-box">
-      <block wx:for="{{listGoods}}" wx:key="">
+     <view wx:if="{{noContent}}" class="fontShow">没有关键词相关内容！</view>
+      <block wx:for="{{listGoods}}" wx:key="1" wx:if="{{hasContent}}">
         <view class="goods-list" data-idx="{{item.id}}" bindtap='onOneShop'>
           <image src="{{item.picy}}"></image>
           <text>{{item.gname}}</text>

@@ -32,7 +32,8 @@
 
   <!-- 新闻 -->
   <view class="new-container">
-    <block wx:for="{{detailsList}}" wx:key="key">
+    <view wx:if="{{noContent}}" class="fontShow">没有关键词相关内容！</view>
+    <block wx:for="{{detailsList}}" wx:key="key" wx:if="{{hasContent}}">
       <view class="new-box">
         <image src="{{item.picy}}" bindtap="detailsPage" data-idx="{{item.id}}"></image>
         <view class="new-text">

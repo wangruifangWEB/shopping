@@ -90,8 +90,8 @@
   </view>
 
   <view class="goods-bottom">
-    <view class="buy" data-id='{{item.goodsArray}}' bindtap='onBuyNow'>
-      <text>积分兑换</text>
+    <view class="buy" data-idx='{{goodsArray.id}}' bindtap='submission'>
+      <text>去兑换</text>
     </view>
   </view>
 </view>

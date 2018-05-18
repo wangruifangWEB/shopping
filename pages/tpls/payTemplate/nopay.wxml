@@ -24,7 +24,7 @@
         </view>
 
       </view>
-      <view class='pay' bindtap='onPayGo'  data-idx="{{item.id}}">
+      <view class='pay' bindtap='onPayGo' data-oid="{{item.id}}">
         <view>
           <text>去付款</text>
         </view>

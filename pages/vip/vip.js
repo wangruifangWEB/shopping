@@ -5,26 +5,28 @@ Page({
     searchShow: false,
     searchValue: '',
     historyArray2: [],
+    noContent:false,
+    hasContent:true
   },
   onLoad: function (options) {
-    //判断用户是否登录
-    var uid = wx.getStorageSync('uid');
-    this.setData({ uid });
-    //商品列表
-    var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
-    utils.http(url, this.callback);
     //轮播图
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
     utils.http(swiperUrl, this.swiperCallback);
-    if(uid){
-      //获取当前用户的展示信息
-      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + this.data.uid;
-      utils.http(userUrl, this.userMsg);
-    }
   },
   onShow(){
     var userInfo=wx.getStorageSync('user');
     this.setData({ userInfo });
+    //商品列表
+    var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
+    utils.http(url, this.callback);
+    //判断用户是否登录
+    var uid = wx.getStorageSync('uid');
+    this.setData({ uid });
+    if (uid) {
+      //获取当前用户的展示信息
+      var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + uid;
+      utils.http(userUrl, this.userMsg);
+    }
   },
   callback(res) {
     var listGoods = res.data.data.goods;
@@ -75,16 +77,18 @@ Page({
   },
   onBlur(event) {
     let val = event.detail.value;
-    var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/sp/de/' + val;
-    utils.http(historyUrl, this.historycallback);
-    let history2;
-    history2 = this.data.historyArray2;
-    history2.push(val);
-    wx.setStorageSync('history2', history2)
-    this.setData({
-      searchShow: false
-    })
-    this.onHistoryArray();
+    if(val!==''){
+      var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/sp/de/' + val;
+      utils.http(historyUrl, this.historycallback);
+      let history2;
+      history2 = this.data.historyArray2;
+      history2.push(val);
+      wx.setStorageSync('history2', history2)
+      this.setData({
+        searchShow: false
+      })
+      this.onHistoryArray();
+    }
   },
   onBindFocus() {
     this.setData({
@@ -113,8 +117,15 @@ Page({
   },
   //搜索
   historycallback(res) {
-    var newsArray = res.data.data.shop;
-    this.setData({ listGoods: newsArray });
+    console.log(res)
+    if (res.data.data.shop.length !== 0) {
+      var newsArray = res.data.data.shop;
+      this.setData({ listGoods: newsArray });
+    } else {
+      let noContent = this.data.noContent,
+        hasContent = this.data.hasContent;
+      this.setData({ noContent: true, hasContent: false });
+    }
   },
   //钱包余额及会员积分
   userMsg(res) {

@@ -14,6 +14,9 @@ Page({
   onLoad: function (options) {
 
   },
+  onShow(){
+   
+  },
   //  待付款
   onPay() {
     wx.navigateTo({

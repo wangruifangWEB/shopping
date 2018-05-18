@@ -8,6 +8,7 @@
   font-size: 32rpx;
   background: #fff;
   margin-bottom: 20rpx;
+  z-index:100;
   box-shadow: 0 10rpx 20rpx #f3f3f3;
 }
 

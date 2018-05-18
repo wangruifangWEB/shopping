@@ -199,12 +199,8 @@ Page({
     if (!res.data) {
       utils.showToast('网络错误,请稍后重试!', 'none');
     } else {
-      if (!this.data.status) {
-        this.setData({ selectAllStatus: true });
-      } else {
-        this.setData({ selectAllStatus: false });
-      }
-      this.getTotalPrice();// 重新获取总价
+      //根据用户选择更新所付价格及选中状态
+      this.getSelected(this.data.carts);
     }
   },
   orderListcallback(res) {
@@ -220,5 +216,17 @@ Page({
       return value == val;
     })
     return arr.length;
+  },
+ getSelected(carts){
+    let checkedArray = [];
+    for (var i in carts) {
+      checkedArray.push(carts[i].status);
+    }
+    if (this.getSameNum(1, checkedArray) == carts.length) {
+      this.setData({ selectAllStatus: true });
+    } else {
+      this.setData({ selectAllStatus: false });
+    }
+    this.getTotalPrice();// 重新获取总价
   }
 })

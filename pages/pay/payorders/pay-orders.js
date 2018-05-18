@@ -32,24 +32,66 @@ Page({
     } else {
       this.setData({ noAddress: true, hiddenAddress: false });
     }
+    this.setData({ addressId });
   },
   // 支付
   onPay() {
-    console.log('支付');
-    // var payUrl = app.globalData.shopUrl + '/home/order/index/ty/ooa/uid/' + this.data.uid + '/gid/' + this.data.gid + '/num/' + this.data.num + '/liuyan/' + this.data.leavingMsg;
-    // utils.http(payUrl, this.paycallback);
-    wx.requestPayment({
-      'timeStamp': '',
-      'nonceStr': '',
-      'package': '',
-      'signType': 'MD5',
-      'paySign': '',
-      'success': function (res) {
-      },
-      'fail': function (res) {
-
-      }
-    })
+    if (!this.data.addressId) {
+      utils.showToast('请添加收货地址！', 'none');
+    } else {
+      console.log('支付');
+      var that = this;
+      // 唤起授权
+      wx.getSetting({
+        success(res) {
+          if (res.authSetting['scope.userInfo']) {
+            wx.authorize({
+              scope: 'scope.userInfo',
+              success() {
+                wx.login({
+                  success: function (res) {
+                    var url = 'https://mypro.51cmo.net/home/loginWx/index' + res.code;
+                    if (res.code) {
+                      wx.request({
+                        url: 'https://mypro.51cmo.net/home/loginWx/index',
+                        method: 'POST',
+                        data: {
+                          code: res.code
+                        },
+                        header: {
+                          "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        success: function (res) {
+                          var openid = res.data.openid;
+                          // console.log(openid);
+                          that.orderChuli(that, openid);
+                        },
+                        fail: function (res) {
+                          // console.log(res.data);
+                        }
+                      })
+                    } else {
+                      console.log('获取用户登录态失败！' + res.errMsg)
+                    }
+                  }
+                })
+              },
+              fail() {
+                console.log(fail);
+              }
+            })
+          }
+        }
+      })
+      wx.getSetting({
+        success: (res) => {
+          res.authSetting = {
+            "scope.userInfo": true,
+            "scope.userLocation": true
+          }
+        }
+      })
+    }
   },
   //发票选择
   invoiceSelection(e) {
@@ -72,21 +114,21 @@ Page({
   payGoodscallback(res) {
     //获取用户商品信息
     var payGoods = res.data.data.ord;
-    let totalPrice = this.data.totalPrice;
-    let payPrice = this.data.payPrice;
-    let couponPrice = this.data.couponPrice;
+    let totalPrice = this.data.totalPrice,
+        payPrice = this.data.payPrice,
+        couponPrice = this.data.couponPrice,
+        orderId = payGoods.id;
     for (var i in payGoods.shop) {
-      totalPrice += Number(payGoods.shop[i].yuanjia);
-      payPrice += Number(payGoods.shop[i].zhejia);
+      totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
+      payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
       couponPrice = totalPrice - payPrice;
     }
     payPrice = payPrice + Number(payGoods.yunfei);
-    this.setData({ payGoods, totalPrice, payPrice, couponPrice });
+    this.setData({ payGoods, totalPrice, payPrice, couponPrice, orderId });
   },
   addresscallback(res) {
     if (res.data) {
-      var addressId = wx.getStorageSync('addressId');
-      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + addressId + '/oid/' + this.data.gid;
+      var addressUrl = app.globalData.shopUrl + '/home/order/index/ty/oou/uid/' + this.data.uid + '/did/' + this.data.addressId + '/oid/' + this.data.gid;
       utils.http(addressUrl, this.addresscallback);
     } else {
       utils.showToast('网络错误,请重试!', 'none');
@@ -135,6 +177,67 @@ Page({
   invoiceSelection(e) {
     wx.navigateTo({
       url: '../../invoice/invoiceMsg/invoiceMsg?oid=' + e.currentTarget.dataset.oid,
+    })
+  },
+  orderChuli(that, openid) {
+    let totalPrice = this.data.payPrice,
+      orderId = this.data.orderId;
+    console.log('totalPrice=>' + totalPrice);
+    console.log('openid=>' + openid);
+    wx.showModal({
+      title: '提示',
+      content: '确定提交订单？',
+      success: function (res) { 
+        if (res.confirm) {
+          that.paypay(that, openid, totalPrice, orderId);//关键来啦，把openid和钱和订单走去支付啦！  
+        }
+      }
+    })
+  },
+  paypay: function (that, openid, totalPrice, orderId) {
+    wx.request({
+      url: '',//后台接口
+      data: {
+        openid: openid,
+        totalPrice: totalPrice
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
+        console.log(res);
+        var nonceStr = res.data.nonce_str;
+        var appId = res.data.appid;
+        var pkg = 'prepay_id=' + res.data.prepay_id;
+        var timeStamp = res.data.timeStamp;
+        var paySign = res.data.paySign;
+        var sign = res.data.sign;
+        //console.log(pkg);  
+        wx.requestPayment({
+          timeStamp: timeStamp,
+          nonceStr: nonceStr,
+          package: pkg,
+          signType: 'MD5',
+          paySign: paySign,
+          success: function (res) {
+            that.changeOrderIdPay(orderId);
+          }
+        })
+      }
+    });
+  },
+  changeOrderIdPay: function (orderId) {
+    var url = "";
+    wx.request({
+      url: url,
+      data: {
+        orderId: orderId
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
+        console.log('changeOrderIdPay');
+        // wx.clearStorage();
+      }
     })
   }
 })
