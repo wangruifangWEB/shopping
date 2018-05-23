@@ -64,16 +64,19 @@ Page({
   },
   userLogin() {
     var that=this;
-    //设置缓存记录未登录状态
-    wx.setStorageSync('uid', '');
-    wx.getUserInfo({
-      success: function (res) {
-        wx.setStorageSync('user', res.userInfo)
-        wx.navigateTo({
-          url: '../login/log/log',
-        })
-      }
+    wx.navigateTo({
+      url: '../login/log/log',
     })
+    //设置缓存记录未登录状态
+    //  wx.setStorageSync('uid', '');
+    // wx.getUserInfo({
+    //   success: function (res) {
+    //     wx.setStorageSync('user', res.userInfo)
+    //     wx.navigateTo({
+    //       url: '../login/log/log',
+    //     })
+    //   }
+    // })
   },
   onBlur(event) {
     let val = event.detail.value;

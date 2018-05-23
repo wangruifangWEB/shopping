@@ -6,7 +6,7 @@
   <view class="indexTop">
     <image mode='widthFix' src="{{newsOneUrl.picy}}" class="banner" id="{{newsOneUrl.id}}"></image>
     <view class="coupons">
-      <block wx:for="{{coupon}}" wx:key="key">
+      <block wx:for="{{coupon}}" wx:key="*this">
         <view class="couponItem" id="{{item.id}}" bindtap='coupon'>
           <text class="couponNum">{{item.money}}</text>
           <view class="itemMargin">
@@ -21,7 +21,7 @@
   <view class="nine">
     <image  src='{{newsTwoUrl.picy}}' class="imgBg" id="{{newsTwoUrl.id}}"></image>
     <view class="nine-box">
-      <block wx:for="{{imgDetails}}" wx:key="">
+      <block wx:for="{{imgDetails}}" wx:key="*this">
         <view bindtap='jump' data-idx="{{item.id}}" data-src="{{item.lianjie}}"></view>
       </block>
     </view>
@@ -33,7 +33,7 @@
   <!-- 新闻 -->
   <view class="new-container">
     <view wx:if="{{noContent}}" class="fontShow">没有关键词相关内容！</view>
-    <block wx:for="{{detailsList}}" wx:key="key" wx:if="{{hasContent}}">
+    <block wx:for="{{detailsList}}" wx:key="*this" wx:if="{{hasContent}}">
       <view class="new-box">
         <image src="{{item.picy}}" bindtap="detailsPage" data-idx="{{item.id}}"></image>
         <view class="new-text">

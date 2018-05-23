@@ -38,6 +38,7 @@ form .text {
 }
 
 .text navigator text {
+  float: right;
   color: #999;
   text-decoration: underline;
 }

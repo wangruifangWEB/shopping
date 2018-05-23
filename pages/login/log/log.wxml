@@ -7,8 +7,11 @@
       <input name="psd" type="password" placeholder="密码"></input>
     </view>
     <view class='text'>
-      <navigator url = "../msgVail/msgVail"><text class="msg">用短信验证登录</text></navigator>
-      <navigator url = "../psd/psd"><text>忘记密码？</text></navigator>
+      <!-- <navigator url = "../msgVail/msgVail"><text class="msg">用短信验证登录</text></navigator> -->
+      <text class="msg"></text>
+      <navigator url="../psd/psd">
+        <text>忘记密码？</text>
+      </navigator>
     </view>
     <button class="btn" form-type='submit'>登录</button>
     <button class="btn" bindtap='onRegister'>注册</button>
@@ -18,7 +21,9 @@
     <view class="relative">
       <text class='or'>or</text>
       <view>
-        <button plain="true" open-type="getUserInfo" bindgetuserinfo="getUserInfo" bindtap='onlogin' class="loginBg"><image src="/images/icon/wx.png"></image></button> 
+        <button plain="true" bindtap='onlogin' class="loginBg">
+          <image src="/images/icon/wx.png"></image>
+        </button>
         <text>微信登录</text>
       </view>
     </view>

@@ -1,8 +1,10 @@
 <import src="/pages/tpls/search/search.wxml" />
 <view class="container">
   <view class="my">
+  <!--根据用户是否登录做出显示效果  -->
+    <open-data type="userAvatarUrl" wx:if="{{userImgUrl}}" class="my-photo userinfo-avatar"></open-data>
+    <image wx:else class="my-photo"></image>
     <image class="smile" mode="widthFix" bindtap="onSignIn" src="/images/vip/vip-smile.png"></image>
-    <image mode="widthFix" src="{{userInfo.avatarUrl}}" class="my-photo"></image>
     <text>{{userMsg.vip ?'正式会员':'临时会员'}}</text>
     <view class='a'>
       <view class="my-bottom">

@@ -1,10 +1,7 @@
 <view class="register">
   <form bindsubmit="formSubmit">
     <view>
-      <input name="user" type='text' placeholder="用户名"></input>
-    </view>
-    <view>
-      <input name="phoneNumber" type='number' placeholder="手机号"></input>
+      <input name="phoneNumber" type='number' placeholder="手机号" onblur="getPhone"></input>
     </view>
     <view class="yzm">
       <input name="yzm" type='number' placeholder="验证码"></input>

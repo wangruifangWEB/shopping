@@ -33,7 +33,7 @@
     </view>
   </view>
 
-  <block wx:for="{{list}}" wx:key="*this">
+  <block wx:for="{{list}}" wx:key="">
     <view class="news-image" data-id='{{item.id}}' bindtap='onOneActive'>
       <image src="{{item.picy}}"></image>
     </view>

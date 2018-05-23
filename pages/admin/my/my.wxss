@@ -8,9 +8,7 @@ page{
   padding-bottom: 20rpx;
 }
 .search{
-
   margin: 0 auto;
-
 }
 .my{
   background: #ff5b62;
@@ -37,8 +35,13 @@ page{
   margin: 0 auto;
   margin-bottom: 15rpx;
   margin-top: 30rpx;
-
 }
+
+.userinfo-avatar {
+  display: block;
+  overflow: hidden;
+}
+
 .smile{
   width: 60rpx;
   position: absolute;

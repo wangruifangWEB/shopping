@@ -193,11 +193,13 @@
 }
 
 .nickName {
+  color:#fff;
   width: 40%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display:inline-block;
+  font-size: 26rpx;
 }
 
 .btn-hover{

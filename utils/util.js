@@ -50,6 +50,7 @@ function showToast(titles, icon) {
     wx.hideLoading()
   }, 3000)
 }
+
 module.exports = {
   http: http,
   showModal: showModal,

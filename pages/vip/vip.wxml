@@ -9,7 +9,7 @@
         <image class="vip-img" mode="widthFix" src="/images/vip/vip.png"></image>
         <view class="user" wx:if="{{uid}}">
           <view class="name">
-            <text class="nickName">{{userInfo.nickName}}</text>
+            <open-data type="userNickName" class="nickName"></open-data>
             <text>{{userMsg.vip?'正式会员':'临时会员'}}</text>
           </view>
           <text class="id">
@@ -20,7 +20,8 @@
         <view class="user" wx:else>
           <view>
             <text class="fontColor">会员尊享福利\n</text>
-            <button class="noLogin" hover-class="btn-hover" open-type="getUserInfo" bindtap="userLogin" bindgetuserinfo="getUserInfo">已是会员？立即登录/注册 》</button>
+            <!-- <button class="noLogin" hover-class="btn-hover" open-type="getUserInfo" bindtap="userLogin" bindgetuserinfo="getUserInfo">已是会员？立即登录/注册 》</button> -->
+            <button class="noLogin" hover-class="btn-hover" bindtap="userLogin">已是会员？立即登录/注册 </button>
           </view>
         </view>
 
@@ -62,7 +63,7 @@
     </view>
     <view class="goods-box">
      <view wx:if="{{noContent}}" class="fontShow">没有关键词相关内容！</view>
-      <block wx:for="{{listGoods}}" wx:key="1" wx:if="{{hasContent}}">
+      <block wx:for="{{listGoods}}" wx:key="*this" wx:if="{{hasContent}}">
         <view class="goods-list" data-idx="{{item.id}}" bindtap='onOneShop'>
           <image src="{{item.picy}}"></image>
           <text>{{item.gname}}</text>

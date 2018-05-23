@@ -1,7 +1,33 @@
 //app.js
 App({
   onLaunch: function () {
-  
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          wx.request({
+            url: 'https://mypro.51cmo.net/home/loginWx/index',
+            method: 'POST',
+            data: {
+              code: res.code
+            },
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function (res) {
+              var openid = res.data.openid;
+              //设置用户id缓存
+              wx.setStorageSync('openid', openid)
+            },
+            fail: function (res) {
+              // console.log(res.data);
+            }
+          })
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      }
+    });
+
   },
   globalData: {
     shopUrl: 'https://mypro.51cmo.net',
@@ -11,13 +37,13 @@ App({
     userInfo: null
   },
   //设置当前显示标题
-  setTitle: function (currentArray,currentIndex){
+  setTitle: function (currentArray, currentIndex) {
     var currentTitle = currentArray[currentIndex];
     wx.setNavigationBarTitle({
       title: currentTitle
     })
   },
-  prevData: function (status){
+  prevData: function (status) {
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];  //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
@@ -28,7 +54,7 @@ App({
     wx.navigateBack();
   },
   //用户模态框提示
-  showModal:function (titles, content) {
+  showModal: function (titles, content) {
     wx.showModal({
       title: titles,
       content: content,
@@ -41,8 +67,8 @@ App({
       }
     })
   },
-//用户加载提示
-showToast:function (titles, icon) {
+  //用户加载提示
+  showToast: function (titles, icon) {
     wx.showToast({
       title: titles,
       icon: icon,

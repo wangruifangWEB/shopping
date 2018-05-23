@@ -10,7 +10,8 @@ Page({
       { 'id': 3, 'text': '已完成', 'img': '/images/my/4.png' }
     ],
     currentIdx: '',
-    phoneNumber: '52342947'
+    phoneNumber: '52342947',
+    userImgUrl:false
   },
   onLoad: function (options) { 
     var that=this;
@@ -35,6 +36,9 @@ Page({
       //获取当前用户的优惠券数量
       var cnumUrl = app.globalData.shopUrl + '/home/user/index/ty/cnum/uid/' + uid;
       util.http(cnumUrl, this.cnumCount);
+      //判断用户头像是否显示
+      let userImgUrl = this.data.userImgUrl;
+      this.setData({ userImgUrl:true});
     }
   },
   // 待付款
