@@ -33,7 +33,6 @@ Page({
   //去付款
   onPayGo(e) {
     let oid = e.currentTarget.dataset.oid;
-    console.log(oid);
     wx.navigateTo({
       url: '../payno/paygo/paygo?oid=' + oid,
     })

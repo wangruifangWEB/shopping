@@ -5,16 +5,16 @@ Page({
     searchShow: false,
     searchValue: '',
     historyArray2: [],
-    noContent:false,
-    hasContent:true
+    noContent: false,
+    hasContent: true
   },
   onLoad: function (options) {
     //轮播图
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
     utils.http(swiperUrl, this.swiperCallback);
   },
-  onShow(){
-    var userInfo=wx.getStorageSync('user');
+  onShow() {
+    var userInfo = wx.getStorageSync('user');
     this.setData({ userInfo });
     //商品列表
     var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
@@ -29,8 +29,12 @@ Page({
     }
   },
   callback(res) {
-    var listGoods = res.data.data.goods;
-    this.setData({ listGoods });
+    if(res.data){
+      var listGoods = res.data.data.goods;
+      let noContent = this.data.noContent,
+        hasContent = this.data.hasContent;
+      this.setData({ noContent: false, hasContent: true, listGoods });
+    }
   },
   onOneShop(e) {
     let id = e.currentTarget.dataset.idx;
@@ -63,24 +67,14 @@ Page({
     this.setData({ imgSrc });
   },
   userLogin() {
-    var that=this;
+    var that = this;
     wx.navigateTo({
       url: '../login/log/log',
     })
-    //设置缓存记录未登录状态
-    //  wx.setStorageSync('uid', '');
-    // wx.getUserInfo({
-    //   success: function (res) {
-    //     wx.setStorageSync('user', res.userInfo)
-    //     wx.navigateTo({
-    //       url: '../login/log/log',
-    //     })
-    //   }
-    // })
   },
   onBlur(event) {
     let val = event.detail.value;
-    if(val!==''){
+    if (val !== '') {
       var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/sp/de/' + val;
       utils.http(historyUrl, this.historycallback);
       let history2;
@@ -104,6 +98,9 @@ Page({
       searchShow: false,
       searchValue: ''
     })
+    //商品列表
+    var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
+    utils.http(url, this.callback);
   },
   onHistoryArray() {
     let that = this;
@@ -120,7 +117,6 @@ Page({
   },
   //搜索
   historycallback(res) {
-    console.log(res)
     if (res.data.data.shop.length !== 0) {
       var newsArray = res.data.data.shop;
       this.setData({ listGoods: newsArray });

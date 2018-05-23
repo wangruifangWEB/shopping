@@ -65,7 +65,6 @@ Page({
   backParameter: function () {
     //用户登录成功上个页面缓存更新
     var uid = wx.getStorageSync('uid');
-    console.log(uid);
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];  //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面

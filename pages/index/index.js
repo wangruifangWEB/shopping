@@ -57,20 +57,20 @@ Page({
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
     //优惠券
     var couponUrl = app.globalData.shopUrl + '/home/index/index/ty/coupon';
-    //新闻列表
-    var newUrl = app.globalData.shopUrl + '/home/index/index/ty/new';
-
+  
     util.http(newsOneUrl, this.callback);
     util.http(newsTwoUrl, this.newsTwoCallback);
     util.http(jumpUrl, this.jumpCallBack);
     util.http(swiperUrl, this.swiperCallback);
     util.http(couponUrl, this.couponCallback);
-    util.http(newUrl, this.newCallback);
   },
   onShow(){
     //获取用户id
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
+    //新闻列表
+    var newUrl = app.globalData.shopUrl + '/home/index/index/ty/new';
+    util.http(newUrl, this.newCallback);
   },
   callback(res) {
     var datas = res.data.data.imggg[0];
@@ -94,7 +94,12 @@ Page({
   },
   newCallback(res) {
     var datas = res.data.data.new;
-    this.setData({ detailsList: datas });
+    if(res.data){
+      let noContent = this.data.noContent,
+        hasContent = this.data.hasContent;
+      this.setData({ noContent: false, hasContent: true });
+      this.setData({ detailsList: datas });
+    }
   },
   onBlur(event) {
     let val = event.detail.value;
@@ -122,6 +127,9 @@ Page({
       searchShow: false,
       searchValue: ''
     })
+    //新闻列表
+    var newUrl = app.globalData.shopUrl + '/home/index/index/ty/new';
+    util.http(newUrl, this.newCallback);
   },
   onHistoryArray() {
     let that = this;
