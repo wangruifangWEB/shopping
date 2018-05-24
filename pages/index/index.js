@@ -5,8 +5,9 @@ Page({
     searchShow: false,
     searchValue: '',
     historyArray: [],
-    noContent:false,
-    hasContent:true,
+    noContent: false,
+    hasContent: true,
+    // isHidden:false,
     imgDetails: [
       {
         id: 0,
@@ -57,14 +58,14 @@ Page({
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
     //优惠券
     var couponUrl = app.globalData.shopUrl + '/home/index/index/ty/coupon';
-  
+
     util.http(newsOneUrl, this.callback);
     util.http(newsTwoUrl, this.newsTwoCallback);
     util.http(jumpUrl, this.jumpCallBack);
     util.http(swiperUrl, this.swiperCallback);
     util.http(couponUrl, this.couponCallback);
   },
-  onShow(){
+  onShow() {
     //获取用户id
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
@@ -94,7 +95,7 @@ Page({
   },
   newCallback(res) {
     var datas = res.data.data.new;
-    if(res.data){
+    if (res.data) {
       let noContent = this.data.noContent,
         hasContent = this.data.hasContent;
       this.setData({ noContent: false, hasContent: true });
@@ -103,24 +104,39 @@ Page({
   },
   onBlur(event) {
     let val = event.detail.value;
-    if(val!==''){
-      var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/xw/de/' + val;
+    if (val !== '') {
+      var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/xw/de/' + val + '/uid/' + this.data.uid;
       util.http(historyUrl, this.historycallback);
-      let history;
-      history = this.data.historyArray;
-      history.push(val);
-      wx.setStorageSync('history', history)
-      this.setData({
-        searchShow: false
-      })
-      this.onHistoryArray();
+      // let history;
+      // history = this.data.historyArray;
+      // history.push(val);
+      // wx.setStorageSync('history', history)
     }
-  },
-  onBindFocus() {
     this.setData({
+      searchShow: false
+    })
+  },
+  //搜索历史
+  searchHistoryCallback(res) {
+    //获取到搜索关键词
+    let datas = res.data.data.ls,
+        historyArray = this.data.historyArray;
+    //清空数组
+    historyArray = [];
+    //循环将搜索关键词push到数组
+    for (let i = 0; i < datas.length; i++) {
+      historyArray.push(datas[i].title);
+    }
+    this.setData({
+      historyArray,
       searchShow: true,
       searchValue: ''
     })
+  },
+  onBindFocus() {
+    //获取该用户搜索历史
+    var searchHistoryUrl = app.globalData.shopUrl + '/Home/sousuo/index/ty/ls/uid/' + this.data.uid;
+    util.http(searchHistoryUrl, this.searchHistoryCallback);
   },
   onCancelImgTap(event) {
     this.setData({
@@ -131,19 +147,19 @@ Page({
     var newUrl = app.globalData.shopUrl + '/home/index/index/ty/new';
     util.http(newUrl, this.newCallback);
   },
-  onHistoryArray() {
-    let that = this;
-    that.data.historyArray = wx.getStorageSync('history');
-    let length = that.data.historyArray.length;
-    for (let i = 0; i < length; i++) {
-      if ('' == that.data.historyArray[i]) {
-        that.data.historyArray.splice(i, 1)
-      }
-    }
-    that.setData({
-      historyArray: that.data.historyArray
-    })
-  },
+  // onHistoryArray() {
+  //   let that = this;
+  //   that.data.historyArray = wx.getStorageSync('history');
+  //   let length = that.data.historyArray.length;
+  //   for (let i = 0; i < length; i++) {
+  //     if ('' == that.data.historyArray[i]) {
+  //       that.data.historyArray.splice(i, 1)
+  //     }
+  //   }
+  //   that.setData({
+  //     historyArray: that.data.historyArray
+  //   })
+  //},
   detailsPage: function (e) {
     var id = e.currentTarget.dataset.idx;
     wx.navigateTo({
@@ -174,13 +190,17 @@ Page({
   },
   //搜索
   historycallback(res) {
-    if(res.data.data.new.length!==0){
+    if (res.data.data.new.length !== 0) {
       var newsArray = res.data.data.new;
       this.setData({ detailsList: newsArray });
-    }else{
+    } else {
       let noContent = this.data.noContent,
         hasContent = this.data.hasContent;
-      this.setData({noContent:true,hasContent:false});
+      this.setData({ noContent: true, hasContent: false });
     }
-  }
+  },
+  // tap1(){
+  //   let isHidden = this.data.isHidden;
+  //   this.setData({ isHidden:true});
+  // }
 })

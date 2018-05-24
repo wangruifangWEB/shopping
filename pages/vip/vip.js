@@ -77,18 +77,34 @@ Page({
     if (val !== '') {
       var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/sp/de/' + val;
       utils.http(historyUrl, this.historycallback);
-      let history2;
-      history2 = this.data.historyArray2;
-      history2.push(val);
-      wx.setStorageSync('history2', history2)
-      this.setData({
-        searchShow: false
-      })
-      this.onHistoryArray();
+      // let history2;
+      // history2 = this.data.historyArray2;
+      // history2.push(val);
+      // wx.setStorageSync('history2', history2)
+      // this.onHistoryArray();
     }
+    this.setData({
+      searchShow: false
+    })
   },
   onBindFocus() {
+    //获取该用户搜索历史
+    var searchHistoryUrl = app.globalData.shopUrl + '/Home/sousuo/index/ty/ls/uid/' + this.data.uid;
+    utils.http(searchHistoryUrl, this.searchHistoryCallback);
+  },
+  //搜索历史
+  searchHistoryCallback(res) {
+    //获取到搜索关键词
+    let datas = res.data.data.ls,
+      historyArray = this.data.historyArray;
+    //清空数组
+    historyArray = [];
+    //循环将搜索关键词push到数组
+    for (let i = 0; i < datas.length; i++) {
+      historyArray.push(datas[i].title);
+    }
     this.setData({
+      historyArray,
       searchShow: true,
       searchValue: ''
     })
@@ -102,19 +118,19 @@ Page({
     var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
     utils.http(url, this.callback);
   },
-  onHistoryArray() {
-    let that = this;
-    that.data.historyArray2 = wx.getStorageSync('history2');
-    let length = that.data.historyArray2.length;
-    for (let i = 0; i < length; i++) {
-      if ('' == that.data.historyArray2[i]) {
-        that.data.historyArray2.splice(i, 1)
-      }
-    }
-    that.setData({
-      historyArray: that.data.historyArray2
-    })
-  },
+  // onHistoryArray() {
+  //   let that = this;
+  //   that.data.historyArray2 = wx.getStorageSync('history2');
+  //   let length = that.data.historyArray2.length;
+  //   for (let i = 0; i < length; i++) {
+  //     if ('' == that.data.historyArray2[i]) {
+  //       that.data.historyArray2.splice(i, 1)
+  //     }
+  //   }
+  //   that.setData({
+  //     historyArray: that.data.historyArray2
+  //   })
+  // },
   //搜索
   historycallback(res) {
     if (res.data.data.shop.length !== 0) {

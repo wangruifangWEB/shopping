@@ -1,23 +1,22 @@
 
 <view class="register">
-  <form>
+  <form  bindsubmit="formSubmit">
     <view>
-      <input type='number' placeholder="手机号"></input>
+      <input type='number' name="phoneNumber" placeholder="手机号" onblur="getPhone"></input>
     </view>
     <view class="yzm">
-      <input type='text' placeholder="验证码"></input>
+      <input type='text' name="yzm" placeholder="验证码"></input>
       <button disabled="{{yzm}}" bindtap="onyzm">{{yzmText}}</button>
     </view>
     <view>
-      <input type="password" placeholder="输入新密码"></input>
+      <input type="password" name="password" placeholder="输入新密码"></input>
     </view>
     <view class="mm">
-      <input type="password" placeholder="再次输入新密码"></input>
+      <input type="password" name="subPassword"  placeholder="再次输入新密码"></input>
     </view>
     <view>
       
-      
     </view>
-    <button class="btn" disabled='{{registerBtn}}' form-type='sumbit'>确认修改</button>
+    <button class="btn" form-type='submit'>确认修改</button>
   </form>
 </view>

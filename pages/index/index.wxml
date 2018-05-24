@@ -2,7 +2,7 @@
 <import src="../tpls/swiper/swiper.wxml" />
 <view class="container">
   <template data="{{searchShow,historyArray,searchValue}}" is="search" />
-  
+
   <view class="indexTop">
     <image mode='widthFix' src="{{newsOneUrl.picy}}" class="banner" id="{{newsOneUrl.id}}"></image>
     <view class="coupons">
@@ -19,7 +19,7 @@
   </view>
 
   <view class="nine">
-    <image  src='{{newsTwoUrl.picy}}' class="imgBg" id="{{newsTwoUrl.id}}"></image>
+    <image src='{{newsTwoUrl.picy}}' class="imgBg" id="{{newsTwoUrl.id}}"></image>
     <view class="nine-box">
       <block wx:for="{{imgDetails}}" wx:key="*this">
         <view bindtap='jump' data-idx="{{item.id}}" data-src="{{item.lianjie}}"></view>
@@ -43,4 +43,18 @@
       </view>
     </block>
   </view>
+
+  <!--进入页面弹框推广-->
+  <!-- <view class="layer" hidden="{{isHidden}}">
+    <view class="content">
+      <canvas canvas-id="canvas" class="canvas">
+         <cover-view class="cover-view">
+          <cover-image class="cover-image close-image" bindtap="tap1" src="../../images/close.png" />
+         </cover-view> 
+        <cover-view class="image-cnt">
+          <cover-image class="cover-image" bindtap="tap2" src="https://mypro.51cmo.net/public/uploads/2018-04-10/5acc3362696e5.jpg" />
+        </cover-view>
+      </canvas>
+    </view>
+  </view> -->
 </view>

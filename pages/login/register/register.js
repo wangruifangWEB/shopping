@@ -37,14 +37,15 @@ Page({
     let vailNum = data.slice(0, 6);
     console.log(vailNum);
     this.setData({ vailNum })
+    
     if (vailNum == '手机号已经注') {
       utils.showModal('该用户已注册,去登录!', '');
     } else {
+      //验证码倒计时显示
+      this.timer();
       wx.showToast({
         title: '验证码已发送',
       });
-      //验证码倒计时显示
-      this.timer();
     }
   },
   // 用户协议
@@ -78,6 +79,7 @@ Page({
       register.showToast('密码为空或格式不正确', 'none', 1000)
       return;
     }
+
     // 判断验证码是否为空
     if ("" == register.trim(yzm)) {
       register.showToast('验证码不得为空', 'none', 1000)
@@ -104,7 +106,7 @@ Page({
     if (status == 1) {
       utils.showModal('注册成功，去登录!', '');
     } else {
-      utils.showModal('登录失败,请重试!', '');
+      utils.showModal('注册失败,请重试!', '');
     }
   },
   timer() {

@@ -1,5 +1,9 @@
 @import "../tpls/search/search.wxss";
 
+/* Page {
+  overflow-y: hidden;
+} */
+
 image {
   width: 100%;
   display: block;
@@ -152,7 +156,59 @@ image {
   height: 581rpx;
 }
 
-.fontShow{
+.fontShow {
   text-align: center;
-  margin:30rpx 0;
+  margin: 30rpx 0;
 }
+
+/*进入页面弹框 */
+/* 
+.layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.layer .content {
+  margin: auto;
+  width: 68%;
+  background-color: #fff;
+  position: relative;
+  top: 50%;
+  border-radius: 10rpx;
+  margin-top: -250rpx;
+  overflow: hidden;
+}
+
+.cover-image {
+  width: 80%;
+  height: 400rpx;
+  margin: 20rpx;
+}
+
+.layer .canvas {
+  height: 500rpx;
+}
+
+.cover-view {
+  width: 80%;
+  margin-top: 20rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.layer .close-image {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 0rpx;
+  margin-left: -30rpx;
+} */
