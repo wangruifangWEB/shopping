@@ -2,15 +2,11 @@
 <view class="container">
   <view class="swiper-box">
     <swiper class="swiper" autoplay="true" circular="true" bindchange="changeAutoplay">
-      <swiper-item class="banner-item">
-        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
-      </swiper-item>
-      <swiper-item class="banner-item">
-        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
-      </swiper-item>
-      <swiper-item class="banner-item">
-        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
-      </swiper-item>
+      <block wx:for="{{bannerList}}" wx:key="*this">
+        <swiper-item class="banner-item">
+          <image mode="widthFix" class="item-image" src="{{item.picy}}"></image>
+        </swiper-item>
+      </block>
     </swiper>
     <view class="swiper-text">
       <text>{{current+1}}</text>

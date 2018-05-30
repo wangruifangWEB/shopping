@@ -7,7 +7,7 @@ Page({
     imgUrl: ''
   },
   onLoad: function (options) {
-    let id = options.id;
+    let id = options.idx;
     var url = app.globalData.shopUrl + '/home/news/index/ty/new/id/' + options.id;
     util.http(url, this.callback);
   },

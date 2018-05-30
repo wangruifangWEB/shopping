@@ -20,7 +20,7 @@
       <text class="msg">发票抬头</text>
       <view class="raisedChoice">
         <view wx:for="{{invoiceObj}}" data-idx="{{index}}" class="item {{objIndex==index ? 'active' : ''}}" wx:key="unique" bindtap="invoiceObj">
-          <image src="{{objIndex==index ? '../../../../images/cart/circle@selected.png' : '../../../../images/cart/circle@noselected.png'}}"></image>
+          <image src="{{objIndex==index ? '../../../images/cart/circle@selected.png' : '../../../images/cart/circle@noselected.png'}}"></image>
           <text>{{item}}</text>
         </view>
       </view>

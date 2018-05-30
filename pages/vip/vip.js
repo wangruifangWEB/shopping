@@ -77,11 +77,10 @@ Page({
     if (val !== '') {
       var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/sp/de/' + val;
       utils.http(historyUrl, this.historycallback);
-      // let history2;
-      // history2 = this.data.historyArray2;
-      // history2.push(val);
-      // wx.setStorageSync('history2', history2)
-      // this.onHistoryArray();
+    } else {
+      let noContent = this.data.noContent,
+        hasContent = this.data.hasContent;
+      this.setData({ noContent: false, hasContent: true });
     }
     this.setData({
       searchShow: false
@@ -118,19 +117,6 @@ Page({
     var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
     utils.http(url, this.callback);
   },
-  // onHistoryArray() {
-  //   let that = this;
-  //   that.data.historyArray2 = wx.getStorageSync('history2');
-  //   let length = that.data.historyArray2.length;
-  //   for (let i = 0; i < length; i++) {
-  //     if ('' == that.data.historyArray2[i]) {
-  //       that.data.historyArray2.splice(i, 1)
-  //     }
-  //   }
-  //   that.setData({
-  //     historyArray: that.data.historyArray2
-  //   })
-  // },
   //搜索
   historycallback(res) {
     if (res.data.data.shop.length !== 0) {

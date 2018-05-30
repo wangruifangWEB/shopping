@@ -44,6 +44,7 @@ Page({
   },
   noPaycallbackInit(res) {
     var stayPayment = res.data.data;
+    console.log(stayPayment);
     this.setData({
       stayPayment
     })

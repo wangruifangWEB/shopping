@@ -9,7 +9,7 @@
         <image class="vip-img" mode="widthFix" src="/images/vip/vip.png"></image>
         <view class="user" wx:if="{{uid}}">
           <view class="name">
-            <open-data type="userNickName" class="nickName"></open-data>
+            <open-data type="userNickName" class="nickName"></open-data>   
             <text>{{userMsg.vip?'正式会员':'临时会员'}}</text>
           </view>
           <text class="id">

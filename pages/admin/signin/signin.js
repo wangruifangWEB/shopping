@@ -24,7 +24,7 @@ Page({
   onShow() {
     //签到列表
     var signListUrl = app.globalData.shopUrl + '/home/qiandao/index/ty/qd/uid/' + this.data.uid + '/lsqd/' + this.data.initDate;
-    util.http(signListUrl, this.signListcallback);
+    util.http(signListUrl, this.signShowcallback);
     this.setData({ signListUrl });
   },
   // 签到
@@ -63,6 +63,35 @@ Page({
       url: '../../integration/integration?id=' + id,
     })
   },
+  //签到列表初始化
+  signShowcallback(res){
+    let signText = this.data.signText,
+      signList = res.data.data.qd,
+      dateList = [];
+    for (let i in signList) {
+      dateList.push(signList[i].addtime);
+    }
+    if (this.getSameNum(this.data.date, dateList)) {
+      this.setData({ signText: "已签" });
+    } else {
+      this.setData({ signText: '签到' });
+    }
+    if (res.data) {
+      let arr = [];
+      for (var i in signList) {
+        let addtime = signList[i].addtime;
+        var days = addtime.slice(8, );
+        if (days.charAt(0) == '0') {
+          var days = addtime.slice(9, );
+        }
+        arr.push(Number(days));
+      }
+      this.setData({ arr });
+       this._signDay();
+    } else {
+      app.showToast('网络错误，请重试！', 'none');
+    }
+  },
   //签到列表
   signListcallback(res) {
     let signText = this.data.signText,
@@ -73,6 +102,8 @@ Page({
     }
     if (this.getSameNum(this.data.date, dateList)) {
       this.setData({ signText: "已签" });
+      //提示签到结果
+      app.showToast('签到成功！', '');
     } else {
       this.setData({ signText: '签到' });
     }
@@ -141,8 +172,6 @@ Page({
     } else {
       //更新签到列表
       util.http(this.data.signListUrl, this.signListcallback);
-      //提示签到结果
-      app.showToast('签到成功！', '');
     }
   },
   //获取数组中相同数个数

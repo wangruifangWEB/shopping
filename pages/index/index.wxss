@@ -147,9 +147,9 @@ image {
   color: #ff6a70;
   background-color: #fff;
   border-radius: 15rpx;
-  padding: 5rpx 10rpx;
+  padding: 5rpx 12rpx;
   position: relative;
-  top: 8rpx;
+  top: 12rpx;
 }
 
 .imgBg {

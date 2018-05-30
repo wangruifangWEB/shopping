@@ -1,7 +1,8 @@
-page{
-  background: #ffffff;
+page {
+  background: #fff;
 }
-form{
+
+form {
   width: 90%;
   margin: 0 auto;
   display: block;
@@ -10,7 +11,8 @@ form{
   margin-top: 10rpx;
   border-top: 1rpx solid #d1d1d1;
 }
-form view{
+
+form view {
   border-bottom: 1rpx solid #d1d1d1;
   padding: 0 10rpx;
   padding-bottom: 10rpx;
@@ -19,40 +21,51 @@ form view{
   justify-content: space-between;
   align-items: baseline;
 }
-.yzm button{
+
+.yzm button {
   display: block;
   background: #ff5b62;
-  color: #ffffff;
+  color: #fff;
   font-size: 28rpx;
-  padding: 6rpx 10rpx;
+  padding: 6rpx 10rpx 9rpx 10rpx;
   border-radius: 6rpx;
   box-sizing: inherit;
-  line-height: 40rpx;
+  line-height: 45rpx;
   margin-right: 0;
 }
 
-form view image{
+button::after{
+  border:none;
+}
+
+.yzm input {
+  width: 360rpx;
+}
+
+form view image {
   width: 40rpx;
   margin-right: 10rpx;
 }
-form .mm{
+
+form .mm {
   margin-bottom: 20rpx;
 }
-form view:last-of-type{
-  
+
+form view:last-of-type {
   border: none;
   align-items: center;
   justify-content: flex-start;
 }
 
-.btn{
+.btn {
   background: #ff5b62;
-  color: #ffffff;
+  color: #fff;
   border: none;
-  width:70%;
+  width: 70%;
   margin: 0 auto;
 }
-.agree{
-  color: #999999;
+
+.agree {
+  color: #999;
   font-size: 28rpx;
 }

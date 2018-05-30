@@ -11,7 +11,18 @@ Page({
     fixbg: true,
     isTop: false,
     buyNum: 1,
-    classNum: true
+    classNum: true,
+    bannerList:[
+      {
+        'picy':'../../images/pay-list.png'
+      },
+      {
+        'picy': '../../images/qiandao2.png'
+      },
+      {
+        'picy': '../../images/pay-list.png'
+      }
+    ]
   },
   onLoad: function (options) {
     //将此商品id缓存
@@ -23,6 +34,9 @@ Page({
     var likeUrl = app.globalData.shopUrl + '/home/goods/index/ty/like';
     utils.http(url, that.callback);
     utils.http(likeUrl, that.likecallback);
+    //获取商品轮播图
+    // var bannerUrl = app.globalData.shopUrl + ;
+    // utils.http(bannerUrl, that.bannercallback);
   },
   onShow() {
     var TotalNumberGoods = wx.getStorageSync('TotalNumberGoods');
@@ -162,4 +176,9 @@ Page({
       url: '../goods/goods?id=' + id,
     })
   },
+  //商品轮播图
+  bannercallback(res){
+   let bannerList=res.data.data;
+   this.setData({ bannerList});
+  }
 })

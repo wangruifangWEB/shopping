@@ -107,10 +107,10 @@ Page({
     if (val !== '') {
       var historyUrl = app.globalData.shopUrl + '/home/sousuo/index/ty/xw/de/' + val + '/uid/' + this.data.uid;
       util.http(historyUrl, this.historycallback);
-      // let history;
-      // history = this.data.historyArray;
-      // history.push(val);
-      // wx.setStorageSync('history', history)
+    }else{
+      let noContent = this.data.noContent,
+        hasContent = this.data.hasContent;
+       this.setData({ noContent: false, hasContent: true });
     }
     this.setData({
       searchShow: false
@@ -147,19 +147,6 @@ Page({
     var newUrl = app.globalData.shopUrl + '/home/index/index/ty/new';
     util.http(newUrl, this.newCallback);
   },
-  // onHistoryArray() {
-  //   let that = this;
-  //   that.data.historyArray = wx.getStorageSync('history');
-  //   let length = that.data.historyArray.length;
-  //   for (let i = 0; i < length; i++) {
-  //     if ('' == that.data.historyArray[i]) {
-  //       that.data.historyArray.splice(i, 1)
-  //     }
-  //   }
-  //   that.setData({
-  //     historyArray: that.data.historyArray
-  //   })
-  //},
   detailsPage: function (e) {
     var id = e.currentTarget.dataset.idx;
     wx.navigateTo({
@@ -183,7 +170,9 @@ Page({
     }
   },
   jump(e) {
-    var idx = e.currentTarget.dataset.idx;
+    // var idx = e.currentTarget.dataset.idx;
+    let src = e.currentTarget.dataset.src;
+    let idx=src.slice(-1);
     wx.navigateTo({
       url: '../find/news/newslist/newslist?id=' + idx
     })
@@ -198,9 +187,5 @@ Page({
         hasContent = this.data.hasContent;
       this.setData({ noContent: true, hasContent: false });
     }
-  },
-  // tap1(){
-  //   let isHidden = this.data.isHidden;
-  //   this.setData({ isHidden:true});
-  // }
+  }
 })

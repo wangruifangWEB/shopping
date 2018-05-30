@@ -32,7 +32,7 @@ Page({
   //提交
   submission(e) {
     if (!this.data.uid) {
-      utils.showToast('请登录，登录后即可领取！', 'none');
+      utils.showToast('请登录，登录后即可兑换！', 'none');
     } else {
       var aid = e.currentTarget.dataset.idx;
       wx.navigateTo({

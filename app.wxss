@@ -40,3 +40,7 @@ view {
   box-sizing: border-box;
   -webkit-overflow-scrolling : touch;
 }
+
+button:after{
+  border:none;
+}

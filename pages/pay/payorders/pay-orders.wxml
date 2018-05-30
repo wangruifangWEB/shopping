@@ -48,7 +48,7 @@
   <view class="order">
     <view>
       <text>商品金额</text>
-      <text>￥{{totalPrice}}</text>
+      <text>￥{{payGoods.shop[0].zhejia}}</text>
     </view>
     <view>
       <text>运费</text>
