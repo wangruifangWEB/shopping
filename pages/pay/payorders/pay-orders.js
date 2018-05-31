@@ -82,21 +82,8 @@ Page({
     utils.http(payedUrl, this.payedcallback);
   },
   payedcallback(res){
-    console.log(res)
     if(res.data){
-      wx.showModal({
-        title: '支付成功!',
-        content: '点击确定, 去待发货中查看！',
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../../pay/pays/pays?currentIdx=1',
-            })
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
+      utils.showTitle('支付成功!', '点击确定, 去待发货中查看！', '../../pay/pays/pays?currentIdx=1');
     }
   },
   //发票选择

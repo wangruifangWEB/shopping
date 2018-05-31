@@ -64,18 +64,17 @@ Page({
   },
   payGoodscallback(res) {
     //获取用户商品信息
-    var payGoods = res.data.data.ord;
-    console.log(payGoods);
-    let totalPrice = this.data.totalPrice;
-    let payPrice = this.data.payPrice;
-    let couponPrice = this.data.couponPrice;
-    for (var i in payGoods.shop) {
-      totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
-      payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
-      couponPrice = totalPrice - payPrice;
-    }
-    payPrice = payPrice + Number(payGoods.yunfei);
-    this.setData({ payGoods, totalPrice, payPrice, couponPrice });
+    let payGoods = res.data.data.ord,
+        totalPrice = this.data.totalPrice,
+        payPrice = this.data.payPrice,
+        couponPrice = this.data.couponPrice;
+        for (var i in payGoods.shop) {
+          totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
+          payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
+          couponPrice = totalPrice - payPrice;
+        }
+        payPrice = payPrice + Number(payGoods.yunfei);
+        this.setData({ payGoods, totalPrice, payPrice, couponPrice });
   },
   addresscallback(res) {
     if (res.data) {
@@ -134,18 +133,20 @@ Page({
     var integartionStatus = res.data;
     if (integartionStatus == 1) {
       //加入订单
-      var orderUrl = app.globalData.shopUrl + '/home/jifen/index/ty/ooa/uid/' + this.data.uid + '/gid/' + +this.data.gid;
+      var orderUrl=app.globalData.shopUrl+'/home/jifen/index/ty/ooa/uid/'+this.data.uid+'/gid/' +this.data.gid;
       utils.http(orderUrl, this.ordercallback);
 
     } else if (integartionStatus == '积分不够') {
+
       utils.showToast('积分不够兑换该商品!', 'none');
+
     } else {
       utils.showToast('网络错误，请重试！', 'none');
     }
   },
   ordercallback(res) {
     if (res.data) {
-      app.showModal('兑换结果', '商品兑换成功，待收货中查看详情!');
+      utils.showTitle('兑换成功!', '点击确定, 去待收货中查看！', '../../pay/pays/pays?currentIdx=2');
     } else {
       utils.showToast('网络错误，请重试！', 'none');
     }

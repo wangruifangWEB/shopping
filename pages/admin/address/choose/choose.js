@@ -72,9 +72,10 @@ Page({
     var currentTarget = e.currentTarget.dataset.index;
     this.setData({ aid, currentTarget });
     var removeUrl = app.globalData.shopUrl + '/home/address/index/ty/d/uid/' + this.data.uid + '/aid/' + aid;
-    utils.http(removeUrl, this.removeItem);
+    console.log(removeUrl);
+    utils.http(removeUrl, this.removeItemcallback);
   },
-  removeItem(res) {
+  removeItemcallback(res) {
     if (res.data) {
       this.data.address.splice(this.data.currentTarget, 1)
       this.setData({

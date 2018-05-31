@@ -491,3 +491,8 @@ button::after{
 .text{
   overflow: hidden;
 }
+
+.wxParse-p .wxParse-img{
+  width:100% !important;
+  height:100%;
+}

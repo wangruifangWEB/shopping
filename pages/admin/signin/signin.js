@@ -87,7 +87,8 @@ Page({
         arr.push(Number(days));
       }
       this.setData({ arr });
-       this._signDay();
+      wx.setStorageSync('signDays', arr);
+      this._signDay();
     } else {
       app.showToast('网络错误，请重试！', 'none');
     }

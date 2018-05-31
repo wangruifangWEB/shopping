@@ -38,7 +38,7 @@ Page({
     console.log(vailNum);
     this.setData({ vailNum })
     
-    if (vailNum == '手机号已经注') {
+    if (vailNum == '手机号已注册') {
       utils.showModal('该用户已注册,去登录!', '');
     } else {
       //验证码倒计时显示

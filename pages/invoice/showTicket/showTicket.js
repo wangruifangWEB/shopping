@@ -23,8 +23,7 @@ Page({
   },
   callback(res){
     if(res.data){
-      app.showModal('', '删除成功！');
-      wx.navigateBack({})
+      util.showModal('', '删除成功！');    
     }else{
       app.showModal('', '删除失败，请重试！');
     }

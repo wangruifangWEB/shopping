@@ -87,4 +87,7 @@
       <text>￥{{payPrice}}</text>
     </view>
   </view>
+
+  <!--正在加载 -->
+  <loading hidden="{{hiddenLoading}}">正在加载</loading>
 </view>

@@ -42,7 +42,6 @@ Page({
   },
   callback(res) {
     var goodsArray = res.data.data.goods[0];
-    // console.log(goodsArray);
     WxParse.wxParse('article', 'html', goodsArray.content, this, 5);
     this.setData({ goodsArray });
   },

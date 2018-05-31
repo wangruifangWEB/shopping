@@ -2,7 +2,8 @@ var app = getApp();
 var util = require('../../../../utils/util.js');
 Page({
   data: {
-    choicedType: '不开发票'
+    choicedType: '不开发票',
+    hiddenLoading: false
   },
   onLoad: function (options) {
     var uid = wx.getStorageSync('uid');
@@ -63,35 +64,28 @@ Page({
     utils.http(payedUrl, this.payedcallback);
   },
   payedcallback(res) {
-    console.log(res)
    if(res.data){
-    wx.showModal({
-      title: '支付成功!',
-      content: '点击确定, 去待发货中查看！',
-      success: function (res) {
-        if (res.confirm) {
-          wx.navigateTo({
-            url: '../../pay/pays/pays?currentIdx=1',
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
+     utils.showTitle('支付成功!', '点击确定, 去待发货中查看', '../../pay/pays/pays?currentIdx=1');
+   } else {
+     app.showToast('网络错误，请重试！', 'error');
    }
   },
   callback(res) {
-    //获取用户商品信息
-    let payGoods = res.data.data.ord,
+    if(res.data){
+      //获取用户商品信息
+      let payGoods = res.data.data.ord,
         totalPrice = this.data.totalPrice,
         payPrice = this.data.payPrice,
         couponPrice = this.data.couponPrice,
         orderId = payGoods.orderh;
-        totalPrice = Number(payGoods.yuanjia) * payGoods.num;
-        payPrice = Number(payGoods.zhejia) * payGoods.num;
-        couponPrice = totalPrice - payPrice;
-        payPrice = payPrice + Number(payGoods.yunfei);
-        this.setData({ payGoods, totalPrice, payPrice, couponPrice, orderId});
+      totalPrice = Number(payGoods.yuanjia) * payGoods.num;
+      payPrice = Number(payGoods.zhejia) * payGoods.num;
+      couponPrice = totalPrice - payPrice;
+      payPrice = payPrice + Number(payGoods.yunfei);
+      this.setData({ hiddenLoading:true,payGoods, totalPrice, payPrice, couponPrice, orderId });
+    } else {
+      app.showToast('网络错误，请重试！', 'error');
+    }
   },
   invoiceSelection(e) {
     wx.navigateTo({

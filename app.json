@@ -32,7 +32,6 @@
     "pages/invoice/modifyTicket/modifyTicket",
     "pages/invoice/showTicket/showTicket",
     "pages/integration/integration"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

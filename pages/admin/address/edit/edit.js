@@ -61,7 +61,7 @@ if (userMsg.userName == '' || userMsg.userTel == '' || address == '' || userMsg.
   callback(res) {
     var requestStatus = res.data;
     if (requestStatus) {
-      util.showToast('地址修改成功!', '');
+      util.showModal('地址修改成功!', '');
     } else {
       util.showToast('网络错误,请重试!', 'none');
     }

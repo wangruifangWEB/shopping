@@ -51,10 +51,30 @@ function showToast(titles, icon) {
   }, 3000)
 }
 
+
+//点击确定跳转指定页面
+function showTitle(titles, content,url){
+  wx.showModal({
+    title: titles,
+    content: content,
+    success: function (res) {
+      if (res.confirm) {
+        wx.navigateTo({
+          url:url
+        })
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    }
+  })
+}
+
+
 module.exports = {
   http: http,
   showModal: showModal,
   showToast: showToast,
+  showTitle: showTitle,
   formHttp: formHttp
 }
 

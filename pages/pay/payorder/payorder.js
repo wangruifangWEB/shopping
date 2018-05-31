@@ -10,13 +10,12 @@ Page({
   },
   onLoad: function (options) {
     //获取缓存值
-    var uid = wx.getStorageSync('uid');
+    var uid = wx.getStorageSync('uid'); 
     //获取openid
     var openid = wx.getStorageSync('openid');
     this.setData({ uid, openid});
     //获取账单信息
     var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + this.data.uid;
-    console.log(orderUrl);
     utils.http(orderUrl, this.initOrdercallback);
   },
   onShow() {
@@ -46,7 +45,6 @@ Page({
     }
   },
   payMoneycallback(res) {
-    // console.log(res);
     //取出支付所需变量
     let nonceStr = res.data.nonceStr,
       appId = res.data.appid,
@@ -64,7 +62,6 @@ Page({
       signType: sign,
       paySign: paySign,
       success: function (res) {
-        // console.log(res);
         //给后台返回支付成功结果，修改订单状态
         that.changeOrderIdPay(orderId);
       },
@@ -80,21 +77,8 @@ Page({
     utils.http(payedUrl, this.payedcallback);
   },
   payedcallback(res) {
-    console.log(res)
     if (res.data) {
-      wx.showModal({
-        title: '支付成功!',
-        content: '点击确定, 去待发货中查看！',
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../../pay/pays/pays?currentIdx=1',
-            })
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
+      utils.showTitle('支付成功!', '点击确定, 点击确定, 去待发货中查看！', '../../pay/pays/pays?currentIdx=1');
     }
   },
   //发票选择
@@ -146,7 +130,6 @@ Page({
   //价格
   initOrdercallback(res) {
     let payGoods = res.data.data.ord;
-    console.log(payGoods);
     let orderId = payGoods.orderh;
     let totalPrice = this.data.totalPrice;
     let payPrice = this.data.payPrice;

@@ -32,7 +32,6 @@ Page({
     }
   },
   callback(res) {
-    console.log(res);
     if (!res.data) {
       app.showToast('登录失败,请注册后登录!', 'none');
     } else {

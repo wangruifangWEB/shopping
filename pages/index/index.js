@@ -94,8 +94,8 @@ Page({
     this.setData({ coupon: datas });
   },
   newCallback(res) {
-    var datas = res.data.data.new;
     if (res.data) {
+      var datas = res.data.data.new;
       let noContent = this.data.noContent,
         hasContent = this.data.hasContent;
       this.setData({ noContent: false, hasContent: true });

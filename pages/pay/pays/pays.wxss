@@ -148,3 +148,10 @@ image {
   display: block;
   clear: both;
 }
+
+.default image{
+  width:327rpx;
+  height:323rpx;
+  margin:0 auto;
+  padding-top:300rpx;
+}

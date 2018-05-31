@@ -3,7 +3,8 @@ var util = require('../../../utils/util.js');
 Page({
   data: {
     navbar: ['待付款', '待发货', '待收货', '已完成'],
-    currentTab: 0
+    currentTab: 0,
+    hiddenLoading:false
   },
   onLoad: function (options) {
     var that = this;
@@ -43,17 +44,21 @@ Page({
     util.http(url, this.sureGoodscallback);
   },
   noPaycallbackInit(res) {
-    var stayPayment = res.data.data;
-    console.log(stayPayment);
-    this.setData({
-      stayPayment
-    })
+    if(res.data){  
+      var stayPayment = res.data.data;
+      this.setData({
+        hiddenLoading:true,
+        stayPayment
+      })
+    }
+   
   },
   noPaycallback(res) {
     if (res.data) {
       var stayPayment = res.data.data;
       app.setTitle(this.data.navbar, this.data.idx);
       this.setData({
+        hiddenLoading:true,
         currentTab: this.data.idx, stayPayment
       })
     } else {
@@ -63,6 +68,9 @@ Page({
   sureGoodscallback(res) {
     if (res.data) {
       app.showToast('确认收货完成', 'success');
+      wx.navigateTo({
+        url: '../../pay/pays/pays?currentIdx=3',
+      })
     } else {
       app.showToast('网络错误，请重试！', 'error');
     }

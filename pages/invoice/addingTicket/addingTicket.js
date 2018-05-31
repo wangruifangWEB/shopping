@@ -43,9 +43,7 @@ Page({
       //用户提示
       app.showModal('添加失败，请稍后重试！', '');
     } else {
-      app.showModal('增票信息添加成功！', '');
-      //返回上一页
-      wx.navigateBack({})
+      utils.showTitle('增票信息添加成功!', '', '../../invoice/showTicket/showTicket');
     }
   }
 })
