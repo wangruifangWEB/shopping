@@ -33,15 +33,14 @@ Page({
   },
   callback(res) {
     if (!res.data) {
-      app.showToast('登录失败,请注册后登录!', 'none');
+      app.showToast('登录失败,请注册/核对密码后登录!', 'none');
     } else {
       var requestStatus = res.data.data.uid;
       utils.showToast('登录成功!', 'success');
       //设置缓存记录登录状态
       wx.setStorageSync('uid', requestStatus);
+      //返回上一页并传值
       this.backParameter();
-      //返回上一页
-      wx.navigateBack({})
     }
   },
   onRegister() {
@@ -56,9 +55,8 @@ Page({
       var uid = res.data.data.uid;
       //设置缓存记录登录状态
       wx.setStorageSync('uid', uid);
+      //返回上一页并传值
       this.backParameter();
-      //返回上一页
-      wx.navigateBack({})
     }
   },
   backParameter: function () {
@@ -69,5 +67,7 @@ Page({
     var prevPage = pages[pages.length - 2]; //上一个页面
     //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
     prevPage.setData({ uid });
+    //返回上一页
+    wx.navigateBack({})
   }
 })

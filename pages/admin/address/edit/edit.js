@@ -5,7 +5,7 @@ Page({
     yzm: false,
     agree: false,
     region: [],
-    m: 0
+    m: 0 //默认选中地址状态
   },
   onLoad: function (options) {
     //获取该地址id
@@ -50,7 +50,6 @@ Page({
     let d = userMsg.userDetailsAddress;
     //验证非空
 if (userMsg.userName == '' || userMsg.userTel == '' || address == '' || userMsg.userDetailsAddress == '') {
-      //提示用户内容不能为空
       util.showModal('错误提示', '内容不能为空！');
     } else {
       //请求传值
@@ -59,8 +58,7 @@ if (userMsg.userName == '' || userMsg.userTel == '' || address == '' || userMsg.
     }
   },
   callback(res) {
-    var requestStatus = res.data;
-    if (requestStatus) {
+    if (res.data) {
       util.showModal('地址修改成功!', '');
     } else {
       util.showToast('网络错误,请重试!', 'none');

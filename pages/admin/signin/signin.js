@@ -5,6 +5,7 @@ Page({
   data: {
     signDay: '',
     signText: '',
+    hiddenLoading:false
   },
   onLoad: function () {
     //获取用户id
@@ -65,19 +66,21 @@ Page({
   },
   //签到列表初始化
   signShowcallback(res){
-    let signText = this.data.signText,
-      signList = res.data.data.qd,
-      dateList = [];
-    for (let i in signList) {
-      dateList.push(signList[i].addtime);
-    }
-    if (this.getSameNum(this.data.date, dateList)) {
-      this.setData({ signText: "已签" });
-    } else {
-      this.setData({ signText: '签到' });
-    }
-    if (res.data) {
-      let arr = [];
+    if(res.data){
+      let signText = this.data.signText,
+          signList = res.data.data.qd,
+          dateList = [],
+          arr = [];
+      for (let i in signList) {
+        dateList.push(signList[i].addtime);
+      }
+      //判断用户当前签到状态
+      if (this.getSameNum(this.data.date, dateList)) {
+        this.setData({ signText: "已签" });
+      } else {
+        this.setData({ signText: '签到' });
+      }
+      //循环签到列表
       for (var i in signList) {
         let addtime = signList[i].addtime;
         var days = addtime.slice(8, );
@@ -86,9 +89,15 @@ Page({
         }
         arr.push(Number(days));
       }
-      this.setData({ arr });
-      wx.setStorageSync('signDays', arr);
-      this._signDay();
+
+        this.setData({ hiddenLoading:true, arr });
+
+        //缓存签到天数
+        wx.setStorageSync('signDays', arr);
+
+        //更新签到显示
+        this._signDay();
+        
     } else {
       app.showToast('网络错误，请重试！', 'none');
     }

@@ -120,7 +120,6 @@ Page({
     utils.http(url, this.valueAddTicketcallback);
   },
   valueAddTicketcallback(res) {
-    console.log(res);
     if (res.data !== 0) {
       this.data.choicedType = '开发票';
       wx.setStorageSync('choicedType', '开发票')

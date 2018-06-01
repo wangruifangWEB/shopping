@@ -13,7 +13,6 @@ Page({
   },
   callback(res) {
     var activeList = res.data.data.xq[0];
-    console.log(activeList);
     WxParse.wxParse('article', 'html', activeList.content, this, 5);
     this.setData({
       'activeList': activeList,

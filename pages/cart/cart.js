@@ -10,6 +10,7 @@ Page({
     select: true,            //默认选中,
     totalNumber: 0,          //初始化结算总数
     displayDistage: false,
+    hiddenLoading:false
   },
   onLoad: function (options) {
     var uid = wx.getStorageSync('uid');
@@ -38,13 +39,14 @@ Page({
     let carts = this.data.carts;
 
     for (let i = 0; i < carts.length; i++) {
-      carts[i].status = selectAllStatus;           // 改变所有商品状态
+      carts[i].status = selectAllStatus;// 改变所有商品状态
     }
     this.setData({
       selectAllStatus: selectAllStatus,
       carts: carts
     });
-    this.getTotalPrice();                           // 重新获取总价 
+     // 重新获取总价
+    this.getTotalPrice();                           
   },
   // 增加数量
   addCount(e) {
@@ -76,6 +78,7 @@ Page({
     this.setData({ e, dnum });
     var deleteListUrl = app.globalData.shopUrl + '/home/car/index/ty/d/gid/' + gid + '/uid/' + this.data.uid;
     utils.http(deleteListUrl, this.deleteListcallback);
+     // 重新获取总价
     this.getTotalPrice();
   },
   getTotalPrice() {
@@ -109,25 +112,28 @@ Page({
     }
   },
   callback(res) {
-    var carts = res.data.data.car;
-    let TotalNumberGoods = 0;
-    let shopArray=[];
-    for (var i in carts) {
-      TotalNumberGoods += parseInt(carts[i].gnum);
-      shopArray.push(carts[i].status);
+    if(res.data){
+      var carts = res.data.data.car;
+      let TotalNumberGoods = 0;
+      let shopArray = [];
+      for (var i in carts) {
+        TotalNumberGoods += parseInt(carts[i].gnum);
+        shopArray.push(carts[i].status);
+      }
+      if (this.getSameNum(1, shopArray) == shopArray.length) {
+        this.setData({ selectAllStatus: true });
+      }
+      this.setData({ hiddenLoading: true, carts });
+      //计算价格
+      this.getTotalPrice();
+      //设置缓存
+      wx.setStorageSync('TotalNumberGoods', TotalNumberGoods)
+    }else{
+      utils.showToast('网络错误,请稍后重试!', 'none');
     }
-    if (this.getSameNum(1, shopArray) == shopArray.length){
-       this.setData({ selectAllStatus: true });
-    }
-    this.setData({ carts});
-    //计算价格
-    this.getTotalPrice();
-    //设置缓存
-    wx.setStorageSync('TotalNumberGoods', TotalNumberGoods)
   },
   minusCountcallback(res) {
-    var minusStatus = res.data;
-    if (!minusStatus) {
+    if (!res.data) {
       utils.showToast('网络错误,请稍后重试!', 'none');
     } else {
       const index = this.data.currentIdx.index;
@@ -138,9 +144,8 @@ Page({
       } else {
         gnum = Number(gnum) - 1;
         carts[index].gnum = gnum;
-        this.setData({
-          carts: carts
-        });
+        this.setData({ carts: carts });
+        // 重新获取总价
         this.getTotalPrice();
         //更新缓存值
         var TotalNumberGoods = wx.getStorageSync('TotalNumberGoods');
@@ -151,8 +156,7 @@ Page({
     }
   },
   addCountcallback(res, e) {
-    var addStatus = res.data;
-    if (!addStatus) {
+    if (!res.data) {
       utils.showToast('网络错误,请稍后重试!', 'none');
     } else {
       const index = this.data.currentId.index;
@@ -163,6 +167,7 @@ Page({
       this.setData({
         carts: carts
       });
+      // 重新获取总价
       this.getTotalPrice();
       //更新缓存值
       var TotalNumberGoods = wx.getStorageSync('TotalNumberGoods');
@@ -180,9 +185,7 @@ Page({
       TotalNumberGoods -= this.data.dnum;
       wx.setStorageSync('TotalNumberGoods', TotalNumberGoods);
 
-      this.setData({
-        carts: carts
-      });
+      this.setData({ carts: carts });
       if (!carts.length) {  // 如果购物车为空
         this.setData({
           hasList: false   //修改标识为false，显示购物车为空页面

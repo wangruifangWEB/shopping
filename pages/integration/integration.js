@@ -11,7 +11,8 @@ Page({
     fixbg: true,
     isTop: false,
     buyNum: 1,
-    classNum: true
+    classNum: true,
+    hiddenLoading:false
   },
   onLoad: function (options) {
     //将此商品id缓存
@@ -41,9 +42,11 @@ Page({
     }
   },
   callback(res) {
-    var goodsArray = res.data.data.goods[0];
-    WxParse.wxParse('article', 'html', goodsArray.content, this, 5);
-    this.setData({ goodsArray });
+    if(res.data){
+      var goodsArray = res.data.data.goods[0];
+      WxParse.wxParse('article', 'html', goodsArray.content, this, 5);
+      this.setData({ hiddenLoading:true, goodsArray });
+    }
   },
   //猜你喜欢
   likecallback(res) {

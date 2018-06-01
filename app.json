@@ -16,7 +16,6 @@
     "pages/login/log/log",
     "pages/coupon/coupon",
     "pages/login/psd/psd",
-    "pages/login/msgVail/msgVail",
     "pages/pay/payorders/pay-orders",
     "pages/find/shop/shop",
     "pages/find/news/news",

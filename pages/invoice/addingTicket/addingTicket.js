@@ -19,13 +19,13 @@ Page({
     var tel = userMsg.tel;
     var bank = userMsg.bank;
     var account = userMsg.account;
-    //获取用户输入信息
+    //判断用户输入值状态
     if (companyName == '' || identCode == '' || address == '' || bank == '' || account == '') {
-      //提示用户内容不能为空
       app.showModal('', '内容不能为空！');
+      return false;
     } else if ("" == register.trim(tel) || !(/^1[0-9]{10}$/.test(tel))) {
       register.showToast('手机号为空或格式不正确', 'none', 1000)
-      return;
+      return false;
     } else {
       var url = app.globalData.shopUrl + '/home/zpzz/index/ty/zpa/uid/' + this.data.uid + '/cn/' + companyName + '/nsr/' + identCode + '/ra/' + address + '/rt/' + tel + '/bk/' + bank + '/bkh/' + account;
       utils.formHttp(url, 'POST', 'application/x-www-form-urlencoded', this.callback);

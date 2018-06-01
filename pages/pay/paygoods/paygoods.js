@@ -8,7 +8,8 @@ Page({
     payPrice: 0,
     choicedType: '不开发票',
     noAddress: false,
-    hiddenAddress: true
+    hiddenAddress: true,
+    hiddenLoading:false
   },
   onLoad: function (options) {
     //获取缓存值
@@ -25,7 +26,7 @@ Page({
     if (choicedType) {
       this.setData({ choicedType });
     }
-    var addressId = wx.getStorageSync('addressId')
+    var addressId = wx.getStorageSync('addressId');
     if (addressId) {
       //获取账单信息
       this.modifyAddress();
@@ -58,23 +59,27 @@ Page({
   callback(res) {
     if (res.data) {
       var payGoodsUrl = app.globalData.shopUrl + '/home/order/index/ty/oo/uid/' + this.data.uid + '/gid/' + this.data.gid;
-      console.log(payGoodsUrl);
       utils.http(payGoodsUrl, this.payGoodscallback);
     }
   },
   payGoodscallback(res) {
-    //获取用户商品信息
-    let payGoods = res.data.data.ord,
+    if(res.data){
+      //获取用户商品信息
+      let payGoods = res.data.data.ord,
         totalPrice = this.data.totalPrice,
         payPrice = this.data.payPrice,
         couponPrice = this.data.couponPrice;
-        for (var i in payGoods.shop) {
-          totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
-          payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
-          couponPrice = totalPrice - payPrice;
-        }
-        payPrice = payPrice + Number(payGoods.yunfei);
-        this.setData({ payGoods, totalPrice, payPrice, couponPrice });
+
+      for (var i in payGoods.shop) {
+        totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
+        payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
+        couponPrice = totalPrice - payPrice;
+      }
+      payPrice = payPrice + Number(payGoods.yunfei);
+      this.setData({ hiddenLoading: true, payGoods, totalPrice, payPrice, couponPrice });
+    } else {
+      utils.showToast('网络错误,请重试!', 'none');
+    }
   },
   addresscallback(res) {
     if (res.data) {
@@ -109,19 +114,19 @@ Page({
     let userName, userTel, userSheng,
       userShi, userXian, userDizhi,
       hiddenAddress, noAddress;
-    //判定是否有收货地址
-    noAddress = false;
-    hiddenAddress = true;
-    this.setData({
-      noAddress,
-      hiddenAddress,
-      userName: address.name,
-      userTel: address.tel,
-      userSheng: address.sheng,
-      userShi: address.shi,
-      userXian: address.xian,
-      userDizhi: address.dizhi,
-    });
+      //判定是否有收货地址
+      noAddress = false;
+      hiddenAddress = true;
+      this.setData({
+        noAddress,
+        hiddenAddress,
+        userName: address.name,
+        userTel: address.tel,
+        userSheng: address.sheng,
+        userShi: address.shi,
+        userXian: address.xian,
+        userDizhi: address.dizhi,
+      });
   },
   //发票选择
   invoiceSelection(e) {

@@ -9,6 +9,7 @@ Page({
     m: 0//是否设置为默认地址
   },
   onLoad: function (options) {
+    //获取缓存uid
     var uid = wx.getStorageSync('uid');
     this.setData({ uid });
   },
@@ -31,20 +32,19 @@ Page({
     })
   },
   formSubmit: function (e) {
-    let userMsg = e.detail.value;
-    let n = userMsg.userName;
-    let t = userMsg.userTel;
-    let address = this.data.region;
-    let uid = this.data.uid;
-    let province = this.data.region[0];
-    let city = this.data.region[1];
-    let town = this.data.region[2];
-    let detailsAddr = userMsg.userDetailsAddress;
+    let userMsg = e.detail.value,
+      n = userMsg.userName,
+      t = userMsg.userTel,
+      address = this.data.region,
+      uid = this.data.uid,
+      province = this.data.region[0],
+      city = this.data.region[1],
+      town = this.data.region[2],
+      detailsAddr = userMsg.userDetailsAddress;
     //验证手机格式
     if (!(/^1[34578]\d{9}$/.test(userMsg.userTel))) {
       util.showToast('手机号格式不正确！', 'none');
        return false;
-    //填写信息项不能为空
     } else if (userMsg.userName == '' || userMsg.userTel == '' || address == '' || detailsAddr == '') {
       //提示用户内容不能为空
       util.showToast('错误提示', '内容不能为空！');
@@ -56,10 +56,8 @@ Page({
     }
   },
   callback(res) {
-    var requestStatus = res.data;
-    if (requestStatus) {
-      util.showToast('地址填写成功!', 'success');
-      wx.navigateBack({})
+    if (res.data) {
+      util.showModal('地址填写成功!', '')
     } else {
       util.showToast('网络错误,请重试!', 'error');
     }

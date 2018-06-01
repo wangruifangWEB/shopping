@@ -14,25 +14,24 @@ Page({
     this.setData({ uid, invoiceMsg, fid });
   },
   formSubmit: function (e) {
-    var userMsg = e.detail.value;
-    console.log(userMsg);
-    var companyName = userMsg.companyName;
-    var identCode = userMsg.identCode;
-    var address = userMsg.address;
-    var tel = userMsg.tel;
-    var bank = userMsg.bank;
-    var account = userMsg.account;
+    var userMsg = e.detail.value,
+     companyName = userMsg.companyName,
+     identCode = userMsg.identCode,
+     address = userMsg.address,
+     tel = userMsg.tel,
+     bank = userMsg.bank,
+     account = userMsg.account;
     this.setData({ companyName, identCode, address, tel, bank, account });
-    //获取用户输入信息
+
+    //判断用户输入信息
     if (companyName == '' || identCode == '' || address == '' || bank == '' || account == '') {
-      //提示用户内容不能为空
       app.showModal('', '内容不能为空！');
+      return false;
     } else if ("" == register.trim(tel) || !(/^1[0-9]{10}$/.test(tel))) {
       register.showToast('手机号为空或格式不正确', 'none', 1000)
-      return;
+      return false;
     } else {
       var url = app.globalData.shopUrl + '/home/zpzz/index/ty/zpu/uid/' + this.data.uid + '/cn/' + companyName + '/nsr/' + identCode + '/ra/' + address + '/rt/' + tel + '/bk/' + bank + '/bkh/' + account + '/fid/' + this.data.fid;
-      console.log(url);
       utils.formHttp(url, 'POST', 'application/x-www-form-urlencoded', this.callback);
     }
   },
@@ -57,7 +56,7 @@ Page({
         bankname: this.data.bank,
         bankaccount: this.data.account
       }
-      var invoiceMsg = wx.setStorageSync('invoiceMsg', invoiceMsg);
+      wx.setStorageSync('invoiceMsg', invoiceMsg);
       //返回上一个页面
       wx.navigateBack({});
     }

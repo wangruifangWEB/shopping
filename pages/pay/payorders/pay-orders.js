@@ -8,7 +8,8 @@ Page({
     payPrice: 0,
     choicedType: '不开发票',
     noAddress: false,
-    hiddenAddress: true
+    hiddenAddress: true,
+    hiddenLoading: false
   },
   onLoad: function (options) {
     //获取缓存值
@@ -48,7 +49,6 @@ Page({
     }
   },
   payMoneycallback(res) {
-    console.log(res);
     //取出支付所需变量
     let nonceStr = res.data.nonceStr,
         appId = res.data.appid,
@@ -58,21 +58,21 @@ Page({
         sign = res.data.signType,
         orderId=this.data.orderId,
         that=this;
-    //调用支付方法
-    wx.requestPayment({
-      timeStamp: timeStamp,
-      nonceStr: nonceStr,
-      package: pkg,
-      signType: sign,
-      paySign: paySign,
-      success: function (res) {
-        console.log(res);
-        //给后台返回支付成功结果，修改订单状态
-        that.changeOrderIdPay(orderId);
-      },
-      fail:function(res){
-        console.log(res);
-      }
+      //调用支付方法
+      wx.requestPayment({
+        timeStamp: timeStamp,
+        nonceStr: nonceStr,
+        package: pkg,
+        signType: sign,
+        paySign: paySign,
+        success: function (res) {
+          console.log(res);
+          //给后台返回支付成功结果，修改订单状态
+          that.changeOrderIdPay(orderId);
+        },
+        fail:function(res){
+          console.log(res);
+        }
     })
   },
   changeOrderIdPay (orderId) {
@@ -105,20 +105,24 @@ Page({
     }
   },
   payGoodscallback(res) {
-    console.log(res)
-    //获取用户商品信息
+    if(res.data){
+      //获取用户商品信息
     let payGoods = res.data.data.ord,
         totalPrice = this.data.totalPrice,
         payPrice = this.data.payPrice,
         couponPrice = this.data.couponPrice,
         orderId = payGoods.orderh;
-        for (var i in payGoods.shop) {
-          totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
-          payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
-          couponPrice = totalPrice - payPrice;
-        }
-        payPrice = payPrice + Number(payGoods.yunfei);
-        this.setData({ payGoods, totalPrice, payPrice, couponPrice, orderId });
+
+      for (var i in payGoods.shop) {
+        totalPrice = Number(payGoods.shop[i].yuanjia) * payGoods.num;
+        payPrice = Number(payGoods.shop[i].zhejia) * payGoods.num;
+        couponPrice = totalPrice - payPrice;
+      }
+      payPrice = payPrice + Number(payGoods.yunfei);
+      this.setData({ hiddenLoading:true, payGoods, totalPrice, payPrice, couponPrice, orderId });
+    } else {
+      utils.showToast('网络出错，请检查网络!', 'none');
+    }
   },
   addresscallback(res) {
     if (res.data) {

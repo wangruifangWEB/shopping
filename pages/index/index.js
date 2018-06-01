@@ -8,44 +8,7 @@ Page({
     noContent: false,
     hasContent: true,
     // isHidden:false,
-    imgDetails: [
-      {
-        id: 0,
-        url: '../find/news/newslist/newslist'
-      },
-      {
-        id: 1,
-        url: '../find/news/newslist/newslist'
-      },
-      {
-        id: 2,
-        url: '../find/news/newslist/newslist'
-      },
-      {
-        id: 3,
-        url: '../find/news/newslist/newslist'
-      },
-      {
-        id: 4,
-        url: '../admin/my/my'
-      },
-      {
-        id: 5,
-        url: '../admin/my/my'
-      },
-      {
-        id: 6,
-        url: '../admin/my/my'
-      },
-      {
-        id: 7,
-        url: '../admin/my/my'
-      },
-      {
-        id: 8,
-        url: '../admin/my/my'
-      }
-    ]
+    imgDetails: []
   },
   onLoad: function (options) {
     //首页图片(一图)
@@ -97,9 +60,8 @@ Page({
     if (res.data) {
       var datas = res.data.data.new;
       let noContent = this.data.noContent,
-        hasContent = this.data.hasContent;
-      this.setData({ noContent: false, hasContent: true });
-      this.setData({ detailsList: datas });
+          hasContent = this.data.hasContent;
+      this.setData({ noContent: false, hasContent: true, detailsList: datas });
     }
   },
   onBlur(event) {

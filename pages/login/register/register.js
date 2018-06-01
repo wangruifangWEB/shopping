@@ -25,7 +25,6 @@ Page({
     //保证用户在输入有效电话后跟后台请求验证码
     if (this.data.phoneNumber!==undefined){
       var yzmUrl = 'https://mypro.51cmo.net/Home/duanxin/senddx/tel/' + this.data.phoneNumber;
-      console.log(yzmUrl);
       utils.http(yzmUrl, this.yzmcallback);
     }else{
       app.showModal('请先填写有效的手机号码!', '');
@@ -64,37 +63,36 @@ Page({
   },
   formSubmit(e) {
     //获取用户输入值
-    let password = e.detail.value.password;
-    let phoneNumber = e.detail.value.phoneNumber;
-    let subPassword = e.detail.value.subPassword;
-    let yzm = e.detail.value.yzm;
+    let password = e.detail.value.password,
+     phoneNumber = e.detail.value.phoneNumber,
+     subPassword = e.detail.value.subPassword,
+     yzm = e.detail.value.yzm;
 
     // 判断手机号是否为空
     if ("" == register.trim(phoneNumber) || !(/^1[0-9]{10}$/.test(phoneNumber))) {
       register.showToast('手机号为空或格式不正确', 'none', 1000)
-      return;
+      return false;
     }
     // 判断密码是否为空  
     if ("" == register.trim(password) || !(/^[0-9A-Za-z]{6,}$/.test(password))) {
       register.showToast('密码为空或格式不正确', 'none', 1000)
-      return;
+      return false;
     }
 
     // 判断验证码是否为空
     if ("" == register.trim(yzm)) {
       register.showToast('验证码不得为空', 'none', 1000)
-      return;
+      return false;
     }
     // 两个密码必须一致  
     if (subPassword != password) {
       register.showToast('两次密码必须一致', 'none', 1000)
-      return;
+      return false;
     }
     //所有数据有效则向后台传值
     //判断当前用户返回值是否为数值
     if (parseFloat(this.data.vailNum).toString() !== 'NaN') {
       let registerUrl = app.globalData.shopUrl + '/Home/duanxin/reg/tel/' + phoneNumber + '/code/' + yzm + '/pass/' + subPassword + '/yzm/' + this.data.vailNum;
-      console.log(registerUrl);
 
       var method = 'GET';
       var contentType = "application/x-www-form-urlencoded";

@@ -11,7 +11,7 @@ Page({
     ],
     currentIdx: '',
     phoneNumber: '52342947',
-    userImgUrl:false
+    userImgUrl: false
   },
   onLoad: function (options) { 
     var that=this;

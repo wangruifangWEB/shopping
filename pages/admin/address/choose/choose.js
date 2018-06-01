@@ -29,6 +29,7 @@ Page({
     //修改默认地址
     var defaultAddrChange = app.globalData.shopUrl + '/home/address/index/ty/u/uid/' + this.data.uid + '/aid/' + did + '/n/' + n + '/s/' + s + '/ss/' + ss + '/x/' + x + '/d/' + d + '/t/' + t + '/m/1';
     utils.http(defaultAddrChange, this.defaultAddrChangecallback);
+
     let addressMsg = {
       name: n,
       tel: t,
@@ -66,13 +67,12 @@ Page({
       url: '../../address/add/add'
     })
   },
-  //删除事件
+  //删除地址
   delItem: function (e) {
     var aid = e.currentTarget.dataset.idx;
     var currentTarget = e.currentTarget.dataset.index;
     this.setData({ aid, currentTarget });
     var removeUrl = app.globalData.shopUrl + '/home/address/index/ty/d/uid/' + this.data.uid + '/aid/' + aid;
-    console.log(removeUrl);
     utils.http(removeUrl, this.removeItemcallback);
   },
   removeItemcallback(res) {

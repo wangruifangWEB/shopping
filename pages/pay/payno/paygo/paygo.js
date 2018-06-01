@@ -12,7 +12,6 @@ Page({
     var openid = wx.getStorageSync('openid');
     this.setData({ uid, oid, openid});
     var url = app.globalData.shopUrl + '/home/dfk/index/ty/oo/uid/' + uid + '/oid/' + oid;
-    console.log(url);
     util.http(url, this.callback);
   },
   onShow(){
@@ -26,11 +25,9 @@ Page({
   onPay() {
     //调取支付弹框
     var payMoneyUrl = app.globalData.shopUrl + '/home/wxzf/index/openid/' + this.data.openid + '/oid/' + this.data.orderId + '/free/' + this.data.payPrice;
-    console.log(payMoneyUrl);
     util.http(payMoneyUrl, this.payMoneycallback);
   },
   payMoneycallback(res) {
-    console.log(res);
     //取出支付所需变量
     let nonceStr = res.data.nonceStr,
         appId = res.data.appid,
@@ -40,27 +37,26 @@ Page({
         sign = res.data.signType,
         orderId = this.data.orderId,
         that = this;
-    //调用支付方法
-    wx.requestPayment({
-      timeStamp: timeStamp,
-      nonceStr: nonceStr,
-      package: pkg,
-      signType: sign,
-      paySign: paySign,
-      success: function (res) {
-        console.log(res);
-        //给后台返回支付成功结果，修改订单状态
-        that.changeOrderIdPay(orderId);
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    })
+      //调用支付方法
+      wx.requestPayment({
+        timeStamp: timeStamp,
+        nonceStr: nonceStr,
+        package: pkg,
+        signType: sign,
+        paySign: paySign,
+        success: function (res) {
+          console.log(res);
+          //给后台返回支付成功结果，修改订单状态
+          that.changeOrderIdPay(orderId);
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+     })
   },
   changeOrderIdPay(orderId) {
     //调取支付弹框
     var payedUrl = app.globalData.shopUrl + "/home/wxzf/wxdd/oid/" + orderId + '/wc/1';
-    console.log(payedUrl)
     utils.http(payedUrl, this.payedcallback);
   },
   payedcallback(res) {
@@ -74,14 +70,15 @@ Page({
     if(res.data){
       //获取用户商品信息
       let payGoods = res.data.data.ord,
-        totalPrice = this.data.totalPrice,
-        payPrice = this.data.payPrice,
-        couponPrice = this.data.couponPrice,
-        orderId = payGoods.orderh;
-      totalPrice = Number(payGoods.yuanjia) * payGoods.num;
-      payPrice = Number(payGoods.zhejia) * payGoods.num;
-      couponPrice = totalPrice - payPrice;
-      payPrice = payPrice + Number(payGoods.yunfei);
+          totalPrice = this.data.totalPrice,
+          payPrice = this.data.payPrice,
+          couponPrice = this.data.couponPrice,
+          orderId = payGoods.orderh;
+          totalPrice = Number(payGoods.yuanjia) * payGoods.num;
+          payPrice = Number(payGoods.zhejia) * payGoods.num;
+          couponPrice = totalPrice - payPrice;
+          payPrice = payPrice + Number(payGoods.yunfei);
+         
       this.setData({ hiddenLoading:true,payGoods, totalPrice, payPrice, couponPrice, orderId });
     } else {
       app.showToast('网络错误，请重试！', 'error');

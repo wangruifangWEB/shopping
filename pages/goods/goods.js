@@ -12,15 +12,16 @@ Page({
     isTop: false,
     buyNum: 1,
     classNum: true,
+    hiddenLoading: false,
     bannerList:[
       {
-        'picy':'../../images/pay-list.png'
+        'picy':'https://mypro.51cmo.net/Public/uploads/20180531/1527731565593365.png'
       },
       {
-        'picy': '../../images/qiandao2.png'
+        'picy': 'https://mypro.51cmo.net/Public/uploads/20180531/1527731565593365.png'
       },
       {
-        'picy': '../../images/pay-list.png'
+        'picy': 'https://mypro.51cmo.net/Public/uploads/20180531/1527731565593365.png'
       }
     ]
   },
@@ -133,9 +134,13 @@ Page({
     })
   },
   callback(res) {
-    var goodsArray = res.data.data.goods[0];
-    WxParse.wxParse('article', 'html', goodsArray.content, this, 5);
-    this.setData({ goodsArray });
+    if(res.data){
+      var goodsArray = res.data.data.goods[0];
+      WxParse.wxParse('article', 'html', goodsArray.content, this, 5);
+      this.setData({ hiddenLoading:true, goodsArray });
+    }else{
+      utils.showToast('网络出错，请检查网络!', 'none');
+    }
   },
   addGoodscallback(res) {
     if (res.data) {

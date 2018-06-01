@@ -140,4 +140,7 @@
       <button data-aid="{{goodsArray.id}}" bindtap="submission">确定</button>
     </view>
   </view>
+
+  <!--正在加载 -->
+  <loading hidden="{{hiddenLoading}}">正在加载</loading>
 </view>

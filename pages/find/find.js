@@ -2,16 +2,7 @@ var app = getApp();
 var utils = require('../../utils/util.js');
 Page({
   data: {
-    list: [
-      {
-        id: 0,
-        img: '/images/8.png'
-      },
-      {
-        id: 1,
-        img: '/images/8.png'
-      }
-    ]
+    list: []
   },
   onLoad: function (options) {
     //轮播图
