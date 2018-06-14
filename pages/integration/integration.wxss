@@ -1,13 +1,31 @@
 @import "../goods/goods.wxss";
 
-.buy {
-  width: 100%;
+ .buy {
+  width: 80%;
 }
 
-.goods-details2 .img {
-  justify-content: flex-start;
+.rule {
+  width:30%; 
+  float:left; 
+  display: block;
+  border-radius: 20rpx;
+  border:1px solid #eee;
+  margin:20rpx 10rpx;
+  text-align: center;
+  font-size: 26rpx;
+}
+.rule text{
+  margin-top:8rpx;
 }
 
-.goods-details2 .img view {
-  margin-right: 15rpx;
+.red{
+  font-size: 14px;
+}
+
+.active{
+  color:#ff5b62;
+}
+
+.price{
+  margin-bottom: 15rpx;
 }

@@ -1,0 +1,180 @@
+Page {
+  background-color: #fff;
+}
+
+.container {
+  padding: 0 27rpx;
+  font-family: '微软雅黑';
+}
+
+.secondKillList {
+  display: flex;
+}
+
+.secondKillItem {
+  border-bottom: 1px solid #d7d7d7;
+  padding: 20rpx 0;
+}
+
+.secondKillItem .shopImg {
+  width: 250rpx;
+  height: 250rpx;
+}
+
+.secondKillItem .shopImg image {
+  max-width: 250rpx;
+  max-height: 250rpx;
+}
+
+.secondKillItem .title {
+  font-size: 26rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.secondKillItem, .secondKillItem .shopImg {
+  -webkit-display: flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.secondRt {
+  width: 415rpx;
+  float: left;
+  margin-left: 20rpx;
+}
+
+.secondBg {
+  color: #fff;
+  width: 98rpx;
+  height: 39rpx;
+  line-height: 39rpx;
+  font-size: 24rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  margin: 10rpx 3rpx 0 0;
+  background-color: #f00;
+  display: inline-block;
+}
+
+.percentage {
+  width: 168rpx;
+  height: 22.5rpx;
+  line-height: 22.5rpx;
+  float: left;
+  margin-top: 20rpx;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.secondProgress {
+  overflow: hidden;
+  display: flex;
+}
+
+.secondProgress text {
+  color: #fff;
+  position: relative;
+  left: -105rpx;
+  top: 15rpx;
+  font-size: 24rpx;
+  text-align: center;
+  display: inline-block;
+}
+
+.secondProgress button {
+  color: #fff;
+  width: 157rpx;
+  height: 50rpx;
+  float: right;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  background-color: #f00;
+}
+
+.coutDownBox text {
+  color: #fff;
+  height: 35rpx;
+  line-height: 35rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  display: inline-block;
+  text-align: center;
+  padding:3rpx 6rpx;
+}
+
+.coutDownBox .noBg {
+  width: 20.5rpx;
+  background-color: #fff;
+}
+
+.coutDownTime text {
+  background-color: #ff5b62;
+}
+
+.coutDownEnd text {
+  background-color: #999;
+}
+
+.coutDownTime .noBg {
+  color: #ff5b62;
+}
+
+.coutDownEnd .noBg {
+  color: #999;
+}
+
+.secondPrice {
+  color: #ff5b62;
+  margin-right: 12rpx;
+}
+
+.yuanjia {
+  color: #999;
+  font-size: 26rpx;
+  text-decoration: line-through;
+}
+
+/*三种状态不同背景 */
+
+.end {
+  color:#fff !important;
+  background-color: #999 !important;
+}
+
+.progress {
+  background-color: #ff5b62;
+}
+
+.tui-countdown-content {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: #fff;
+  margin-top: 15px;
+  padding: 0 15px;
+  font-size: 18px;
+}
+
+.tui-conutdown-box {
+  display: inline-block;
+  height: 26px;
+  width: 26px;
+  line-height: 26px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  margin: 0 5px;
+}
+
+.tui-countdown-bg {
+  background-color: #df0101;
+}

@@ -1,19 +1,18 @@
-<view class="register">
-  <form>
-    <block wx:for="{{address}}" wx:key="">
-      <view class="address-box">
-        <view class="address">
+<view>
+  <view class="register">
+    <view class="address-box">
+      <view class="address touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{address}}" wx:key="">
+        <view class="content">
           <image bindtap="onagree" mode='widthFix' data-idx="{{item.id}}" data-id="{{index}}" src="{{ currentTab == index ?'/images/cart/circle@selected.png':'/images/cart/circle@noselected.png'}}"></image>
           <view>
             <text>{{item.name}}，{{item.tel}}</text>
             <text>{{item.sheng}}{{item.shi}}{{item.xian}}{{item.dizhi}}</text>
           </view>
+          <image mode='widthFix' src="/images/icon/edit-address.png" data-idx="{{item.id}}" bindtap="modifyAddress" class="modifyImg"></image>
         </view>
-        <image mode='widthFix' src="/images/icon/edit-address.png" data-idx="{{item.id}}" bindtap="modifyAddress"></image>
-        <!--这里是左滑按钮部分----start-->
-        <view data-idx="{{item.id}}" data-index="{{index}}" bindtap = "delItem" class="inner del">删除</view> 
+        <view class="del" bindtap="del" data-index="{{index}}" data-idx="{{item.id}}">删除</view>
       </view>
-    </block>
-    <button class="btn" formType="submit" bindtap="addAddr">添加地址</button>
-  </form>
+    </view>
+  </view>
+  <button class="btn" formType="submit" bindtap="addAddr">添加新地址</button>
 </view>

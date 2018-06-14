@@ -1,0 +1,24 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="title">
+      <image src="/images/icon/import.png"></image>
+      <text>标题：</text>
+      <input name="title" value="{{details.title}}"></input>
+    </view>
+
+    <view class="title details">
+      <image src="/images/icon/import.png"></image>
+      <text>描述：</text>
+      <textarea name="desc" value="{{details.desc}}"></textarea>
+    </view>
+
+    <view class="title content">
+      <image src="/images/icon/import.png"></image>
+      <text>内容：</text>
+      <textarea name="content" value="{{details.content}}"></textarea>
+    </view>
+
+    <button class="release" formType="submit">确认修改</button>
+  </form>
+  <button class="release del" bindtap="del" data-idx="{{details.id}}">删除文章</button>
+</view>

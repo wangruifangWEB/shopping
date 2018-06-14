@@ -38,7 +38,7 @@
   <image class="pay-line" src="/images/pay/pay-line.png"></image>
   <view class="pay-box">
     <view class="pay-list">
-      <image mode="widthFix" src="{{payGoods.pics}}"></image>
+      <image mode="widthFix" src="{{payGoods.pics[0]}}"></image>
       <view>
         <text class="title">{{payGoods.gname}}</text>
         <!-- <text class="format">{{item.rule}}</text> -->

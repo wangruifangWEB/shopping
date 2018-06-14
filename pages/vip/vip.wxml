@@ -9,7 +9,7 @@
         <image class="vip-img" mode="widthFix" src="/images/vip/vip.png"></image>
         <view class="user" wx:if="{{uid}}">
           <view class="name">
-            <open-data type="userNickName" class="nickName"></open-data>   
+            <open-data type="userNickName" class="nickName"></open-data>
             <text>{{userMsg.vip?'正式会员':'临时会员'}}</text>
           </view>
           <text class="id">
@@ -29,9 +29,13 @@
 
     <view class="vip-bottom">
       <view class="vip-bottom-text">
-        <text>每年最低省180元</text>
-        <text>购物累计积分，直接兑换礼品</text>
-        <text>每月享受不同的专属优惠活动</text>
+        <text>· 每年最低</text>
+        <text class="red">省180元\n</text>
+        <text>· 购物累计</text>
+        <text class="red">积分</text>
+        <text>,直接兑换礼品\n</text>
+        <text>· 每月享受不同的</text>
+        <text class="red">专属优惠活动</text>
       </view>
     </view>
   </view>
@@ -39,17 +43,17 @@
   <view class="vip-card-bottom">
     <view class="coupon">
       <view>
-        <image mode="widthFix" src="/images/vip/coupon1.png" bindtap=""></image>
+        <image mode="widthFix" src="/images/vip/coupon1.png"></image>
         <text>会员特价</text>
       </view>
       <view class="coupon-line">|</view>
-      <view>
-        <image mode="widthFix" src="/images/vip/coupon2.png" catchtap='coupon'></image>
+      <view catchtap='coupon'>
+        <image mode="widthFix" src="/images/vip/coupon2.png"></image>
         <text>优惠券</text>
       </view>
       <view class="coupon-line">|</view>
-      <view>
-        <image mode="widthFix" src="/images/vip/coupon3.png" catchtap='shop'></image>
+      <view catchtap='shop'>
+        <image mode="widthFix" src="/images/vip/coupon3.png"></image>
         <text>积分购物</text>
       </view>
     </view>
@@ -59,9 +63,32 @@
     <view class="vip-swiper">
       <template is="swiper" data="{{imgSrc}}" />
     </view>
+    <!--秒杀-->
+    <view class="secondContainer" bindtap='secondKillShop'>
+      <view class="secondtitle">
+        <image src="../../images/icon/second_kill.png" mode="widthFix" class="secondImg"></image>
+        <view>
+          <text>今天你最大！</text>
+          <image src="../../images/icon/second_more.png" mode="widthFix" class="more"></image>
+        </view>
+      </view>
+
+      <view class="secondKill">
+        <block wx:for="{{secondShop}}" wx:key="">
+          <view class="secondItem" data-idx="{{item.gid}}">
+            <view>
+              <image src="{{item.picy}}" mode="widthFix"></image>
+            </view>
+            <text>{{item.gname}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+
     <view class="goods-box">
-     <view wx:if="{{noContent}}" class="fontShow">没有关键词相关内容！</view>
-      <block wx:for="{{listGoods}}" wx:key="*this" wx:if="{{hasContent}}">
+      <view wx:if="{{noContent}}" class="fontShow">没有关键词相关内容！</view>
+      <block wx:for="{{listGoods}}" wx:key="" wx:if="{{hasContent}}">
         <view class="goods-list" data-idx="{{item.id}}" bindtap='onOneShop'>
           <image src="{{item.picy}}"></image>
           <text>{{item.gname}}</text>

@@ -20,7 +20,7 @@ page {
 
 .news-image {
   width: 90%;
-  margin: 0 auto;
+  margin:25rpx auto;
   margin-bottom: 28rpx;
   box-sizing: border-box;
 }

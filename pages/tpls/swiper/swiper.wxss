@@ -4,7 +4,6 @@
 }
 .swiper{
   height: 180px; 
-  margin-bottom: 28rpx;
 }
 
 .swiper .wx-swiper-dot-active{

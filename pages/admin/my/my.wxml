@@ -1,7 +1,7 @@
 <import src="/pages/tpls/search/search.wxml" />
 <view class="container">
   <view class="my">
-  <!--根据用户是否登录做出显示效果  -->
+    <!--根据用户是否登录做出显示效果  -->
     <open-data type="userAvatarUrl" wx:if="{{userImgUrl}}" class="my-photo userinfo-avatar"></open-data>
     <image wx:else class="my-photo"></image>
     <image class="smile" mode="widthFix" bindtap="onSignIn" src="/images/vip/vip-smile.png"></image>
@@ -34,7 +34,7 @@
       </view>
     </block>
   </view>
-
+  
   <view class="my-address" bindtap='onAddress'>
     <image mode="widthFix" src="/images/my/5.png"></image>
     <text>收货地址</text>
@@ -52,6 +52,10 @@
     <view class="my-address" bindtap='onInvoice'>
       <image mode="widthFix" src="/images/my/8.png"></image>
       <text>增票资质</text>
+    </view>
+    <view class="my-address" bindtap='onRelease'>
+      <image mode="widthFix" src="/images/my/10.png"></image>
+      <text>我的发布</text>
     </view>
   </view>
 

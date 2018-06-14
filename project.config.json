@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 22,
 			"list": [
 				{
 					"id": 0,
@@ -168,6 +168,54 @@
 					"id": -1,
 					"name": "会员专区",
 					"pathName": "pages/vip/vip",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "BD展示",
+					"pathName": "pages/find/bd/bd",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "新文章发布",
+					"pathName": "pages/find/newArticle/newArticle",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "已发布文章修改",
+					"pathName": "pages/find/newArticleModify/newArticleModify",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "BD详情展示",
+					"pathName": "pages/find/bdDetails/bdDetails",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "限时秒杀",
+					"pathName": "pages/find/secondKill/secondKill",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "秒杀详情",
+					"pathName": "pages/find/secondKillDetails/secondKillDetails",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "秒杀详情",
+					"pathName": "pages/find/secondKillDetails/secondKillDetails",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "积分列表",
+					"pathName": "pages/find/shop/shop",
 					"query": ""
 				}
 			]

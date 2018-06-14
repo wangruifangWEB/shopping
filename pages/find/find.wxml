@@ -15,8 +15,8 @@
         <view class="news" bindtap="onNews">
           <image mode="widthFix" src="/images/6.png"></image>
           <view class="news-text">
-            <text>新闻资讯</text>
-            <text>了解更多资讯详情</text>
+            <text>BD展示</text>
+            <text>了解更多BD详情</text>
           </view>
 
         </view>
@@ -26,7 +26,6 @@
             <text>热门活动</text>
             <text>了解更多资讯详情</text>
           </view>
-
         </view>
 
       </view>

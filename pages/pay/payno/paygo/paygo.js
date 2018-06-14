@@ -1,5 +1,5 @@
 var app = getApp();
-var util = require('../../../../utils/util.js');
+var utils = require('../../../../utils/util.js');
 Page({
   data: {
     choicedType: '不开发票',
@@ -10,11 +10,12 @@ Page({
     var oid = options.oid;
     //获取openid
     var openid = wx.getStorageSync('openid');
-    this.setData({ uid, oid, openid});
-    var url = app.globalData.shopUrl + '/home/dfk/index/ty/oo/uid/' + uid + '/oid/' + oid;
-    util.http(url, this.callback);
+    this.setData({ uid, oid, openid });
   },
-  onShow(){
+  onShow() {
+    //获取页面内容
+    var url = app.globalData.shopUrl + '/home/dfk/index/ty/oo/uid/' + this.data.uid + '/oid/' + this.data.oid;
+    utils.http(url, this.callback);
     //获取发票状态值
     var choicedType = wx.getStorageSync('choicedType');
     if (choicedType) {
@@ -25,34 +26,33 @@ Page({
   onPay() {
     //调取支付弹框
     var payMoneyUrl = app.globalData.shopUrl + '/home/wxzf/index/openid/' + this.data.openid + '/oid/' + this.data.orderId + '/free/' + this.data.payPrice;
-    util.http(payMoneyUrl, this.payMoneycallback);
+    utils.http(payMoneyUrl, this.payMoneycallback);
   },
   payMoneycallback(res) {
     //取出支付所需变量
     let nonceStr = res.data.nonceStr,
-        appId = res.data.appid,
-        pkg = res.data.package,
-        timeStamp = res.data.timeStamp,
-        paySign = res.data.paySign,
-        sign = res.data.signType,
-        orderId = this.data.orderId,
-        that = this;
-      //调用支付方法
-      wx.requestPayment({
-        timeStamp: timeStamp,
-        nonceStr: nonceStr,
-        package: pkg,
-        signType: sign,
-        paySign: paySign,
-        success: function (res) {
-          console.log(res);
-          //给后台返回支付成功结果，修改订单状态
-          that.changeOrderIdPay(orderId);
-        },
-        fail: function (res) {
-          console.log(res);
-        }
-     })
+      appId = res.data.appid,
+      pkg = res.data.package,
+      timeStamp = res.data.timeStamp,
+      paySign = res.data.paySign,
+      sign = res.data.signType,
+      orderId = this.data.orderId,
+      that = this;
+    //调用支付方法
+    wx.requestPayment({
+      timeStamp: timeStamp,
+      nonceStr: nonceStr,
+      package: pkg,
+      signType: sign,
+      paySign: paySign,
+      success: function (res) {
+        //给后台返回支付成功结果，修改订单状态
+        that.changeOrderIdPay(orderId);
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
   },
   changeOrderIdPay(orderId) {
     //调取支付弹框
@@ -60,26 +60,27 @@ Page({
     utils.http(payedUrl, this.payedcallback);
   },
   payedcallback(res) {
-   if(res.data){
-     utils.showTitle('支付成功!', '点击确定, 去待发货中查看', '../../pay/pays/pays?currentIdx=1');
-   } else {
-     app.showToast('网络错误，请重试！', 'error');
-   }
+    if (res.data) {
+      utils.showTitle('支付成功!', '点击确定, 去待发货中查看！', '../../../pay/pays/pays?currentIdx=1');
+    } else {
+      app.showToast('网络错误，请重试！', 'error');
+    }
   },
   callback(res) {
-    if(res.data){
+    console.log(res);
+    if (res.data) {
       //获取用户商品信息
       let payGoods = res.data.data.ord,
-          totalPrice = this.data.totalPrice,
-          payPrice = this.data.payPrice,
-          couponPrice = this.data.couponPrice,
-          orderId = payGoods.orderh;
-          totalPrice = Number(payGoods.yuanjia) * payGoods.num;
-          payPrice = Number(payGoods.zhejia) * payGoods.num;
-          couponPrice = totalPrice - payPrice;
-          payPrice = payPrice + Number(payGoods.yunfei);
-         
-      this.setData({ hiddenLoading:true,payGoods, totalPrice, payPrice, couponPrice, orderId });
+        totalPrice = this.data.totalPrice,
+        payPrice = this.data.payPrice,
+        couponPrice = this.data.couponPrice,
+        orderId = payGoods.orderh;
+      totalPrice = Number(payGoods.yuanjia) * payGoods.num;
+      payPrice = Number(payGoods.zhejia) * payGoods.num;
+      couponPrice = totalPrice - payPrice;
+      payPrice = payPrice + Number(payGoods.yunfei);
+
+      this.setData({ hiddenLoading: true, payGoods, totalPrice, payPrice, couponPrice, orderId });
     } else {
       app.showToast('网络错误，请重试！', 'error');
     }

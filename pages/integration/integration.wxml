@@ -2,14 +2,8 @@
 <view class="container">
   <view class="swiper-box">
     <swiper class="swiper" autoplay="true" circular="true" bindchange="changeAutoplay">
-      <swiper-item class="banner-item">
-        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
-      </swiper-item>
-      <swiper-item class="banner-item">
-        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
-      </swiper-item>
-      <swiper-item class="banner-item">
-        <image mode="widthFix" class="item-image" src="{{goodsArray.picy}}"></image>
+      <swiper-item class="banner-item" wx:for="{{goodsArray.picy}}" wx:key="">
+        <image mode="widthFix" class="item-image" src="{{item}}"></image>
       </swiper-item>
     </swiper>
     <view class="swiper-text">
@@ -26,8 +20,9 @@
       </view>
       <view class="h2">{{goodsArray.desc}}</view>
       <view class="price">
-        <text class="red">￥{{goodsArray.zhejia}}</text>
-        <text class="underline">￥{{goodsArray.yuanjia}}</text>
+        <text class="red">
+           {{goodsArray.inte}}积分/{{goodsArray.jjq}}积分+￥{{goodsArray.jjq_q}}/￥{{goodsArray.zhejia}}
+        </text>
       </view>
       <view class="goods-yes">
         <view>
@@ -90,8 +85,34 @@
   </view>
 
   <view class="goods-bottom">
-    <view class="buy" data-idx='{{goodsArray.id}}' bindtap='submission'>
-      <text>去兑换</text>
+    <view class="kf">
+      <image mode='widthFix' src="/images/icon/kf.png"></image>
+      <text>客服</text>
+      <button class="kf_button" open-type="contact" session-from="weapp">联系</button>
+    </view>
+    <view class="buy" bindtap='onBuyNow'>
+      <text>立即兑换</text>
+    </view>
+  </view>
+
+  <view hidden='{{fixbg}}' class="buy-now">
+    <view class="absolute {{isTop?'animate-top':''}}">
+      <view class="relative">
+        <image mode='widthFix' class="x-image" src="/images/icon/xx.png" bindtap='onX'></image>
+
+        <view class="buy-image">
+          <view class="image-small">
+            <image src="{{goodsArray.picy[0]}}"></image>
+          </view>
+        </view>
+        <view class="number">
+          <text>兑换方式</text>
+          <view wx:for="{{inter}}" wx:key='*this' class="rule">
+            <text class="{{currentTab==index ? 'active' : ''}}" data-id='{{index}}' bindtap='choicedInter'>{{item}}</text>
+          </view>
+        </view>
+      </view>
+      <button data-idx='{{goodsArray.id}}' bindtap='submission'>确定</button>
     </view>
   </view>
 

@@ -1,0 +1,30 @@
+<import src="../../tpls/search/search.wxml" />
+
+<view class="container">
+  <!-- <template data="{{searchShow,historyArray,searchValue}}" is="search" /> -->
+
+  <view class='search-box'>
+    <view class='search'>
+      <icon type='search' class='search-img' size='15' color='#405f80'></icon>
+      <input type='text' name="searchVal" placeholder='输入你要搜索的内容' class='placeholder' value='{{searchVal}}' bindinput='userInputValue' onblur="search" />     
+    </view>
+  </view>
+
+  <!--这里是左滑按钮部分----start-->
+  <view class="bdList">
+    <view class="touch-item" wx:for="{{bdArray}}" wx:key="">
+      <view class="content">
+        <view class="bdLeft">
+          <view class='bdLeft_lf' bindtap="bdDetails" data-idx="{{item.id}}">
+            <text class="title">{{item.title}}\n</text>
+            <text class="details">{{item.desc}}\n</text>
+            <image src="/images/icon/time.png" mode='widthFix' class="timeImg"></image>
+            <text class="date">{{item.addtime}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--发表文章-->
+  <button class="release" bindtap='releaseNews'>发布新文章</button>
+</view>

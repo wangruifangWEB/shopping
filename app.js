@@ -31,9 +31,7 @@ App({
   },
   globalData: {
     shopUrl: 'https://mypro.51cmo.net',
-    // shopUrl:'http://192.168.11.240/Atdzx/xcx',
-    appid: 'wx032a4e456c744881',
-    secret: 'f9c3ffd0d2cbcf1593576e3c8a38de5b',
+    //shopUrl:'http://192.168.11.240/Atdzx/xcx',
     userInfo: null
   },
   //设置当前显示标题

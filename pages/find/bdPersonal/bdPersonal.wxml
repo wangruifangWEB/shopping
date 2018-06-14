@@ -1,0 +1,26 @@
+<import src="../../tpls/search/search.wxml" />
+
+<view class="container">
+  <template data="{{searchShow,historyArray,searchValue}}" is="search" />
+  <!--这里是左滑按钮部分----start-->
+  <view class="bdList">
+    <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{bdArray}}" wx:key="">
+      <view class="content">
+        <view class="bdLeft">
+          <view class='bdLeft_lf' bindtap="bdDetails" data-idx="{{item.id}}">
+            <text class="title">{{item.title}}\n</text>
+            <text class="details">{{item.desc}}\n</text>
+            <image src="/images/icon/time.png" mode='widthFix' class="timeImg"></image>
+            <text class="date">{{item.addtime}}</text>
+          </view>
+          <view class="bdRight_rt">
+            <image src="/images/icon/edit-address.png" mode="widthFix" data-idx="{{item.id}}" bindtap="bdWrites"></image>
+          </view>
+        </view>
+      </view>
+      <view class="del" bindtap="del" data-index="{{index}}" data-idx="{{item.id}}">删除</view>
+    </view>
+  </view>
+  <!--发表文章-->
+  <button class="release" bindtap='releaseNews'>发布新文章</button>
+</view>

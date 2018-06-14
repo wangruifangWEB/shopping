@@ -12,6 +12,7 @@ Page({
     util.http(url, this.callback);
   },
   callback(res) {
+    console.log(res);
     var activeList = res.data.data.new[0];
     WxParse.wxParse('article', 'html', activeList.content, this, 5);
     this.setData({

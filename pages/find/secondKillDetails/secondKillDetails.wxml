@@ -1,0 +1,160 @@
+<import src="../../../wxParse/wxParse.wxml" />
+<view class="container">
+  <view class="swiper-box">
+    <swiper class="swiper" autoplay="true" circular="true" bindchange="changeAutoplay">
+      <block wx:for="{{goodsArray.picy}}" wx:key="">
+        <swiper-item class="banner-item">
+          <image mode="widthFix" class="item-image" src="{{item}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="swiper-text">
+      <text>{{current+1}}</text>
+      <text>/</text>
+      <text>3</text>
+    </view>
+  </view>
+
+  <view class="goods-title">
+    <view class="goods-secondKill">
+
+      <view class="goods-lf">
+        <text class="goods-lfBg">限时购</text>
+        <text class="white">￥{{goodsArray.miaojia}}</text>
+        <text class="underline">￥{{goodsArray.yuanjia}}</text>
+      </view>
+
+      <view class="goods-rt">
+        <text class="countDown"> 距离结束还有：\n</text>
+        <view class="coutDownTime">
+          <text>{{goodsArray.obj.day}}</text>
+          <text class="noBg">天</text>
+          <text>{{goodsArray.obj.hou}}</text>
+          <text class="noBg">时</text>
+          <text>{{goodsArray.obj.min}}</text>
+          <text class="noBg">分</text>
+          <text>{{goodsArray.obj.sec}}</text>
+          <text class="noBg">秒</text>
+        </view>
+
+      </view>
+    </view>
+
+    <view class="goods-box">
+      <text class="h1">{{goodsArray.gname}}</text>
+      <view class="h2">{{goodsArray.desc}}</view>
+      <view class="goods-yes">
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>正品保证</text>
+        </view>
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>满¥68包邮</text>
+        </view>
+        <view>
+          <image mode='widthFix' src="/images/icon/yes.png"></image>
+          <text>7天退货</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 优惠 -->
+  <view class="favourable">
+    <view>
+      <text>会员特权</text>
+      <text>每月一享满150立减20元</text>
+    </view>
+  </view>
+  <view class="favourable">
+    <view>
+      <text>全场包邮</text>
+      <text>实付满199包邮，偏远地区除外</text>
+    </view>
+  </view>
+  <view class="favourable">
+    <view>
+      <text>会员卡激活后</text>
+      <text>次单每150减20起，最高减少60元</text>
+    </view>
+  </view>
+  <view class="goods-details">
+    <view class="details-title">
+      <text></text>
+      <text>商品详情</text>
+    </view>
+    <view class="text">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </view>
+
+  <view class="goods-details goods-details2">
+    <view class="details-title">
+      <text></text>
+      <text>猜你喜欢</text>
+    </view>
+    <view class="img">
+      <view wx:for="{{likeArray}}" wx:key="">
+        <view data-idx="{{item.id}}" bindtap='onOneShop'>
+          <image mode='widthFix' src="{{item.picy}}"></image>
+          <text>{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-bottom">
+    <view class="cart-bus" bindtap='onCart'>
+      <view class="cart-bus-box">
+        <text class="{{isShake?'animate':''}}">{{TotalNumberGoods ? TotalNumberGoods:'0'}}</text>
+        <image mode="widthFix" src="/images/icon/cart@top.png"></image>
+      </view>
+    </view>
+    <view class="kf">
+      <image mode='widthFix' src="/images/icon/kf.png"></image>
+      <text>客服</text>
+      <button class="kf_button" open-type="contact" session-from="weapp">联系</button>
+    </view>
+    <view class="buy" bindtap='onBuyNow'>
+      <text>立即抢购</text>
+    </view>
+  </view>
+
+  <view hidden='{{fixbg}}' class="buy-now">
+    <view class="absolute {{isTop?'animate-top':''}}">
+      <view class="relative">
+        <image mode='widthFix' class="x-image" src="/images/icon/xx.png" bindtap='onX'></image>
+
+        <view class="buy-image">
+          <view class="image-small">
+            <image src="{{goodsArray.picy[0]}}"></image>
+          </view>
+          <view class="buy-text">
+            <view class="price-input">
+              <view>￥</view>
+              <view>
+                <input type='text' disabled name="price" value='{{goodsArray.miaojia}}'></input>
+              </view>
+            </view>
+
+            <text>已选择{{rule}}</text>
+          </view>
+        </view>
+        <view class="number">
+          <text>购买数量</text>
+          <view class="cart-num">
+            <text class="down {{classNum?'classnum':''}}" bindtap='onDown'>-</text>
+            <view class="num">
+              <input type='text' disabled name="buyNum" value='{{buyNum}}'></input>
+            </view>
+            <text class="add" bindtap='onUp'>+</text>
+          </view>
+        </view>
+      </view>
+      <button data-aid="{{goodsArray.gid}}" bindtap="submission">确定</button>
+    </view>
+  </view>
+
+  <!--正在加载 -->
+  <loading hidden="{{hiddenLoading}}">正在加载</loading>
+</view>

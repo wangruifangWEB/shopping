@@ -77,13 +77,19 @@
   background-color: #fff;
 }
 
+.vip-bottom-text {
+  margin-left: 15rpx;
+}
+
 .vip-bottom-text text {
-  display: block;
   color: #333;
   font-size: 28rpx;
   text-align: left;
-  margin-left: 15rpx;
   line-height: 1.8;
+}
+
+.vip-bottom-text .red {
+  color: #ff868b;
 }
 
 .coupon {
@@ -134,10 +140,6 @@
   background: #fff;
 }
 
-.swiper {
-  height: 130px;
-}
-
 .goods-box {
   width: 90%;
   margin: 0 auto;
@@ -184,7 +186,7 @@
   background-color: #fff;
   padding: 0 18rpx;
   border-radius: 10rpx;
-  margin-top:10rpx;
+  margin-top: 10rpx;
   opacity: 0.5;
 }
 
@@ -193,21 +195,83 @@
 }
 
 .nickName {
-  color:#fff;
+  color: #fff;
   width: 100rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display:inline-block;
+  display: inline-block;
   font-size: 26rpx;
 }
 
-.btn-hover{
-  background-color: #fff
+.btn-hover {
+  background-color: #fff;
 }
 
-.fontShow{
+.fontShow {
   text-align: center;
-  margin:30rpx 0;
+  margin: 30rpx 0;
 }
 
+/*秒杀 */
+
+.secondContainer {
+  height: 375rpx;
+  background-color: #fff;
+  padding-top: 20rpx;
+  font-size: 28rpx;
+}
+
+.secondtitle .secondImg {
+  width: 155rpx;
+  height: 47rpx;
+}
+
+.secondtitle {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+
+.secondtitle view {
+  float: right;
+  color: #ff5b62;
+}
+
+.secondtitle .more {
+  width: 32rpx;
+  height: 32rpx;
+  position: relative;
+  top: 8rpx;
+}
+
+.secondKill .secondItem {
+  width: 33.3%;
+  text-align: center;
+}
+
+.secondKill .secondItem view {
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+
+.secondItem view image {
+  max-width: 128rpx;
+  max-height: 200rpx;
+}
+
+.secondKill, .secondItem view, .secondKill text {
+  -webkit-display: flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.secondKill view text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}

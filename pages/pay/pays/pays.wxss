@@ -8,7 +8,7 @@
   font-size: 32rpx;
   background: #fff;
   margin-bottom: 20rpx;
-  z-index:100;
+  z-index: 100;
   box-shadow: 0 10rpx 20rpx #f3f3f3;
 }
 
@@ -149,9 +149,16 @@ image {
   clear: both;
 }
 
-.default image{
-  width:327rpx;
-  height:323rpx;
-  margin:0 auto;
-  padding-top:300rpx;
+.default image {
+  width: 327rpx;
+  height: 323rpx;
+  margin: 0 auto;
+  padding-top: 300rpx;
+}
+
+/*无内容  */
+
+.noContent {
+  text-align: center;
+  margin-top: 350rpx;
 }

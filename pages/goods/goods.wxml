@@ -2,9 +2,9 @@
 <view class="container">
   <view class="swiper-box">
     <swiper class="swiper" autoplay="true" circular="true" bindchange="changeAutoplay">
-      <block wx:for="{{bannerList}}" wx:key="*this">
+      <block wx:for="{{goodsArray.picy}}" wx:key="*this">
         <swiper-item class="banner-item">
-          <image mode="widthFix" class="item-image" src="{{item.picy}}"></image>
+          <image mode="widthFix" class="item-image" src="{{item}}"></image>
         </swiper-item>
       </block>
     </swiper>
@@ -113,7 +113,7 @@
 
         <view class="buy-image">
           <view class="image-small">
-            <image src="{{goodsArray.picy}}"></image>
+            <image src="{{goodsArray.picy[0]}}"></image>
           </view>
           <view class="buy-text">
             <view class="price-input">

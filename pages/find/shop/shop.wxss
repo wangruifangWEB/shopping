@@ -15,10 +15,6 @@
   background: #fff;
 }
 
-.swiper {
-  height: 130px;
-}
-
 .goods-box {
   width: 90%;
   margin: 0 auto;

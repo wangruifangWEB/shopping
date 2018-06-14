@@ -14,10 +14,6 @@ page {
   margin: 0 auto;
 }
 
-.swiper {
-  height: 130px;
-}
-
 .store {
   margin: 28rpx auto;
   width: 90%;

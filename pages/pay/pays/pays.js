@@ -4,7 +4,8 @@ Page({
   data: {
     navbar: ['待付款', '待发货', '待收货', '已完成'],
     currentTab: 0,
-    hiddenLoading:false
+    hiddenLoading: false,
+    noContent: true
   },
   onLoad: function (options) {
     var that = this;
@@ -44,22 +45,34 @@ Page({
     util.http(url, this.sureGoodscallback);
   },
   noPaycallbackInit(res) {
-    if(res.data){  
+    if (res.data) {
       var stayPayment = res.data.data;
+      let noContent = this.data.noContent;
+      if (stayPayment.dfk.length == 0) {
+        this.setData({ noContent: false });
+      } else {
+        this.setData({ noContent: true });
+      }
       this.setData({
-        hiddenLoading:true,
+        hiddenLoading: true,
         stayPayment
       })
     }
-   
   },
   noPaycallback(res) {
     if (res.data) {
       var stayPayment = res.data.data;
+      let noContent = this.data.noContent;
       app.setTitle(this.data.navbar, this.data.idx);
+      if (stayPayment.dfk.length == 0) {
+        this.setData({ noContent: false });
+      }else{
+        this.setData({ noContent: true });
+      }
       this.setData({
-        hiddenLoading:true,
-        currentTab: this.data.idx, stayPayment
+        hiddenLoading: true,
+        currentTab: this.data.idx,
+        stayPayment
       })
     } else {
       app.showToast('网络错误，请重试！', 'error');

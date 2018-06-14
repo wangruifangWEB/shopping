@@ -21,7 +21,7 @@ Page({
   },
   onNews() {
     wx.navigateTo({
-      url: 'news/news',
+      url: 'bd/bd',
     })
   },
   onActive() {

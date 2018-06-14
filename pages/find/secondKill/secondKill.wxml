@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="secondKillList" wx:for="{{secondKillList}}" wx:key="">
+    <view class="secondKillItem">
+      <view class="shopImg" data-idx="{{item.gid}}" data-endtime="{{item.jss}}" bindtap="secondKillDetails">
+        <image src="{{item.picy}}" mode='widthFix'></image>
+      </view>
+
+      <view class="secondRt">
+        <view class="title">
+          <view class="secondBg {{item.obj.end ? 'end' : 'secondBg'}}">秒杀</view>
+          {{item.gname}}
+        </view>
+
+        <view class="coutDownBox">
+          <view class="{{item.obj.end ? 'coutDownEnd' : 'coutDownTime'}}">
+            <text>{{item.obj.day}}</text>
+            <text class="noBg">天</text>
+            <text>{{item.obj.hou}}</text>
+            <text class="noBg">时</text>
+            <text>{{item.obj.min}}</text>
+            <text class="noBg">分</text>
+            <text>{{item.obj.sec}}</text>
+            <text class="noBg">秒</text>
+          </view>
+        </view>
+
+
+        <view>
+          <text class="secondPrice">¥{{item.miaojia}}</text>
+          <text class="yuanjia">¥{{item.yuanjia}}</text>
+        </view>
+
+        <view class="secondProgress">
+        <!--判别商品秒杀状态 -->
+          <progress wx:if="{{item.obj.end}}" activeColor="#999" percent="{{item.jindu}}" stroke-width="12" class="percentage" />
+          <progress wx:else activeColor="#ff5b62" percent="{{item.jindu}}" stroke-width="12" active class="percentage" />
+          <text>{{item.jindu}}%</text>
+
+          <button class="end" wx:if="{{item.obj.end}}" disabled>已结束</button>
+          <button wx:else data-idx="{{item.gid}}" data-endtime="{{item.jss}}" bindtap="secondKillDetails">马上抢 ></button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

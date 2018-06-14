@@ -29,4 +29,7 @@
 
   <!--正在加载 -->
   <loading hidden="{{hiddenLoading}}">正在加载</loading>
+
+  <!--暂无足迹 -->
+  <view class="noContent" hidden="{{noContent}}">还没有足迹哦！</view>
 </view>

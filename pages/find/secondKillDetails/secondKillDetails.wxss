@@ -1,0 +1,94 @@
+@import "../../goods/goods.wxss";
+
+.goods-rt {
+  text-align: center;
+}
+
+.countDown {
+  font-size: 30rpx;
+}
+
+.coutDownTime {
+  display: block;
+}
+
+.coutDownTime text {
+  color: #fff;
+  width: 35.5rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  display: inline-block;
+  text-align: center;
+  background-color: #333;
+  margin: 10rpx 7rpx 0 0;
+}
+
+.title {
+  justify-content: left;
+}
+
+.title text:first-of-type {
+  display: none;
+}
+
+.goods-title {
+  padding-top: 0;
+  padding-bottom: 30rpx;
+}
+
+.goods-box {
+  margin: 20rpx auto 0;
+}
+
+.goods-secondKill {
+  height: 129rpx;
+  background-color: #fce9ab;
+}
+
+.goods-lf {
+  width: 60%;
+  float: left;
+  padding: 0 30rpx;
+  height: 129rpx;
+  line-height: 129rpx;
+  background-color: #ff5b62;
+}
+
+.goods-lfBg {
+  color: #ff5b62;
+  background-color: #fff;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  text-align: center;
+  padding: 5rpx 10rpx;
+}
+
+.h2 {
+  margin: 15rpx 0;
+}
+
+.white {
+  color: #fff;
+  margin: 0 5rpx 0 8rpx;
+}
+
+.underline {
+  color: #ffc4c6;
+}
+
+.buy {
+  width: 80%;
+}
+
+.coutDownTime .noBg {
+  width: 20.5rpx;
+  color: #ff5b62;
+  background-color: #fce9ab;
+}
+
+.coutDownTime view {
+  font-size: 28rpx;
+  display: block;
+}

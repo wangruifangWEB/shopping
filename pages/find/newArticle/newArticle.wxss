@@ -1,0 +1,67 @@
+/* pages/find/newArticle/newArticle.wxss */
+
+Page {
+  background-color: #fff;
+}
+
+.container image {
+  width: 17rpx;
+  height: 17rpx;
+  margin: 10rpx 5rpx;
+}
+
+.container text {
+  color: #9c9c9c;
+  font-size: 28rpx;
+}
+
+.container input {
+  padding-left: 12rpx;
+  font-size: 28rpx;
+}
+
+.title {
+  display: flex;
+  margin: 45rpx 0 45rpx 25rpx;
+}
+
+.title input {
+  width: 565rpx;
+  border: 1px solid #d1d1d1;
+  border-radius: 10rpx;
+  padding:10rpx;
+  font-size: 28rpx;
+  line-height: 48rpx;
+  display: block;
+}
+
+.title textarea {
+  width: 565rpx;
+  border: 1px solid #d1d1d1;
+  border-radius: 10rpx;
+  padding:10rpx;
+  font-size: 28rpx;
+  line-height: 48rpx;
+  display: block;
+} 
+
+.details textarea {
+  height: 203rpx;
+}
+
+.content textarea {
+  height: 530rpx;
+}
+
+.release {
+  color: #fff;
+  width: 430rpx;
+  height: 60rpx;
+  background-color: #ff5b62;
+  border-radius: 8rpx;
+  margin: 50rpx 0 50rpx 200rpx;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  justify-content: center;
+}

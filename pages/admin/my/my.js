@@ -113,6 +113,16 @@ Page({
     var userMsg = res.data.data.user[0];
     this.setData({ userMsg });
   },
+  //我的发布
+  onRelease(){
+    if (!this.data.uid) {
+      util.showToast('请登录后查看！', 'none');
+    } else {
+      wx.navigateTo({
+        url: '../../find/bdPersonal/bdPersonal',
+      })
+    }
+  },
   callback(res) {
     if (!this.data.uid) {
       util.showToast('请登录后查看！', 'none');

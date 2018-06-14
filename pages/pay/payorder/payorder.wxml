@@ -3,8 +3,8 @@
   <view class="pay-number" data-idx="{{payGoods.id}}" bindtap="choiceAddress">
     <image mode='widthFix' class="address" src="/images/icon/address.png"></image>
     <view  wx:if="{{hiddenAddress?'active':''}}">
-      <text>{{userName}} {{userTel}}</text>
-      <text>{{userSheng}}{{userShi}}{{userXian}}{{userDizhi}}</text>
+       <text>{{payGoods.name}} {{payGoods.tel}}</text>
+      <text>{{payGoods.sheng}}{{payGoods.shi}}{{payGoods.xian}}{{payGoods.dizhi}}</text>
     </view>
 
     <view wx:if="{{noAddress?'active':''}}">
@@ -14,7 +14,7 @@
   <image class="pay-line" src="/images/pay/pay-line.png"></image>
   <view class="pay-box">
     <view class="pay-list" wx:for="{{payGoods.shop}}" wx:key="1">
-      <image mode="widthFix" src='{{item.pics}}'></image>
+      <image mode="widthFix" src='{{item.pics[0]}}'></image>
       <view>
         <text class="title">{{item.gname}}</text>
         <view class="price">

@@ -7,30 +7,29 @@ Page({
     leavingFocus: false,
     payPrice: 0,
     choicedType: '不开发票',
-    hiddenLoading:false
+    hiddenLoading: false
   },
   onLoad: function (options) {
     //获取缓存值
-    var uid = wx.getStorageSync('uid'); 
+    var uid = wx.getStorageSync('uid');
     //获取openid
     var openid = wx.getStorageSync('openid');
-    this.setData({ uid, openid});
+    this.setData({ uid, openid });
+  },
+  onShow() {
     //获取账单信息
     var orderUrl = app.globalData.shopUrl + '/home/caror/index/ty/oocx/uid/' + this.data.uid;
     utils.http(orderUrl, this.initOrdercallback);
-  },
-  onShow() {
     //获取发票状态值
     var choicedType = wx.getStorageSync('choicedType');
     if (choicedType) {
       this.setData({ choicedType });
     }
     var addressId = wx.getStorageSync('addressId')
-    if (addressId) {
-      //获取账单信息
-      this.modifyAddress();
-    } else {
+    if (!addressId) {
       this.setData({ noAddress: true, hiddenAddress: false });
+    } else {
+      this.setData({ noAddress: false, hiddenAddress: true });
     }
     this.setData({ addressId });
   },
@@ -128,12 +127,12 @@ Page({
   },
   //价格
   initOrdercallback(res) {
-    if(res.data){
+    if (res.data) {
       let payGoods = res.data.data.ord,
-       orderId = payGoods.orderh,
-       totalPrice = this.data.totalPrice,
-       payPrice = this.data.payPrice,
-       couponPrice = this.data.couponPrice;
+          orderId = payGoods.orderh,
+          totalPrice = this.data.totalPrice,
+          payPrice = this.data.payPrice,
+          couponPrice = this.data.couponPrice;
       //循环商品信息
       for (var i in payGoods.shop) {
         totalPrice += Number(payGoods.shop[i].zhejia);
@@ -142,29 +141,18 @@ Page({
       }
       //计算应付价格
       payPrice = payPrice + Number(payGoods.yunfei);
-      this.setData({ hiddenLoading:true, payGoods, totalPrice, payPrice, couponPrice, orderId });
+      this.setData({ hiddenLoading: true, payGoods, totalPrice, payPrice, couponPrice, orderId });
     }
   },
   modifyAddress() {
     var address = wx.getStorageSync('address');
-    let userName, userTel, userSheng,
-        userShi, userXian, userDizhi,
-        hiddenAddress, noAddress;
-        userName = address.name;
-        userTel = address.tel;
-        userSheng = address.sheng;
-        userShi = address.shi;
-        userXian = address.xian;
-        userDizhi = address.dizhi;
-        //判定是否有收货地址
-        noAddress = false;
-        hiddenAddress = true;
-        this.setData({
-          noAddress,hiddenAddress,
-          userName,userTel,
-          userSheng,userShi,
-          userXian, userDizhi
-      });
+    let hiddenAddress, noAddress;
+    //判定是否有收货地址
+    noAddress = false;
+    hiddenAddress = true;
+    this.setData({
+      noAddress, hiddenAddress
+    });
   },
   //添加地址
   addAddress() {

@@ -57,7 +57,7 @@ Page({
   },
   callback(res) {
     if (res.data) {
-      util.showModal('地址填写成功!', '')
+      util.showModal('地址填写成功!', '');
     } else {
       util.showToast('网络错误,请重试!', 'error');
     }

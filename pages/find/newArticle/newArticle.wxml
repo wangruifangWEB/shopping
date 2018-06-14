@@ -1,0 +1,23 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="title">
+      <image src="/images/icon/import.png"></image>
+      <text>标题：</text>
+      <input name="title"></input>
+    </view>
+
+    <view class="title details">
+      <image src="/images/icon/import.png"></image>
+      <text>描述：</text>
+      <textarea name="desc" maxlength='-1'></textarea>
+    </view>
+
+    <view class="title content">
+      <image src="/images/icon/import.png"></image>
+      <text>内容：</text>
+      <textarea name="content" maxlength='-1'></textarea>
+    </view>
+
+    <button class="release" formType="submit">发布</button>
+  </form>
+</view>

@@ -12,18 +12,7 @@ Page({
     isTop: false,
     buyNum: 1,
     classNum: true,
-    hiddenLoading: false,
-    bannerList:[
-      {
-        'picy':'https://mypro.51cmo.net/Public/uploads/20180531/1527731565593365.png'
-      },
-      {
-        'picy': 'https://mypro.51cmo.net/Public/uploads/20180531/1527731565593365.png'
-      },
-      {
-        'picy': 'https://mypro.51cmo.net/Public/uploads/20180531/1527731565593365.png'
-      }
-    ]
+    hiddenLoading: false
   },
   onLoad: function (options) {
     //将此商品id缓存
@@ -35,9 +24,6 @@ Page({
     var likeUrl = app.globalData.shopUrl + '/home/goods/index/ty/like';
     utils.http(url, that.callback);
     utils.http(likeUrl, that.likecallback);
-    //获取商品轮播图
-    // var bannerUrl = app.globalData.shopUrl + ;
-    // utils.http(bannerUrl, that.bannercallback);
   },
   onShow() {
     var TotalNumberGoods = wx.getStorageSync('TotalNumberGoods');

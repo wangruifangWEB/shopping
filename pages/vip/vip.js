@@ -6,12 +6,16 @@ Page({
     searchValue: '',
     historyArray2: [],
     noContent: false,
-    hasContent: true
+    hasContent: true,
+    secondShop: []
   },
   onLoad: function (options) {
     //轮播图
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
     utils.http(swiperUrl, this.swiperCallback);
+    //秒杀商品
+    var secondKillUrl = app.globalData.shopUrl + '/home/xsms/index/ty/msh';
+    utils.http(secondKillUrl, this.secondKillcallback);
   },
   onShow() {
     var userInfo = wx.getStorageSync('user');
@@ -25,11 +29,11 @@ Page({
     if (uid) {
       //获取当前用户的展示信息
       var userUrl = app.globalData.shopUrl + '/home/user/index/ty/user/uid/' + uid;
-      utils.http(userUrl, this.userMsg);
+      utils.http(userUrl, this.userMsgcallback);
     }
   },
   callback(res) {
-    if(res.data){
+    if (res.data) {
       var listGoods = res.data.data.goods;
       let noContent = this.data.noContent,
         hasContent = this.data.hasContent;
@@ -129,8 +133,35 @@ Page({
     }
   },
   //钱包余额及会员积分
-  userMsg(res) {
+  userMsgcallback(res) {
     var userMsg = res.data.data.user[0];
     this.setData({ userMsg });
+  },
+  //轮播图详情
+  detailsPage: function (e) {
+    var id = e.currentTarget.dataset.idx;
+    wx.navigateTo({
+      url: '../index/indexlist/indexlist?id=' + id,
+    })
+  },
+  //秒杀列表
+  secondKillShop() {
+    wx.navigateTo({
+      url: '../find/secondKill/secondKill',
+    })
+  },
+  //秒杀商品
+  secondKillcallback(res) {
+    let secondShop = res.data.data.xsms;
+    secondShop=secondShop.slice(0, 3)
+    this.setData({ secondShop });
+  },
+  //秒杀商品详情
+  secondKillDetails(e){
+    let id = e.currentTarget.dataset.idx;
+    let endtime = e.currentTarget.dataset.endtime;
+    wx.navigateTo({
+      url: '../find/secondKillDetails/secondKillDetails?id=' + id + '&endtime=' + endtime,
+    })
   }
 })

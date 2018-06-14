@@ -46,6 +46,7 @@ Page({
   },
   jumpCallBack(res) {
     var datas = res.data.data.lianjie;
+    console.log(datas);
     this.setData({ imgDetails: datas });
   },
   swiperCallback(res) {

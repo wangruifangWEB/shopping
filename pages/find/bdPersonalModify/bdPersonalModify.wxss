@@ -1,0 +1,7 @@
+@import "../newArticle/newArticle.wxss";
+
+.del button{
+  color:#ff5b62;
+  background-color: #fff;
+  border:1px solid #ff5b62;
+}

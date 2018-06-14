@@ -3,7 +3,7 @@ Page {
 }
 
 .container view {
-  margin: 0 20rpx;
+  margin: 0 30rpx;
   box-sizing: border-box;
 }
 
@@ -22,7 +22,7 @@ Page {
 }
 
 .container view input {
-  width: calc(100% - 28%);
+  width: calc(100% - 32%);
   height: 100%;
   margin-top: 15rpx;
   overflow: hidden;

@@ -7,7 +7,7 @@ Page({
   },
   onLoad: function (options) {
     //商品列表
-    var url = app.globalData.shopUrl + '/home/goods/index/ty/shop';
+    var url = app.globalData.shopUrl + '/home/jifen/index/ty/jis';
     utils.http(url, this.callback);
     //轮播图
     var swiperUrl = app.globalData.shopUrl + '/home/index/index/ty/imglun';
@@ -24,8 +24,8 @@ Page({
     var imgSrc = res.data.data.imglun;
     this.setData({ imgSrc });
   },
-  callback(res) {
-    var listGoods = res.data.data.goods;
+  callback(res) { 
+    var listGoods = res.data.data.sp;
     this.setData({ listGoods });
-  },
+  }
 })
